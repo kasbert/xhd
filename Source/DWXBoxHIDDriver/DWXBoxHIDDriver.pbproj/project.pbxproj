@@ -125,6 +125,7 @@
 		};
 		000000000000000001491760 = {
 			children = (
+				B2C41A7804AE4B3A00A80002,
 				00000000000000000159C770,
 			);
 			isa = PBXGroup;
@@ -220,7 +221,7 @@
 		};
 		0000000000000000014970A0 = {
 			isa = PBXBundleReference;
-			path = DWXBoxHIDDriver.kext;
+			path = DWXboxHIDDriver.kext;
 			refType = 3;
 		};
 		000000000000000001497120 = {
@@ -367,7 +368,7 @@
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = DWXBoxHIDDriver;
+				PRODUCT_NAME = DWXboxHIDDriver;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
 				WRAPPER_EXTENSION = kext;
@@ -386,9 +387,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>DWXBoxHIDDriver</string>
+	<string>DWXboxHIDDriver</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>xboxhidkext.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.walisser.driver.DWXBoxHIDDriver</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -608,6 +609,11 @@
 			isa = PBXBuildFile;
 			settings = {
 			};
+		};
+		B2C41A7804AE4B3A00A80002 = {
+			isa = PBXFileReference;
+			path = xboxhidkext.icns;
+			refType = 2;
 		};
 	};
 	rootObject = 0000000000000000014A0950;
