@@ -1,0 +1,504 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 38;
+	objects = {
+		014CEA4F0018CE4811CA2923 = {
+			buildRules = (
+			);
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				OPTIMIZATION_CFLAGS = "-O0";
+			};
+			isa = PBXBuildStyle;
+			name = Development;
+		};
+		014CEA500018CE4811CA2923 = {
+			buildRules = (
+			);
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			isa = PBXBuildStyle;
+			name = Deployment;
+		};
+//010
+//011
+//012
+//013
+//014
+//080
+//081
+//082
+//083
+//084
+		08FB7793FE84155DC02AAC07 = {
+			buildStyles = (
+				014CEA4F0018CE4811CA2923,
+				014CEA500018CE4811CA2923,
+			);
+			hasScannedForEncodings = 1;
+			isa = PBXProject;
+			mainGroup = 08FB7794FE84155DC02AAC07;
+			projectDirPath = "";
+			targets = (
+				B204495104AA137800A80002,
+				B2C58A2804AA94C900A80002,
+			);
+		};
+		08FB7794FE84155DC02AAC07 = {
+			children = (
+				08FB7795FE84155DC02AAC07,
+				C6859EA2029092E104C91782,
+				08FB779DFE84155DC02AAC07,
+				1AB674ADFE9D54B511CA2CBB,
+			);
+			isa = PBXGroup;
+			name = Registrar;
+			refType = 4;
+		};
+		08FB7795FE84155DC02AAC07 = {
+			children = (
+				32A70AAB03705E1F00C91783,
+				08FB7796FE84155DC02AAC07,
+				B2CAF12504AD18B000A80002,
+				B2C58A1804AA646700A80002,
+				B2C58A1904AA646700A80002,
+				B2C58A2B04AA94E800A80002,
+				B204494404A9F28700A80002,
+				B204494504A9F28700A80002,
+				B204495B04AA309900A80002,
+				B204495C04AA309900A80002,
+				B29CDCC604ABB77A00A80002,
+				B29CDCC704ABB77A00A80002,
+			);
+			isa = PBXGroup;
+			name = Source;
+			refType = 4;
+		};
+		08FB7796FE84155DC02AAC07 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = testcrypto.m;
+			refType = 4;
+		};
+		08FB779DFE84155DC02AAC07 = {
+			children = (
+				08FB779EFE84155DC02AAC07,
+				B204494B04AA0EE900A80002,
+			);
+			isa = PBXGroup;
+			name = "External Frameworks and Libraries";
+			refType = 4;
+		};
+		08FB779EFE84155DC02AAC07 = {
+			isa = PBXFrameworkReference;
+			name = Foundation.framework;
+			path = /System/Library/Frameworks/Foundation.framework;
+			refType = 0;
+		};
+//080
+//081
+//082
+//083
+//084
+//1A0
+//1A1
+//1A2
+//1A3
+//1A4
+		1AB674ADFE9D54B511CA2CBB = {
+			children = (
+				B204495204AA137800A80002,
+				B2C58A2904AA94C900A80002,
+			);
+			isa = PBXGroup;
+			name = Products;
+			refType = 4;
+		};
+//1A0
+//1A1
+//1A2
+//1A3
+//1A4
+//320
+//321
+//322
+//323
+//324
+		32A70AAB03705E1F00C91783 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = Registrar_Prefix.h;
+			refType = 4;
+		};
+//320
+//321
+//322
+//323
+//324
+//B20
+//B21
+//B22
+//B23
+//B24
+		B204494404A9F28700A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = RSACrypto.h;
+			refType = 2;
+		};
+		B204494504A9F28700A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = RSACrypto.m;
+			refType = 2;
+		};
+		B204494B04AA0EE900A80002 = {
+			isa = PBXFileReference;
+			name = libcrypto.dylib;
+			path = /usr/lib/libcrypto.dylib;
+			refType = 0;
+		};
+		B204494D04AA137800A80002 = {
+			buildActionMask = 2147483647;
+			files = (
+				B204495504AA137F00A80002,
+				B204496004AA3CCD00A80002,
+				B2C58A1704AA640D00A80002,
+				B2CAF12704AD18B000A80002,
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B204494E04AA137800A80002 = {
+			buildActionMask = 2147483647;
+			files = (
+				B204495404AA137E00A80002,
+				B204495604AA137F00A80002,
+				B204495F04AA3CCD00A80002,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B204494F04AA137800A80002 = {
+			buildActionMask = 2147483647;
+			files = (
+				B204495704AA138000A80002,
+				B204495804AA138100A80002,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B204495004AA137800A80002 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXRezBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B204495104AA137800A80002 = {
+			buildPhases = (
+				B204494D04AA137800A80002,
+				B204494E04AA137800A80002,
+				B204494F04AA137800A80002,
+				B204495004AA137800A80002,
+			);
+			buildSettings = {
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRECOMPILE_PREFIX_HEADER = YES;
+				PREFIX_HEADER = Registrar_Prefix.h;
+				PRODUCT_NAME = testcrypto;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXToolTarget;
+			name = testcrypto;
+			productInstallPath = /usr/local/bin;
+			productName = testcrypto;
+			productReference = B204495204AA137800A80002;
+		};
+		B204495204AA137800A80002 = {
+			isa = PBXExecutableFileReference;
+			path = testcrypto;
+			refType = 3;
+		};
+		B204495404AA137E00A80002 = {
+			fileRef = 08FB7796FE84155DC02AAC07;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B204495504AA137F00A80002 = {
+			fileRef = B204494404A9F28700A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B204495604AA137F00A80002 = {
+			fileRef = B204494504A9F28700A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B204495704AA138000A80002 = {
+			fileRef = 08FB779EFE84155DC02AAC07;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B204495804AA138100A80002 = {
+			fileRef = B204494B04AA0EE900A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B204495B04AA309900A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = Base64.h;
+			refType = 4;
+		};
+		B204495C04AA309900A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = Base64.m;
+			refType = 4;
+		};
+		B204495F04AA3CCD00A80002 = {
+			fileRef = B204495C04AA309900A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B204496004AA3CCD00A80002 = {
+			fileRef = B204495B04AA309900A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B29CDCC604ABB77A00A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = MD5.h;
+			refType = 4;
+		};
+		B29CDCC704ABB77A00A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = MD5.m;
+			refType = 4;
+		};
+		B29CDCC804ABB77A00A80002 = {
+			fileRef = B29CDCC604ABB77A00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B29CDCC904ABB77A00A80002 = {
+			fileRef = B29CDCC704ABB77A00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C58A1704AA640D00A80002 = {
+			fileRef = 32A70AAB03705E1F00C91783;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C58A1804AA646700A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = Registrar.h;
+			refType = 4;
+		};
+		B2C58A1904AA646700A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = Registrar.m;
+			refType = 4;
+		};
+		B2C58A2404AA94C900A80002 = {
+			buildActionMask = 2147483647;
+			files = (
+				B2C58A2D04AA94EB00A80002,
+				B2C58A2F04AA94EC00A80002,
+				B2C58A3304AA94F200A80002,
+				B2C58A3404AA94F800A80002,
+				B29CDCC804ABB77A00A80002,
+				B2CAF12604AD18B000A80002,
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2C58A2504AA94C900A80002 = {
+			buildActionMask = 2147483647;
+			files = (
+				B2C58A2E04AA94EC00A80002,
+				B2C58A3004AA94ED00A80002,
+				B2C58A3104AA94EF00A80002,
+				B2C58A3204AA94F100A80002,
+				B29CDCC904ABB77A00A80002,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2C58A2604AA94C900A80002 = {
+			buildActionMask = 2147483647;
+			files = (
+				B2C58A3504AA954500A80002,
+				B2C58A3604AA954600A80002,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2C58A2704AA94C900A80002 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXRezBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2C58A2804AA94C900A80002 = {
+			buildPhases = (
+				B2C58A2404AA94C900A80002,
+				B2C58A2504AA94C900A80002,
+				B2C58A2604AA94C900A80002,
+				B2C58A2704AA94C900A80002,
+			);
+			buildSettings = {
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRECOMPILE_PREFIX_HEADER = YES;
+				PREFIX_HEADER = Registrar_Prefix.h;
+				PRODUCT_NAME = registerTool;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXToolTarget;
+			name = registerTool;
+			productInstallPath = /usr/local/bin;
+			productName = registerTool;
+			productReference = B2C58A2904AA94C900A80002;
+		};
+		B2C58A2904AA94C900A80002 = {
+			isa = PBXExecutableFileReference;
+			path = registerTool;
+			refType = 3;
+		};
+		B2C58A2B04AA94E800A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = registerTool.m;
+			refType = 4;
+		};
+		B2C58A2D04AA94EB00A80002 = {
+			fileRef = B204494404A9F28700A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C58A2E04AA94EC00A80002 = {
+			fileRef = B204494504A9F28700A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C58A2F04AA94EC00A80002 = {
+			fileRef = B204495B04AA309900A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C58A3004AA94ED00A80002 = {
+			fileRef = B204495C04AA309900A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C58A3104AA94EF00A80002 = {
+			fileRef = B2C58A2B04AA94E800A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C58A3204AA94F100A80002 = {
+			fileRef = B2C58A1904AA646700A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C58A3304AA94F200A80002 = {
+			fileRef = B2C58A1804AA646700A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C58A3404AA94F800A80002 = {
+			fileRef = 32A70AAB03705E1F00C91783;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C58A3504AA954500A80002 = {
+			fileRef = 08FB779EFE84155DC02AAC07;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C58A3604AA954600A80002 = {
+			fileRef = B204494B04AA0EE900A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2CAF12504AD18B000A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = Debug.h;
+			refType = 4;
+		};
+		B2CAF12604AD18B000A80002 = {
+			fileRef = B2CAF12504AD18B000A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2CAF12704AD18B000A80002 = {
+			fileRef = B2CAF12504AD18B000A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+//B20
+//B21
+//B22
+//B23
+//B24
+//C60
+//C61
+//C62
+//C63
+//C64
+		C6859EA2029092E104C91782 = {
+			children = (
+			);
+			isa = PBXGroup;
+			name = Documentation;
+			refType = 4;
+		};
+	};
+	rootObject = 08FB7793FE84155DC02AAC07;
+}
