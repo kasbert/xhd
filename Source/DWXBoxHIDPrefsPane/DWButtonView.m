@@ -242,7 +242,7 @@
     
     [ context saveGraphicsState ];
                 
-        float xPos;
+        float xPos = 0;
         UInt8 maxButtonValue = 1;
         if (_drawsAnalogButtons)
             maxButtonValue = 255;
