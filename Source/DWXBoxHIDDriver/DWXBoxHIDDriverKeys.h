@@ -26,7 +26,7 @@
 #define kDeviceTypeIRKey  "IR"
 //kDeviceTypeWheel "Wheel"
 //kDeviceTypeStick "Stick"
-//add more later
+//add more later, maybe
 
 // top-level device properties
 #define kDeviceGenericPropertiesKey   "GenericProperties"
@@ -35,16 +35,16 @@
 #define kDeviceOptionsKey             "Options"
 #define kDeviceButtonMapKey           "ButtonMap"
 
-// options
+// axes
 #define kOptionInvertYAxisKey            "InvertYAxis"
 #define kOptionInvertXAxisKey            "InvertXAxis"
 #define kOptionInvertRyAxisKey           "InvertRyAxis"
 #define kOptionInvertRxAxisKey           "InvertRxAxis"
+
+// buttons
 #define kOptionClampButtonsKey           "ClampButtons"
 
-//#define kOptionClampTriggersKey          "ClampTriggers"
-//#define kOptionTriggersAreButtonsKey     "TriggersAreButtons"
-//#define kOptionTriggerButtonThresholdKey "TriggerButtonThreshold"
+// triggers
 #define kOptionClampLeftTriggerKey            "ClampLeftTrigger"
 #define kOptionLeftTriggerIsButtonKey         "LeftTriggerIsButton"
 #define kOptionLeftTriggerThresholdKey        "LeftTriggerThreshold"
