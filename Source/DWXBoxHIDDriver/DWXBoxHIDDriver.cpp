@@ -16,7 +16,7 @@ The Original Code and all software distributed under the License are distributed
         05-16-2003 Added manipulateReport() method to allow subclasses to modify the hid report
                    before it's passed to HIDDevice's handleReport()
                    
-                   Changed getReport() to read from interface 0 rather than use 
+                   Changed getReport() to read from interface 0, endpoint 0 (input) rather than use 
                    a HID control request.
                    
                    Changed GetHIDDescriptor() to read a hardcoded report rather than
@@ -30,6 +30,30 @@ The Original Code and all software distributed under the License are distributed
                    index.
                    
                    Added hardcoded tables for aformentioned changes.
+        
+        05-22-2003 Version 1.1 Changes
+                   -initial remote control support
+                    ¥ added IOTimerEventSource to send remote button-up events
+                    ¥ added generateTimedEvent() method which fires at _xbTimedEventsInterval millisecond intervals (currently 80ms)
+                    ¥ added button lookup and structure packing to generate report in manipulateReport()
+                   
+                   -generic device detection via property list (don't need the product id/vendor id for everything)
+                    ¥ added isKnownDevice() method to check vendor/product id's
+                    ¥ added findGenericDevice() method to handle detection of devices with unknown product ids
+                    ¥ added probe(), which calls the 2 previous methods (utilized by IOKit's device matching protocol)
+                   
+                   -initial options support
+                    ¥ each device type can contain a dictionary for setting options
+                    ¥ this is the first step towards a user-configurable driver
+                   
+                   -new defaults
+                    ¥ for compatibility, the analog buttons are clamped to 0-1 (note: to do 0-255 you'd have to edit the hid report descriptor)
+                    
+                   -removed hardcoded tables - now stored in property list (use the "hex" tool to format data)
+                   -removed hardcoded reports - now stored in property list
+                   -removed GetIndexedString() hack, replaced with property list strings if needed
+                   -printing out more error messages
+                   
  */
  
 /*
@@ -55,212 +79,6 @@ The Original Code and all software distributed under the License are distributed
 #define super IOHIDDevice
 OSDefineMetaClassAndStructors(DWXBoxHIDDriver, super)
 
-// this descriptor is a highly modified rip-off from 
-// http://euc.jp/periphs/xbox-controller.en.html
-// The nice formatting was created using the Windoze Descriptor Tool
-// Note: the string index stuff is incomplete (lost steam when I realized it wasn't being recognized)
-static UInt8 gPadHIDReportDescriptor[] = {
-    0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
-    0x09, 0x05,                    // USAGE (Game Pad)
-    0x69, 0x02,                    // STRING_INDEX (2)
-    0xa1, 0x01,                    // COLLECTION (Application)
-    0x75, 0x08,                    //     REPORT_SIZE (8)
-    0x95, 0x01,                    //     REPORT_COUNT (1)
-    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
-    0x26, 0xff, 0x00,              //   LOGICAL_MAXIMUM (255)
-    0x81, 0x01,                    //     INPUT (Cnst,Ary,Abs)
-    0x75, 0x08,                    //     REPORT_SIZE (8)
-    0x95, 0x01,                    //     REPORT_COUNT (1)
-    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
-    0x16, 0xff, 0x00,              //   LOGICAL_MINIMUM (255)
-    0x81, 0x01,                    //     INPUT (Cnst,Ary,Abs)
-    0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
-    0x09, 0x01,                    //     USAGE (Pointer)
-    0xa1, 0x00,                    //     COLLECTION (Physical)
-    0x75, 0x01,                    //       REPORT_SIZE (1)
-    0x95, 0x01,                    //       REPORT_COUNT (1)
-    0x15, 0x00,                    //       LOGICAL_MINIMUM (0)
-    0x25, 0x01,                    //       LOGICAL_MAXIMUM (1)
-    0x05, 0x09,                    //       USAGE_PAGE (Button)
-    0x09, 0x0b,                    //       USAGE (Button 11)
-    0x69, 0x05,                    //       STRING_INDEX (5)
-    0x81, 0x02,                    //       INPUT (Data,Var,Abs)
-    0x09, 0x0c,                    //       USAGE (Button 12)
-    0x69, 0x06,                    //       STRING_INDEX (6)
-    0x81, 0x02,                    //       INPUT (Data,Var,Abs)
-    0x09, 0x0d,                    //       USAGE (Button 13)
-    0x69, 0x07,                    //       STRING_INDEX (7)
-    0x81, 0x02,                    //       INPUT (Data,Var,Abs)
-    0x09, 0x0e,                    //       USAGE (Button 14)
-    0x69, 0x08,                    //       STRING_INDEX (8)
-    0x81, 0x02,                    //       INPUT (Data,Var,Abs)
-    0xc0,                          //     END_COLLECTION
-    0x75, 0x01,                    //     REPORT_SIZE (1)
-    0x95, 0x01,                    //     REPORT_COUNT (1)
-    0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
-    0x25, 0x01,                    //     LOGICAL_MAXIMUM (1)
-    0x05, 0x09,                    //     USAGE_PAGE (Button)
-    0x09, 0x07,                    //     USAGE (Button 7)
-    0x69, 0x09,                    //     STRING_INDEX (9)
-    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
-    0x09, 0x08,                    //     USAGE (Button 8)
-    0x69, 0x0a,                    //     STRING_INDEX (10)
-    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
-    0x09, 0x09,                    //     USAGE (Button 9)
-    0x69, 0x0b,                    //     STRING_INDEX (11)
-    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
-    0x09, 0x0a,                    //     USAGE (Button 10)
-    0x69, 0x0c,                    //     STRING_INDEX (12)
-    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
-    0x75, 0x08,                    //     REPORT_SIZE (8)
-    0x95, 0x01,                    //     REPORT_COUNT (1)
-    0x81, 0x01,                    //     INPUT (Cnst,Ary,Abs)
-    0x75, 0x08,                    //     REPORT_SIZE (8)
-    0x95, 0x01,                    //     REPORT_COUNT (1)
-    0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
-    0x26, 0xff, 0x00,              //     LOGICAL_MAXIMUM (255)
-    0x05, 0x09,                    //     USAGE_PAGE (Button)
-    0x09, 0x01,                    //     USAGE (Button 1)
-    0x69, 0x0d,                    //     STRING_INDEX (13)
-    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
-    0x09, 0x02,                    //     USAGE (Button 2)
-    0x69, 0x0e,                    //     STRING_INDEX (14)
-    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
-    0x09, 0x03,                    //     USAGE (Button 3)
-    0x69, 0x0f,                    //     STRING_INDEX (15)
-    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
-    0x09, 0x04,                    //     USAGE (Button 4)
-    0x69, 0x10,                    //     STRING_INDEX (16)
-    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
-    0x09, 0x05,                    //     USAGE (Button 5)
-    0x69, 0x11,                    //     STRING_INDEX (17)
-    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
-    0x09, 0x06,                    //     USAGE (Button 6)
-    0x69, 0x12,                    //     STRING_INDEX (18)
-    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
-    0x75, 0x08,                    //     REPORT_SIZE (8)
-    0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
-    0x26, 0xff, 0x00,              //     LOGICAL_MAXIMUM (255)
-    0x95, 0x02,                    //     REPORT_COUNT (2)
-    0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
-    0x09, 0x32,                    //     USAGE (Z)
-    0x09, 0x35,                    //     USAGE (Rz)
-    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
-    0x75, 0x10,                    //     REPORT_SIZE (16)
-    0x16, 0x00, 0x80,              //   LOGICAL_MINIMUM (-32768)
-    0x26, 0xff, 0x7f,              //   LOGICAL_MAXIMUM (32767)
-    0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
-    0x09, 0x01,                    //     USAGE (Pointer)
-    0xa1, 0x00,                    //     COLLECTION (Physical)
-    0x95, 0x02,                    //       REPORT_COUNT (2)
-    0x05, 0x01,                    //       USAGE_PAGE (Generic Desktop)
-    0x09, 0x30,                    //       USAGE (X)
-    0x09, 0x31,                    //       USAGE (Y)
-    0x81, 0x02,                    //       INPUT (Data,Var,Abs)
-    0xc0,                          //     END_COLLECTION
-    0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
-    0x09, 0x01,                    //     USAGE (Pointer)
-    0xa1, 0x00,                    //     COLLECTION (Physical)
-    0x95, 0x02,                    //       REPORT_COUNT (2)
-    0x05, 0x01,                    //       USAGE_PAGE (Generic Desktop)
-    0x09, 0x33,                    //       USAGE (Rx)
-    0x09, 0x34,                    //       USAGE (Ry)
-    0x81, 0x02,                    //       INPUT (Data,Var,Abs)
-    0xc0,                          //     END_COLLECTION
-    0x05, 0x01,                    //   USAGE_PAGE (Generic Desktop)
-    0x09, 0x01,                    //   USAGE (Pointer)
-    0xa1, 0x00,                    //     COLLECTION (Physical)
-    0x75, 0x08,                    //     REPORT_SIZE (8)
-    0x95, 0x01,                    //     REPORT_COUNT (1)
-    0x91, 0x01,                    //     OUTPUT (Cnst,Ary,Abs)
-    0x75, 0x08,                    //     REPORT_SIZE (8)
-    0x95, 0x01,                    //     REPORT_COUNT (1)
-    0x91, 0x01,                    //     OUTPUT (Cnst,Ary,Abs)
-    0x75, 0x08,                    //     REPORT_SIZE (8)
-    0x95, 0x01,                    //     REPORT_COUNT (1)
-    0x91, 0x01,                    //     OUTPUT (Cnst,Ary,Abs)
-    0x75, 0x08,                    //     REPORT_SIZE (8)
-    0x95, 0x01,                    //     REPORT_COUNT (1)
-    0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
-    0x26, 0xff, 0x00,              //     LOGICAL_MAXIMUM (255)
-    0x06, 0x00, 0xff,              //     USAGE_PAGE (Generic Desktop)
-    0x09, 0x01,                    //     USAGE (Vendor Usage 1)
-    0x91, 0x02,                    //     OUTPUT (Data,Var,Abs)
-    0x75, 0x08,                    //     REPORT_SIZE (8)
-    0x95, 0x01,                    //     REPORT_COUNT (1)
-    0x91, 0x01,                    //     OUTPUT (Cnst,Ary,Abs)
-    0x75, 0x08,                    //     REPORT_SIZE (8)
-    0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
-    0x26, 0xff, 0x00,              //     LOGICAL_MAXIMUM (255)
-    0x95, 0x01,                    //     REPORT_COUNT (1)
-    0x06, 0x00, 0xff,              //     USAGE_PAGE (Generic Desktop)
-    0x09, 0x02,                    //     USAGE (Vendor Usage 2)
-    0x91, 0x02,                    //     OUTPUT (Data,Var,Abs)
-    0xc0,                          //   END_COLLECTION
-    0xc0                           // END_COLLECTION
-};
-
-
-static IOUSBHIDDescriptor gPadHIDDescriptor = 
-{
-    sizeof(IOUSBHIDDescriptor), // descLen
-    kUSBHIDDesc,                // descType
-    0x0111,                     // (1.11) descVersNum
-    0,                          // hidCountryCode
-    1,                          // hidNumDescriptors
-    kUSBReportDesc,             // hidDescriptorType - Table 7.1.2
-    sizeof(gPadHIDReportDescriptor) & 0xFF,          // hidDescriptorLengthLo
-    (sizeof(gPadHIDReportDescriptor) & 0xFF00) >> 8, // hidDescriptorLengthHi
-};
-
-#define kPadNumStrings 19
-static char* gPadStringTable[kPadNumStrings] = {
-    "",                  // 0 (dummy)
-    "Microsoft",         // 1 Manufacturer Name
-    "XBox USB Gamepad",  // 2 Product Name
-    "n/a",            // 3 Serial number
-    "Digital Pad",    // 4
-    "Up",             // 5
-    "Down",           // 6
-    "Left",           // 7
-    "Right",          // 8
-    "Start",          // 9
-    "Back",           // 10
-    "Left Stick Click", // 11
-    "Right Stick Click", // 12
-    "A",              // 13
-    "B",              // 14
-    "X",              // 15
-    "Y",              // 16
-    "Black",          // 17
-    "White"           // 18
-};
-
-// this structure represents the raw report fields
-typedef struct {
-
-    UInt8
-        r1,      // reserved
-        r2,      // report length (useless)
-        buttons,
-        r3,      // reserved
-        a,
-        b,
-        x,
-        y,
-        black,
-        white,
-        lt,
-        rt;
-    
-    // lo/hi bits of signed 16-bit axes
-    UInt8
-        lxlo, lxhi,
-        lylo, lyhi,
-        rxlo, rxhi,
-        rylo, ryhi;
-        
-} XBPadReport;
 
 // Do what is necessary to start device before probe is called.
 //
@@ -282,7 +100,19 @@ DWXBoxHIDDriver::init(OSDictionary *properties)
     _outBuffer = 0;
     _deviceUsage = 0;
     _deviceUsagePage = 0;
-
+    
+    _xbDeviceType = kDeviceTypeUnknown;
+    _xbDeviceVendor = 0;
+    _xbDeviceName = 0;
+    _xbDeviceHIDReportDescriptor = 0;
+    _xbDeviceOptionsDict = 0;
+    _xbDeviceButtonMapArray = 0;
+    _xbLastButtonPressed = 0;
+    //_xbShouldGenerateTimedEvent = false;
+    _xbTimedEventsInterval = 80; // milliseconds
+    _xbWorkLoop = 0;
+    _xbTimerEventSource = 0;
+    
     return true;
 }
 
@@ -302,21 +132,23 @@ DWXBoxHIDDriver::handleStart(IOService * provider)
     UInt32          	hidDescSize;
     IOReturn        	err = kIOReturnSuccess;
 
-    USBLog(7, "%s[%p]::handleStart", getName(), this);
+    USBLog(6, "%s[%p]::handleStart", getName(), this);
     if( !super::handleStart(provider))
     {
+        USBError(1, "%s[%p]::handleStart - super::handleStart failed", getName(), this);
         return false;
     }
 
     if( !provider->open(this))
     {
-        USBError(1, "%s[%p]::handleStart - unable to open provider. returning false", getName(), this);
+        USBError(1, "%s[%p]::handleStart - unable to open provider", getName(), this);
         return (false);
     }
 
     _interface = OSDynamicCast(IOUSBInterface, provider);
     if (!_interface)
     {        
+        USBError(1, "%s[%p]::handleStart - no interface", getName(), this);
         return false;
     }
 
@@ -324,20 +156,93 @@ DWXBoxHIDDriver::handleStart(IOService * provider)
     _device = _interface->GetDevice();
     if (!_device)
     {
+        USBError(1, "%s[%p]::handleStart - no device", getName(), this);
         return false;
     }
 
+    
+    // Load the Xbox device's HID descriptor
+    OSDictionary *dataDict = OSDynamicCast(OSDictionary, getProperty(kDeviceDataKey));
+    if (!dataDict) {
+        
+        USBError(1, "%s[%p]::handleStart - no data dictionary", getName(), this);
+        return false;
+    }
+    
+    const char *key;
+    switch(_xbDeviceType) {
+    case kDeviceTypePad:
+        key = kDeviceTypePadKey;
+        break;
+    case kDeviceTypeIR:
+        key = kDeviceTypeIRKey;
+        break;
+    case kDeviceTypeUnknown:
+    default:
+        key = 0;
+    }
+    
+    if (!key) {
+        
+        USBError(1, "%s[%p]::handleStart - unsupported device type", getName(), this);
+        return false;
+    }
+    
+    OSDictionary *deviceDict = OSDynamicCast(OSDictionary, dataDict->getObject(key));
+    if (!deviceDict) {
+        
+        USBError(1, "%s[%p]::handleStart - no device support dictionary", getName(), this);
+        return false;
+    }
+        
+    // Now finally load the HID descriptor
+    _xbDeviceHIDReportDescriptor = OSDynamicCast(OSData, deviceDict->getObject(kDeviceHIDReportDescriptorKey));
+    if (!_xbDeviceHIDReportDescriptor ||
+        _xbDeviceHIDReportDescriptor->getLength() <= 0) {
+        
+        USBLog(1, "%s[%p]::handleStart - no hid descriptor for device", getName(), this);
+        return false;
+    }
+    
+    // Set the option descriptor too (note: can be NULL if device type has no options)
+    _xbDeviceOptionsDict = OSDynamicCast(OSDictionary, deviceDict->getObject(kDeviceOptionsKey));
+    
+    // Get the button map (can be NULL)
+    _xbDeviceButtonMapArray = OSDynamicCast(OSArray, deviceDict->getObject(kDeviceButtonMapKey));
+    
+    // Setup options from the device's option dictionary
+    this->setDeviceOptions();
+    
+    // If the device is a remote control, setup a timer for generating button-release events
+    if (_xbDeviceType == kDeviceTypeIR) {
+        
+        _xbWorkLoop = getWorkLoop();
+        if (_xbWorkLoop) {
+            
+            _xbTimerEventSource = IOTimerEventSource::timerEventSource(this, &generateTimedEvent);
+            if (_xbTimerEventSource) {
+            
+                if (kIOReturnSuccess != _xbWorkLoop->addEventSource(_xbTimerEventSource)) {
+                
+                    USBLog(1, "%s[%p]::handleStart - couldn't establish a timer", getName(), this);
+                }
+            }
+        }
+    }
+    
     // Get the size of the HID descriptor.
     hidDescSize = 0;
     err = GetHIDDescriptor(kUSBReportDesc, 0, NULL, &hidDescSize);
     if ((err != kIOReturnSuccess) || (hidDescSize == 0))
     {
+        USBLog(1, "%s[%p]::handleStart : unable to get descriptor size", getName(), this);
         return false;       // Won't be able to set last properties.
     }
     
     myHIDDesc = (UInt8 *)IOMalloc(hidDescSize);
     if (myHIDDesc == NULL)
     {
+        USBLog(1, "%s[%p]::handleStart : unable to allocate descriptor", getName(), this);
         return false;
     }
     
@@ -360,11 +265,24 @@ DWXBoxHIDDriver::handleStart(IOService * provider)
                 _maxReportSize = (myHIDCaps.inputReportByteLength > myHIDCaps.featureReportByteLength) ?
                     myHIDCaps.inputReportByteLength : myHIDCaps.featureReportByteLength;
             }
-
+            else
+            {
+                USBError(1, "%s[%p]::handleStart - failed getting capabilities", getName(), this);
+            }
+            
             HIDCloseReportDescriptor(parseData);
         }
-    }
+        else
+        {
+            USBError(1, "%s[%p]::handleStart - failed parsing descriptor", getName(), this);
+        }
 
+    }
+    else 
+    {
+        USBLog(1, "%s[%p]::handleStart : error getting hid descriptor: %X", getName(), this, err);
+    }
+    
     if (myHIDDesc)
     {
         IOFree(myHIDDesc, hidDescSize);
@@ -381,6 +299,18 @@ void
 DWXBoxHIDDriver::handleStop(IOService * provider)
 {
     USBLog(7, "%s[%p]::handleStop", getName(), this);
+
+    // cleanup timer
+    if (_xbWorkLoop) {
+    
+        if (_xbTimerEventSource) {
+        
+            _xbTimerEventSource->cancelTimeout();
+            _xbWorkLoop->removeEventSource(_xbTimerEventSource);
+            _xbTimerEventSource->release();
+            _xbTimerEventSource = 0;
+        }
+    }
 
     if (_outBuffer)
     {
@@ -427,26 +357,460 @@ DWXBoxHIDDriver::processPacket(void *data, UInt32 size)
     return;
 }
 
-void 
+void DWXBoxHIDDriver::generateTimedEvent(OSObject *object, IOTimerEventSource *tes)
+{
+    DWXBoxHIDDriver *me = OSDynamicCast(DWXBoxHIDDriver, object);
+    if (me) {
+    
+        //USBLog(1, "should generate event here...");
+        if (me->_xbDeviceType == kDeviceTypeIR) {
+            
+            if (me->_buffer) {
+    
+                void *bytes;
+                int  len;
+                
+                bytes = me->_buffer->getBytesNoCopy();
+                len = me->_buffer->getLength();
+                if (len == sizeof(XBRemoteReport)) {
+                
+                    memset(bytes, 0, len);
+                    me->handleReport(me->_buffer);
+                    me->_xbLastButtonPressed = 0;
+                }
+            }
+        }
+    }
+}
+
+void
+DWXBoxHIDDriver::setDeviceOptions()
+{
+    switch(_xbDeviceType) {
+    case kDeviceTypePad:
+        // fill in defaults
+        _xbDeviceOptions.pad.InvertYAxis = true;
+        _xbDeviceOptions.pad.ClampButtons = true;
+        
+        // override defaults with xml settings
+        if (_xbDeviceOptionsDict) {
+            
+            OSBoolean *boolean;
+        
+            boolean = OSDynamicCast(OSBoolean, _xbDeviceOptionsDict->getObject(kOptionInvertYAxisKey));
+            if (boolean)
+                _xbDeviceOptions.pad.InvertYAxis = boolean->getValue();
+            
+            boolean = OSDynamicCast(OSBoolean, _xbDeviceOptionsDict->getObject(kOptionClampButtonsKey));
+            if (boolean)
+                _xbDeviceOptions.pad.ClampButtons = boolean->getValue();
+        }
+        break;
+    case kDeviceTypeIR:
+    case kDeviceTypeUnknown:
+    default:
+        ;
+    }
+}
+
+bool
 DWXBoxHIDDriver::manipulateReport(IOBufferMemoryDescriptor *report)
 {
-    // probably unneeded, but make sure the size isn't too small
-    if (report->getLength() == sizeof(XBPadReport)) {
+    // return true if report should be sent to HID layer
+    // change the report before it's sent to the HID layer
+    
+    if (_xbDeviceType == kDeviceTypePad &&
+        report->getLength() == sizeof(XBPadReport)) {
     
         XBPadReport *raw = (XBPadReport*)(report->getBytesNoCopy());
         
-        // reverse the Y-Axis on the sticks so up is negative
-        SInt16 ly = (raw->lyhi << 8) | raw->lylo;
-        SInt16 ry = (raw->ryhi << 8) | raw->lylo;
+        if (_xbDeviceOptions.pad.InvertYAxis) {
+            
+            // reverse the Y-Axis on the sticks so up is negative
+            SInt16 ly = (raw->lyhi << 8) | raw->lylo;
+            SInt16 ry = (raw->ryhi << 8) | raw->lylo;
           
-        ly = -(ly + 1);
-        raw->lyhi = ly >> 8;
-        raw->lylo = ly & 0xFF;
+            ly = -(ly + 1);
+            raw->lyhi = ly >> 8;
+            raw->lylo = ly & 0xFF;
         
-        ry = -(ry + 1);
-        raw->ryhi = ry >> 8;
-        raw->rylo = ry & 0xFF;
+            ry = -(ry + 1);
+            raw->ryhi = ry >> 8;
+            raw->rylo = ry & 0xFF;
+        }
+        
+        if (_xbDeviceOptions.pad.ClampButtons) {
+        
+            if (raw->a != 0)
+                raw->a = 1;
+            if (raw->b != 0)
+                raw->b = 1;
+            if (raw->x != 0)
+                raw->x = 1;
+            if (raw->y != 0)
+                raw->y = 1;
+            if (raw->black != 0)
+                raw->black = 1;
+            if (raw->white != 0)
+                raw->white = 1;
+        }
     }
+    else
+    if (_xbDeviceType == kDeviceTypeIR &&
+        report->getLength() == sizeof(XBActualRemoteReport) &&
+        _xbDeviceButtonMapArray) {
+        
+        XBActualRemoteReport *raw = (XBActualRemoteReport*)(report->getBytesNoCopy());   
+        UInt8 scancode = raw->scancode;
+        UInt8 testScancode;
+        XBRemoteReport *converted = (XBRemoteReport*)raw;
+        OSNumber *number;
+    
+        if (scancode == _xbLastButtonPressed)
+            return false; // remote sends many events when holding down a button.. skip 'em
+        else
+            _xbLastButtonPressed = scancode;
+            
+        //USBLog(6, "handle remote control: scancode=%d", scancode);
+        
+        #define SET_REPORT_FIELD(field, index) \
+            number = OSDynamicCast(OSNumber, _xbDeviceButtonMapArray->getObject(index)); \
+            if (number) { \
+                testScancode = number->unsigned8BitValue(); \
+                if (scancode == testScancode) { \
+                    converted->field = 1; \
+                } \
+                else \
+                    converted->field = 0; \
+             }
+             
+        SET_REPORT_FIELD(select, kRemoteSelect)
+        SET_REPORT_FIELD(up, kRemoteUp)
+        SET_REPORT_FIELD(down, kRemoteDown)
+        SET_REPORT_FIELD(left, kRemoteLeft)
+        SET_REPORT_FIELD(right, kRemoteRight)
+        SET_REPORT_FIELD(title, kRemoteTitle)
+        SET_REPORT_FIELD(info, kRemoteInfo)
+        SET_REPORT_FIELD(menu, kRemoteMenu)
+        SET_REPORT_FIELD(back, kRemoteBack)
+        SET_REPORT_FIELD(display, kRemoteDisplay)
+        SET_REPORT_FIELD(play, kRemotePlay)
+        SET_REPORT_FIELD(stop, kRemoteStop)
+        SET_REPORT_FIELD(pause, kRemotePause)
+        SET_REPORT_FIELD(reverse, kRemoteReverse)
+        SET_REPORT_FIELD(forward, kRemoteForward)
+        SET_REPORT_FIELD(skipBackward, kRemoteSkipBackward)
+        SET_REPORT_FIELD(skipForward, kRemoteSkipForward)
+        SET_REPORT_FIELD(kp0, kRemoteKP0)
+        SET_REPORT_FIELD(kp1, kRemoteKP1)
+        SET_REPORT_FIELD(kp2, kRemoteKP2)
+        SET_REPORT_FIELD(kp3, kRemoteKP3)
+        SET_REPORT_FIELD(kp4, kRemoteKP4)
+        SET_REPORT_FIELD(kp5, kRemoteKP5)
+        SET_REPORT_FIELD(kp6, kRemoteKP6)
+        SET_REPORT_FIELD(kp7, kRemoteKP7)
+        SET_REPORT_FIELD(kp8, kRemoteKP8)
+        SET_REPORT_FIELD(kp9, kRemoteKP9)
+        
+        #undef SET_REPORT_FIELD
+    }
+    
+    return true;
+}
+
+bool DWXBoxHIDDriver::isKnownDevice(IOService *provider, XBoxDeviceType *outType)
+{
+    ///
+    // Check for a known vendor and product id
+    ///
+    bool isKnown = false;
+
+    IOUSBInterface *interface = OSDynamicCast(IOUSBInterface, provider);
+    
+    if (interface) {
+    
+        IOUSBDevice *device = interface->GetDevice();
+        if (device) {
+        
+            char productID[8], vendorID[8];
+            
+            // get product and vendor id
+            sprintf(vendorID, "%d", device->GetVendorID());
+            sprintf(productID, "%d", device->GetProductID());
+                        
+            OSDictionary *dataDict = OSDynamicCast(OSDictionary, getProperty(kDeviceDataKey));
+            if (dataDict) {
+            
+                OSDictionary *vendors = OSDynamicCast(OSDictionary, dataDict->getObject(kKnownDevicesKey));
+                if (vendors) {
+            
+                    OSDictionary *vendor = OSDynamicCast(OSDictionary, vendors->getObject(vendorID));
+                    if (vendor) {
+                    
+                        OSDictionary *product = OSDynamicCast(OSDictionary, vendor->getObject(productID));
+                        if (product) {
+                        
+                            OSString *typeName, *deviceName, *vendorName;
+                            
+                            typeName = OSDynamicCast(OSString, product->getObject(kTypeKey));
+                            deviceName = OSDynamicCast(OSString, product->getObject(kNameKey));
+                            vendorName = OSDynamicCast(OSString, vendor->getObject(kVendorKey));
+                            
+                            USBLog(4,  "%s[%p]::isKnownDevice found %s %s",
+                                getName(), this, vendorName->getCStringNoCopy(), deviceName->getCStringNoCopy());
+                                
+                            isKnown = true;
+                            
+                            if (typeName->isEqualTo(kDeviceTypePadKey))
+                                _xbDeviceType = kDeviceTypePad;
+                            else
+                            if (typeName->isEqualTo(kDeviceTypeIRKey))
+                                _xbDeviceType = kDeviceTypeIR;
+                            else
+                                isKnown = false;
+
+                            _xbDeviceName = deviceName;
+                            _xbDeviceVendor = vendorName;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    return isKnown;
+}
+
+bool DWXBoxHIDDriver::findGenericDevice(IOService *provider, XBoxDeviceType *outType)
+{
+    IOUSBInterface 		*interface   = 0;
+    IOUSBDevice 		*device      = 0;
+    OSDictionary 		*deviceDataDict = 0;        // root dictionary for all device types
+    OSDictionary        *specificDeviceDict = 0;    // pad, IR, wheel, etc
+    OSDictionary        *genericPropertiesDict = 0; // tree of properties that can identify device with unknown vendor/product id
+    OSArray             *genericInterfaceArray = 0; // array of interfaces
+    OSDictionary        *genericInterfaceDict = 0;  // interface
+    OSArray             *genericEndpointArray = 0;  // array of endpoints
+    OSDictionary        *genericEndpointDict = 0;   // endpoint
+    
+    char 				*typesList[] = { kDeviceTypePadKey, kDeviceTypeIRKey, NULL };
+    
+    bool				foundGenericDevice = false;
+    
+    interface = OSDynamicCast(IOUSBInterface, provider);
+    if (interface) {
+    
+        device = interface->GetDevice();
+        if (device) {
+        
+            deviceDataDict = OSDynamicCast(OSDictionary, getProperty(kDeviceDataKey));
+            if (deviceDataDict) {
+                
+                for (int i = 0; typesList[i] != NULL; i++) {
+            
+                    specificDeviceDict = OSDynamicCast(OSDictionary, deviceDataDict->getObject(typesList[i]));
+                    if (specificDeviceDict) {
+                    
+                        genericPropertiesDict = OSDynamicCast(OSDictionary, specificDeviceDict->getObject(kDeviceGenericPropertiesKey));
+                        if (genericPropertiesDict) {
+
+                            genericInterfaceArray = OSDynamicCast(OSArray, genericPropertiesDict->getObject(kGenericInterfacesKey));
+                            if (genericInterfaceArray) {
+                            
+                                int numInterfaces = genericInterfaceArray->getCount();
+                                int numActualInterfaces = 0;
+                                bool allEndpointsMatched = true;
+                                IOUSBFindInterfaceRequest request;
+                                IOUSBInterface *foundInterface;
+
+                                request.bInterfaceClass = kIOUSBFindInterfaceDontCare;
+                                request.bInterfaceSubClass = kIOUSBFindInterfaceDontCare;
+                                request.bInterfaceProtocol = kIOUSBFindInterfaceDontCare;
+                                request.bAlternateSetting = kIOUSBFindInterfaceDontCare;
+                                
+                                foundInterface = device->FindNextInterface(NULL,&request);
+
+                                for (int j = 0; j < numInterfaces; j++) {
+
+                                    if (foundInterface) {
+                                    
+                                        USBLog(6, "%s[%p]::findGenericDevice - checking interface: %d", getName(), this, j);
+                                        
+                                        foundInterface->retain();
+                                        numActualInterfaces++;
+                                    
+                                        genericInterfaceDict = OSDynamicCast(OSDictionary, genericInterfaceArray->getObject(j));
+                                        if (genericInterfaceDict) {
+                                        
+                                            genericEndpointArray = OSDynamicCast(OSArray, 
+                                                genericInterfaceDict->getObject(kGenericEndpointsKey));
+                                            if (genericEndpointArray) {
+                                                
+                                                int numEndpoints = genericEndpointArray->getCount();
+                                                int numActualEndpoints = 0;
+                                                
+                                                for (int k = 0; k < numEndpoints; k++) {
+                                                    
+                                                    bool endPointMatched = false;
+                                                    
+                                                    USBLog(6, "%s[%p]::findGenericDevice - checking endpoint: %d of %d", 
+                                                        getName(), this, k, foundInterface->GetNumEndpoints());
+                                                    
+                                                    // check that index is within bounds
+                                                    if (k < foundInterface->GetNumEndpoints()) {
+                                                    
+                                                        genericEndpointDict = OSDynamicCast(OSDictionary, genericEndpointArray->getObject(k));
+                                                        if (genericEndpointDict) {
+                                                    
+                                                            UInt8 transferType = 0, pollingInterval = 0;
+                                                            UInt16 maxPacketSize = 0;
+                                                            IOReturn kr = kIOReturnError;
+                                                    
+                                                            UInt8 genericAttributes = 0;
+                                                            UInt16 genericMaxPacketSize = 0;
+                                                            UInt8 genericPollingInterval = 0;
+                                                            UInt8 genericDirection = 0;
+                                                            UInt8 genericIndex = 0;
+                                                            
+                                                            OSNumber *number;
+                                                            
+                                                            // read dictionary attributes
+                                                            number = OSDynamicCast(OSNumber, 
+                                                                genericEndpointDict->getObject(kGenericAttributesKey));
+                                                            if (number)
+                                                                genericAttributes = number->unsigned8BitValue();
+                                                            
+                                                            number = OSDynamicCast(OSNumber, 
+                                                                genericEndpointDict->getObject(kGenericMaxPacketSizeKey));
+                                                            if (number)
+                                                                genericMaxPacketSize = number->unsigned16BitValue();
+                                                            
+                                                            number = OSDynamicCast(OSNumber, 
+                                                                genericEndpointDict->getObject(kGenericPollingIntervalKey));
+                                                            if (number)
+                                                                genericPollingInterval = number->unsigned8BitValue();
+                                                            
+                                                            if (genericAttributes & 0x80)
+                                                                genericDirection = kUSBIn;
+                                                            else
+                                                                genericDirection = kUSBOut;
+                                                            
+                                                            genericIndex = genericAttributes & 0xF;
+                                                                    
+                                                            // read device attributes
+                                                            kr = foundInterface->GetEndpointProperties(0, genericIndex, 
+                                                                    genericDirection, &transferType, &maxPacketSize, &pollingInterval);
+                                                            
+                                                            if (kIOReturnSuccess == kr) {
+                                                        
+                                                                numActualEndpoints++;
+                                                                
+                                                                // compare device's endpoint to dictionary entry's endpoint
+                                                                if (maxPacketSize == genericMaxPacketSize &&
+                                                                    pollingInterval == genericPollingInterval) {
+                                                                    endPointMatched = true;
+                                                            
+                                                                    USBLog(6, "%s[%p]::findGenericDevice - endpoint %d matched mps=%d int=%d", 
+                                                                        getName(), this, k, genericMaxPacketSize, genericPollingInterval);
+                                                                }
+                                                                else {
+                                                            
+                                                                    USBLog(6, "%s[%p]::findGenericDevice - endpoint %d rejected mps=%d int=%d", 
+                                                                        k, genericMaxPacketSize, genericPollingInterval);
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    
+                                                    if (!endPointMatched)
+                                                        allEndpointsMatched = false;
+                                                }
+                                                
+                                                if (numEndpoints != numActualEndpoints)
+                                                    allEndpointsMatched = false;
+                                            }
+                                        }
+                                                        
+                                        IOUSBInterface *saveInterface = foundInterface; // save so we can call release() on it later
+                                        
+                                        request.bInterfaceClass = kIOUSBFindInterfaceDontCare;
+                                        request.bInterfaceSubClass = kIOUSBFindInterfaceDontCare;
+                                        request.bInterfaceProtocol = kIOUSBFindInterfaceDontCare;
+                                        request.bAlternateSetting = kIOUSBFindInterfaceDontCare;
+                                        
+                                        foundInterface = device->FindNextInterface(foundInterface, &request);
+                                        saveInterface->release();
+                                    }
+                                }
+                                
+                                if (numInterfaces == numActualInterfaces &&
+                                    allEndpointsMatched) {
+                                
+                                    foundGenericDevice = true;
+                                    
+                                    // note: this compare works because strings are interned (pooled)
+                                    // so they have the same address
+                                    if (typesList[i] == kDeviceTypePadKey)
+                                        _xbDeviceType = kDeviceTypePad;
+                                    else
+                                    if (typesList[i] == kDeviceTypeIRKey)
+                                        _xbDeviceType = kDeviceTypeIR;
+                                    else
+                                        foundGenericDevice = false;
+                                    
+                                    _xbDeviceVendor = OSDynamicCast(OSString, specificDeviceDict->getObject(kVendorKey));
+                                    _xbDeviceName   = OSDynamicCast(OSString, specificDeviceDict->getObject(kNameKey));
+                                    if (!_xbDeviceVendor || !_xbDeviceName)
+                                        foundGenericDevice = false;
+                                        
+                                    if (foundGenericDevice) {
+                                    
+                                        USBLog(3, "%s[%p]::findGenericDevice - found %s %s", getName(), this,
+                                            _xbDeviceVendor->getCStringNoCopy(), _xbDeviceName->getCStringNoCopy());
+                                    
+                                        break; // we're done, return from for loop
+                                    }                                    
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    return foundGenericDevice;
+}
+
+IOService* DWXBoxHIDDriver::probe(IOService *provider, SInt32 *score)
+{
+    XBoxDeviceType outDeviceType;
+        
+    if (this->isKnownDevice(provider, &outDeviceType)) {
+    
+        USBLog(3,  "%s[%p]::probe found known device", getName(), this);
+
+        // pump up our probe score, since we're probably the best driver
+        *score += 10000;
+    }
+    else
+    if (this->findGenericDevice(provider, &outDeviceType)) {
+
+        // there might be a better driver, so don't increase the score
+        USBLog(3,  "%s[%p]::probe found generic device", getName(), this);
+    }
+    else {
+   
+        // device is unknown *and* doesn't match known generic properties,
+        // so we can't support it
+        USBLog(3,  "%s[%p]::probe didn't find supported device", getName(), this);
+
+        *score = 0;
+        return 0;
+    }
+    
+    return this;
 }
 
 // ***********************************************************************************
@@ -613,7 +977,24 @@ DWXBoxHIDDriver::GetHIDDescriptor(UInt8 inDescriptorType, UInt8 inDescriptorInde
 
     // From the interface descriptor, get the HID descriptor.
     // theHIDDesc = (IOUSBHIDDescriptor *)_interface->FindNextAssociatedDescriptor(NULL, kUSBHIDDesc);
-    theHIDDesc = (IOUSBHIDDescriptor*)&gPadHIDDescriptor;
+    if (!_xbDeviceHIDReportDescriptor)
+        return kIOReturnError;
+    
+    UInt16 descDataSize = _xbDeviceHIDReportDescriptor->getLength();
+    
+    IOUSBHIDDescriptor hidDescriptor = 
+        {
+            sizeof(IOUSBHIDDescriptor),   // descLen
+            kUSBHIDDesc,                  // descType
+            0x0111,                       // descVersNum (1.11)
+            0,                            // hidCountryCode
+            1,                            // hidNumDescriptors
+            kUSBReportDesc,               // hidDescriptorType - Table 7.1.2
+            descDataSize & 0xFF,          // hidDescriptorLengthLo
+            (descDataSize & 0xFF00) >> 8  // hidDescriptorLengthHi
+        };
+    
+    theHIDDesc = (IOUSBHIDDescriptor*)&hidDescriptor;
     
     if (theHIDDesc == NULL)
     {
@@ -725,7 +1106,17 @@ DWXBoxHIDDriver::GetHIDDescriptor(UInt8 inDescriptorType, UInt8 inDescriptorInde
                         return kIOReturnNotFound;
                     }
 
-                    memcpy(vOutBuf, gPadHIDReportDescriptor, descSize);
+                    if (descSize == _xbDeviceHIDReportDescriptor->getLength() &&
+                        _xbDeviceHIDReportDescriptor->getBytesNoCopy()) {
+                        
+                        memcpy(vOutBuf, _xbDeviceHIDReportDescriptor->getBytesNoCopy(), descSize);
+                    }
+                    else {
+                    
+                        USBLog(2, "%s[%p]::GetHIDDescriptor - hid report desc wrong size", getName(), this);
+                        return kIOReturnError;
+                    }
+                    
                     //IOLog("  Requesting new desscriptor.\n");
                     /*
                     requestPB.bmRequestType = USBmakebmRequestType(kUSBIn, kUSBStandard, kUSBInterface);
@@ -858,14 +1249,16 @@ DWXBoxHIDDriver::newManufacturerString() const
     
     manufacturerString[0] = 0;
 
-    //index = _device->GetManufacturerStringIndex();
-    index = 1;
+    index = _device->GetManufacturerStringIndex();
     strSize = sizeof(manufacturerString);
     
     err = GetIndexedString(index, (UInt8 *)manufacturerString, &strSize);
     
     if ( err == kIOReturnSuccess )
         return OSString::withCString(manufacturerString);
+    else
+    if (_xbDeviceVendor)
+        return OSString::withString(_xbDeviceVendor);
     else
         return NULL;
 }
@@ -881,14 +1274,16 @@ DWXBoxHIDDriver::newProductString() const
     
     productString[0] = 0;
 
-    //index = _device->GetProductStringIndex();
-    index = 2;
+    index = _device->GetProductStringIndex();
     strSize = sizeof(productString);
     
     err = GetIndexedString(index, (UInt8 *)productString, &strSize);
     
     if ( err == kIOReturnSuccess )
         return OSString::withCString(productString);
+    else
+    if (_xbDeviceName)
+        return OSString::withString(_xbDeviceName);
     else
         return NULL;
 }
@@ -904,8 +1299,7 @@ DWXBoxHIDDriver::newSerialNumberString() const
     
     serialNumberString[0] = 0;
 
-    //index = _device->GetSerialNumberStringIndex();
-    index = 3;
+    index = _device->GetSerialNumberStringIndex();
     strSize = sizeof(serialNumberString);
     
     err = GetIndexedString(index, (UInt8 *)serialNumberString, &strSize);
@@ -941,9 +1335,7 @@ DWXBoxHIDDriver::GetIndexedString(UInt8 index, UInt8 *vOutBuf, UInt32 *vOutSize,
     UInt16  strLen = sizeof(strBuf) - 1;    // GetStringDescriptor MaxLen = 255
     UInt32  outSize = *vOutSize;
     IOReturn    err;
-    
-    USBLog (6, "GetIndexString: %d", index);
-    
+        
     // Valid string index?
     if (index == 0)
     {
@@ -956,8 +1348,10 @@ DWXBoxHIDDriver::GetIndexedString(UInt8 index, UInt8 *vOutBuf, UInt32 *vOutSize,
         lang = 0x409;   // Default is US English.
     }
 
-    // err = _device->GetStringDescriptor((UInt8)index, strBuf, strLen, (UInt16)lang);
+    err = _device->GetStringDescriptor((UInt8)index, strBuf, strLen, (UInt16)lang);
     // When string is returned, it has been converted from Unicode and is null terminated!
+    
+    /*
     err = kIOReturnSuccess;
     
     if (index > 0 && index < kPadNumStrings) {
@@ -969,6 +1363,7 @@ DWXBoxHIDDriver::GetIndexedString(UInt8 index, UInt8 *vOutBuf, UInt32 *vOutSize,
     
         err = kIOReturnError;
     }
+    */
     
     if (err != kIOReturnSuccess)
     {
@@ -1090,7 +1485,11 @@ DWXBoxHIDDriver::start(IOService *provider)
     
     USBLog(7, "%s[%p]::start", getName(), this);
     IncrementOutstandingIO();           // make sure that once we open we don't close until start is open
-    if (super::start(provider))
+    bool ret = super::start(provider);
+    if (!ret) {
+        USBLog(1, "%s[%p]::start - failed to start provider", getName(), this);
+    }
+    if (ret)
     do {
     // OK - at this point IOHIDDevice has successfully started, and now we need to start out interrupt pipe
     // read. we have not initialized a bunch of this stuff yet, because we needed to wait to see if
@@ -1260,9 +1659,15 @@ DWXBoxHIDDriver::InterruptReadHandler(IOReturn status, UInt32 bufferSizeRemainin
             USBLog(6, "%s[%p]::InterruptReadHandler report came in:", getName(), this);
             LogMemReport(_buffer);
 #endif
-            manipulateReport(_buffer);
-            handleReport(_buffer);
+            if (manipulateReport(_buffer))
+                handleReport(_buffer);
         
+            if (_xbDeviceType == kDeviceTypeIR)
+                if (_xbTimerEventSource) {
+                    _xbTimerEventSource->cancelTimeout();
+                    _xbTimerEventSource->setTimeoutMS(_xbTimedEventsInterval);
+                }
+                
             if (isInactive())
                 queueAnother = false;
             
@@ -1294,7 +1699,7 @@ DWXBoxHIDDriver::InterruptReadHandler(IOReturn status, UInt32 bufferSizeRemainin
             break;
             
         case kIOReturnAborted:
-        // This generally means that we are done, because we were unplugged, but not always
+            // This generally means that we are done, because we were unplugged, but not always
             //
             if (isInactive() || _deviceIsDead )
             {
@@ -1341,7 +1746,6 @@ DWXBoxHIDDriver::InterruptReadHandler(IOReturn status, UInt32 bufferSizeRemainin
             //
             queueAnother = false;
             break;
-            
         default:
             // We should handle other errors more intelligently, but
             // for now just return and assume the error is recoverable.
