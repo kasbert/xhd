@@ -15,7 +15,19 @@ The Original Code and all software distributed under the License are distributed
     Modifications to Original Code
         05-16-2003 Added manipulateReport() method to allow subclasses to modify the hid report
                    before it's passed to HIDDevice's handleReport()
-
+        
+        05-22-2003 - new methods (see implementation file for comments)
+                     ¥ isKnownDevice()
+                     ¥ findGenericDevice()
+                     ¥ probe()
+                     ¥ setDeviceOptions()
+                     ¥ generateTimedEvent()
+                   - new fields
+                     ¥ all have _xb prefix, used throughout implementation
+                   - new definitions
+                     ¥ property list keys for configuration and data
+                     ¥ structures to abstract reports for remote and controller
+                     ¥ enumerations for device type and remote control key map
     Background:
         This class is a modified IOUSBHIDDriver for use with XBox USB devices. I wanted to
         just subclass IOUSBHIDDriver, but because the XBox has no HID descriptor (or HID
@@ -24,27 +36,33 @@ The Original Code and all software distributed under the License are distributed
         
         I think this really sucks, and hope that Apple's HID implementation will grow to more easily 
         support USB devices that are not HID-compatible.
-        
+    
     Problems in the Code:
-        Right now, I can only support (presumably) the large XBox controller and variants. Each
-        variant needs to be added to the IOKitPersonalities or it won't be matched to this
-        driver.
-        
-        What I would *like* to do is put almost all of the device-specific crap (hid report 
-        descriptor, string table, etc in the Info.plist so that it will be possible to support
-        new devices without touching the code or recompiling the kext ("you can doooit!").
         
         It would be really, really, really nice if Apple's HID implementation actually consulted
         the String_Index items in the report descriptor...I've complained about this on the Apple
         usb list so we'll see.
         
-        Force feedback needs to be looked into as well.
+        Force feedback needs to be looked into as well. Update (05/22/03): Linux kernel's iforce support
+        may provide clues into faking Immersion Corp's behavior for the ForceFeedback framework
+        in 10.2.3...
+
+    Previous Problems (for historical reference)
+        05-16-2003 (Version 1.0)
+            Right now, I can only support (presumably) the large XBox controller and variants. Each
+            variant needs to be added to the IOKitPersonalities or it won't be matched to this
+            driver.
+            
+            What I would *like* to do is put almost all of the device-specific crap (hid report 
+            descriptor, string table, etc in the Info.plist so that it will be possible to support
+            new devices without touching the code or recompiling the kext ("you can doooit!").
 */
 
 #ifndef IOUSBHIDDRIVER_H
 #define IOUSBHIDDRIVER_H
 
 #include <IOKit/IOBufferMemoryDescriptor.h>
+#include <IOKit/IOTimerEventSource.h>
 
 #include <IOKit/hid/IOHIDDevice.h>
 
@@ -52,6 +70,170 @@ The Original Code and all software distributed under the License are distributed
 #include <IOKit/usb/IOUSBInterface.h>
 #include <IOKit/usb/USB.h>
 
+// -- keys for XML configuration -----------------
+// -----------------------------------------------
+
+#define kDeviceDataKey "DeviceData"
+
+#define kKnownDevicesKey "KnownDevices"
+
+// device types
+#define kDeviceTypePadKey "Pad"   
+#define kDeviceTypeIRKey "IR"
+//kDeviceTypeWheel "Wheel"
+//kDeviceTypeStick "Stick"
+//add more later
+
+// top-level device properties
+#define kDeviceGenericPropertiesKey   "GenericProperties"
+#define kDeviceHIDReportDescriptorKey "HIDReportDescriptor"
+#define kDeviceUSBStringTableKey      "USBStrings"
+#define kDeviceOptionsKey             "Options"
+#define kDeviceButtonMapKey           "ButtonMap"
+
+// options
+#define kOptionInvertYAxisKey        "InvertYAxis"
+#define kOptionClampButtonsKey        "ClampButtons"
+
+// generic device properties
+#define kGenericInterfacesKey      "Interfaces"
+#define kGenericEndpointsKey       "Endpoints"
+#define kGenericMaxPacketSizeKey   "MaxPacketSize"
+#define kGenericPollingIntervalKey "PollingInterval"
+#define kGenericAttributesKey      "Attributes"
+
+// general usage keys
+#define kVendorKey  "Vendor"
+#define kNameKey    "Name"
+#define kTypeKey    "Type"
+
+// ----------------------------------------------------
+
+// xbox device type
+typedef enum {
+
+    kDeviceTypeUnknown = 0,
+    kDeviceTypePad,
+    kDeviceTypeIR,
+    kDeviceTypeStick,
+    kDeviceTypeWheel
+    
+} XBoxDeviceType;
+
+// remote control keys (index into ButtonMapping table)
+typedef enum {
+
+    kRemoteDisplay = 0,
+    kRemoteReverse,
+    kRemotePlay,
+    kRemoteForward,
+    kRemoteSkipBackward,
+    kRemoteStop,
+    kRemotePause,
+    kRemoteSkipForward,
+    kRemoteTitle,
+    kRemoteUp,
+    kRemoteInfo,
+    kRemoteLeft,
+    kRemoteSelect,
+    kRemoteRight,
+    kRemoteMenu,
+    kRemoteDown,
+    kRemoteBack,
+    kRemoteKP1,
+    kRemoteKP2,
+    kRemoteKP3,
+    kRemoteKP4,
+    kRemoteKP5,
+    kRemoteKP6,
+    kRemoteKP7,
+    kRemoteKP8,
+    kRemoteKP9,
+    kRemoteKP0,
+    kNumRemoteButtons
+} XBoxRemoteKey;
+
+typedef struct {
+
+    // note: fields within byte are in reverse order
+    // first byte
+    UInt8 menu:1;
+    UInt8 info:1;
+    UInt8 title:1;
+    UInt8 right:1;
+    UInt8 left:1;
+    UInt8 down:1;    
+    UInt8 up:1;
+    UInt8 select:1;
+    
+    // second byte
+    UInt8 skipBackward:1;
+    UInt8 forward:1;
+    UInt8 reverse:1;
+    UInt8 pause:1;
+    UInt8 stop:1;
+    UInt8 play:1;
+    UInt8 display:1;
+    UInt8 back:1;
+
+    // third byte
+    UInt8 kp6:1;
+    UInt8 kp5:1;
+    UInt8 kp4:1;    
+    UInt8 kp3:1;
+    UInt8 kp2:1;
+    UInt8 kp1:1;
+    UInt8 kp0:1;
+    UInt8 skipForward:1;
+    
+    // fourth byte
+    UInt8 r1:5; // constant
+    UInt8 kp9:1;
+    UInt8 kp8:1;
+    UInt8 kp7:1;
+    
+    // constant
+    UInt8 r2;
+    UInt8 r3;
+    
+} XBRemoteReport;
+
+typedef struct
+{
+    UInt8 r1, r2;
+    UInt8 scancode;
+    UInt8 r3, r4, r5;
+    
+} XBActualRemoteReport;
+
+// this checks that the structures are of the same size
+typedef int _sizeCheck[ (sizeof(XBRemoteReport) == sizeof(XBActualRemoteReport)) * 2 - 1];
+
+// this structure represents the gampad's raw report fields
+typedef struct {
+
+    UInt8
+        r1,      // reserved
+        r2,      // report length (useless)
+        buttons, // up, down, left, right, start, back, left-click, right-click
+        r3,      // reserved
+        a,
+        b,
+        x,
+        y,
+        black,
+        white,
+        lt,     // left trigger
+        rt;     // right trigger
+    
+    // lo/hi bits of signed 16-bit axes
+    UInt8
+        lxlo, lxhi,
+        lylo, lyhi,
+        rxlo, rxhi,
+        rylo, ryhi;
+        
+} XBPadReport;
 
 #define ENABLE_HIDREPORT_LOGGING    0
 
@@ -119,7 +301,31 @@ class DWXBoxHIDDriver : public IOHIDDevice
     IOBufferMemoryDescriptor *  _outBuffer;
     UInt32          _deviceUsage;
     UInt32          _deviceUsagePage;
-
+    
+    // xbox additions
+    XBoxDeviceType  _xbDeviceType;
+    OSString *      _xbDeviceVendor;
+    OSString *      _xbDeviceName;
+    OSData *        _xbDeviceHIDReportDescriptor;
+    OSDictionary *  _xbDeviceOptionsDict;
+    OSArray *       _xbDeviceButtonMapArray;
+    UInt8           _xbLastButtonPressed;
+    
+    // timing stuff (for synthesizing events - currently only for remote control)
+    //bool            _xbShouldGenerateTimedEvent;
+    UInt16          _xbTimedEventsInterval;
+    IOWorkLoop *    _xbWorkLoop;
+    IOTimerEventSource * _xbTimerEventSource;
+    
+    // xbox device options
+    union {
+        struct { 
+            bool InvertYAxis; // invert Y axis on sticks (default = true)
+            bool ClampButtons; // clamp face buttons to 0-1 (default = true)
+        } pad;
+        // add more devices here...
+    } _xbDeviceOptions;
+    
     struct ExpansionData 
     { 
     };
@@ -195,8 +401,26 @@ public:
     
     // driver or subclasses can change the format of the report here
     // for example, to reverse the Y axis values
-    virtual void manipulateReport(IOBufferMemoryDescriptor *report);
+    // return value indicates if event should be sent to HID layer or not
+    virtual bool manipulateReport(IOBufferMemoryDescriptor *report);
     
+    // check the device product/vendor id's
+    virtual bool isKnownDevice(IOService *provider, XBoxDeviceType *outType);
+    
+    // fallback: probe device for #of interfaces, endpoints, etc
+    virtual bool findGenericDevice(IOService *provider, XBoxDeviceType *outType);
+
+    // use active matching to determine the device type (gamepad, joystick, etc..)
+    // so we can support 3rd-party devices
+    virtual IOService* probe(IOService *service, SInt32 *score);
+    
+    // set device-specific options from our property list
+    virtual void setDeviceOptions();
+
+    // callback for timer event source
+    static void generateTimedEvent(OSObject *object, IOTimerEventSource *tes);
+
+
 private:    // Should these be protected or virtual?
     IOReturn GetHIDDescriptor(UInt8 inDescriptorType, UInt8 inDescriptorIndex, UInt8 *vOutBuf, UInt32 *vOutSize);
     IOReturn GetReport(UInt8 inReportType, UInt8 inReportID, UInt8 *vInBuf, UInt32 *vInSize);
