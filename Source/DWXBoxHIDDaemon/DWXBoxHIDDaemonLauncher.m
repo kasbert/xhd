@@ -13,15 +13,15 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification*)note
 {
-    NSString *daemon = @"DWXBoxHIDDaemon";
+    NSString *daemon = @"XboxHIDDaemon";
     NSString *resourcePath = [ [ NSBundle mainBundle ] resourcePath ];
  
-    NSString *command = [ NSString stringWithFormat:@"%@/%@ &", resourcePath, daemon, nil ];
+    NSString *command = [ NSString stringWithFormat:@"\"%@/%@\" &", resourcePath, daemon, nil ];
     
     int status = system([ command cString ]);
     
     if (status)
-        NSLog(@"Error starting XBox HID Daemon: %d", status);
+        NSLog (@"Error starting XboxHIDDaemon: %d", status);
     
     [ NSApp terminate:self ];
 }
