@@ -110,6 +110,10 @@ struct joystick_hwdata
 };
 typedef struct joystick_hwdata recDevice;
 
+@interface Dummy : NSObject
+{}
+- (void)hidUpdateElement:(int)deviceIndex cookie:(int)cookie value:(SInt32)value;
+@end
 
 /* Linked list of all available devices */
 static recDevice *gpDeviceList = NULL;
@@ -148,7 +152,7 @@ static SInt32 HIDGetElementValue (recDevice *pDevice, recElement *pElement)
 	return hidEvent.value;
 }
 
-/* similiar to HIDGetElementValue, but auto-calibrates the value before returning it */
+/* similiar to HIDGetElementValue, but auto-calibrates the value before returning it
 
 static SInt32 HIDCalibratedValue (recDevice *pDevice, recElement *pElement)
 {
@@ -160,8 +164,9 @@ static SInt32 HIDCalibratedValue (recDevice *pDevice, recElement *pElement)
 	else
 		return ((value - pElement->minReport) * deviceScale / readScale) + pElement->min;
 }
-
-/* similiar to HIDCalibratedValue but calibrates to an arbitrary scale instead of the elements default scale */
+ */
+ 
+/* similiar to HIDCalibratedValue but calibrates to an arbitrary scale instead of the elements default scale
 
 static SInt32 HIDScaledCalibratedValue (recDevice *pDevice, recElement *pElement, long min, long max)
 {
@@ -173,7 +178,8 @@ static SInt32 HIDScaledCalibratedValue (recDevice *pDevice, recElement *pElement
 	else
 		return ((value - pElement->minReport) * deviceScale / readScale) + min;
 }
-
+ */
+ 
 /* Create and open an interface to device, required prior to extracting values or building queues.
  * Note: appliction now owns the device and must close and release it prior to exiting
  */
@@ -716,7 +722,7 @@ void DWHID_JoystickUpdate(id target)
                 //SDL_PrivateJoystickAxis(joystick, i, value);
 ;
             if (value != element->lastValue) {
-                [ target hidUpdateElement:deviceIndex cookie:element->cookie value:value ];
+                [ target hidUpdateElement:deviceIndex cookie:(int)element->cookie value:value ];
             }
             element->lastValue = value;
             element = element->pNext;
@@ -733,7 +739,7 @@ void DWHID_JoystickUpdate(id target)
             //if ( value != joystick->buttons[i] )
             //	SDL_PrivateJoystickButton(joystick, i, value);
             if (value != element->lastValue)
-                [ target hidUpdateElement:deviceIndex cookie:element->cookie value:value ];
+                [ target hidUpdateElement:deviceIndex cookie:(int)element->cookie value:value ];
             element->lastValue = value;
             
             element = element->pNext;
@@ -748,7 +754,7 @@ void DWHID_JoystickUpdate(id target)
     
             value = HIDGetElementValue(device, element);
             if (value != element->lastValue)
-                [ target hidUpdateElement:deviceIndex cookie:element->cookie value:value ];
+                [ target hidUpdateElement:deviceIndex cookie:(int)element->cookie value:value ];
             element->lastValue = value;
             
             //if (element->max == 3) /* 4 position hatswitch - scale up value */
