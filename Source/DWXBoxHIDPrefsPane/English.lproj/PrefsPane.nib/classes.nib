@@ -9,6 +9,7 @@
             ACTIONS = {
                 changePadOption = id; 
                 deleteConfiguration = id; 
+                endModalSessionAlt = id; 
                 endModalSessionCancel = id; 
                 endModalSessionOK = id; 
                 loadConfiguration = id; 
@@ -24,11 +25,16 @@
                 "_askForNameWindow" = id; 
                 "_betaExpiredWindow" = id; 
                 "_buttonView" = id; 
+                "_codeExpiredWindow" = id; 
                 "_configBox" = id; 
                 "_configPopUp" = id; 
                 "_dPadView" = id; 
+                "_demoMessageText" = id; 
+                "_demoMessageWindow" = id; 
                 "_devicePopUpButton" = id; 
                 "_enableAnalogButtons" = id; 
+                "_enterCodeWindow" = id; 
+                "_invalidCodeWindow" = id; 
                 "_largeErrorMessage" = id; 
                 "_leftStickInvertX" = id; 
                 "_leftStickInvertY" = id; 
@@ -37,6 +43,7 @@
                 "_leftTriggerDeadzoneField" = id; 
                 "_leftTriggerUsage" = id; 
                 "_leftTriggerView" = id; 
+                "_registrationCodeTextField" = id; 
                 "_rightStickInvertX" = id; 
                 "_rightStickInvertY" = id; 
                 "_rightStickView" = id; 
@@ -45,6 +52,7 @@
                 "_rightTriggerUsage" = id; 
                 "_rightTriggerView" = id; 
                 "_tabView" = id; 
+                "_thanksWindow" = id; 
             }; 
             SUPERCLASS = NSPreferencePane; 
         }, 

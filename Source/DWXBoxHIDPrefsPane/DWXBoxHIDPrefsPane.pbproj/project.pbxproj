@@ -7,7 +7,7 @@
 	objects = {
 		014CEA410018CDE011CA2923 = {
 			isa = PBXBundleReference;
-			path = DWXBoxHIDPrefsPane.prefPane;
+			path = XboxHIDPrefsPane.prefPane;
 			refType = 3;
 		};
 		014CEA420018CDE011CA2923 = {
@@ -25,6 +25,8 @@
 			);
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
+				DEBUGGING_SYMBOLS = NO;
+				OPTIMIZATION_CFLAGS = "-Os";
 			};
 			isa = PBXBuildStyle;
 			name = Deployment;
@@ -55,8 +57,8 @@
 		089C166AFE841209C02AAC07 = {
 			children = (
 				08FB77AFFE84173DC02AAC07,
-				32C88E010371C26100C91783,
 				B2C2DB62048D4D2700A80002,
+				32C88E010371C26100C91783,
 				089C167CFE841241C02AAC07,
 				089C1671FE841209C02AAC07,
 				19C28FB8FE9D52D311CA2CBB,
@@ -69,6 +71,7 @@
 			children = (
 				1058C7ACFEA557BF11CA2CBB,
 				1058C7AEFEA557BF11CA2CBB,
+				B2013CEC04AB418800A80002,
 			);
 			isa = PBXGroup;
 			name = "Frameworks and Libraries";
@@ -99,7 +102,7 @@
 				OTHER_REZFLAGS = "";
 				PRECOMPILE_PREFIX_HEADER = YES;
 				PREFIX_HEADER = DWXBoxHIDPrefsPane_Prefix.h;
-				PRODUCT_NAME = DWXBoxHIDPrefsPane;
+				PRODUCT_NAME = XboxHIDPrefsPane;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
 				WRAPPER_EXTENSION = prefPane;
@@ -118,11 +121,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>DWXBoxHIDPrefsPane</string>
+	<string>XboxHIDPrefsPane</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>xboxhid.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.walisser.DWXBoxHIDDriver</string>
+	<string>org.walisser.XBoxHIDDriver</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -130,15 +133,15 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>v1.0</string>
+	<string>v1.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.2</string>
 	<key>NSMainNibFile</key>
 	<string>PrefsPane</string>
-	<key>NSPrefPaneIconLabel</key>
-	<string>XBox HID Driver</string>
+	<key>NSPrefPaneIconFile</key>
+	<string>pref64.tiff</string>
 	<key>NSPrincipalClass</key>
 	<string>DWXBoxHIDPrefsPane</string>
 </dict>
@@ -160,6 +163,11 @@
 				B22B9879048E9C3300A80002,
 				B2098B32049252CA00A80002,
 				B21A2DBF04929C6100A80002,
+				B2013CE604AB410D00A80002,
+				B2013CE804AB410D00A80002,
+				B2013CEA04AB410D00A80002,
+				B2013CF004AB61CF00A80002,
+				B2CAF13504AD191300A80002,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,10 +175,13 @@
 		089C1675FE841209C02AAC07 = {
 			buildActionMask = 2147483647;
 			files = (
-				089C1680FE841241C02AAC07,
 				B2BC8C62048679EE00A80002,
 				B2C2DB5B048D48B900A80002,
 				B2C2DB5D048D48C000A80002,
+				B2CAF12304AD17B000A80002,
+				B2C41A9204AE4D0700A80002,
+				B2C41A9304AE4D0700A80002,
+				B2C41A9404AE549D00A80002,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -189,6 +200,10 @@
 				B22B987A048E9C3300A80002,
 				B2098B33049252CA00A80002,
 				B21A2DC004929C6100A80002,
+				B2013CE704AB410D00A80002,
+				B2013CE904AB410D00A80002,
+				B2013CEB04AB410D00A80002,
+				B2013CF104AB61CF00A80002,
 			);
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,6 +214,7 @@
 				1058C7AFFEA557BF11CA2CBB,
 				B2BC8C550486723300A80002,
 				B2C2DB6C048D4D9A00A80002,
+				B2013CED04AB418800A80002,
 			);
 			isa = PBXFrameworksBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,8 +228,11 @@
 		};
 		089C167CFE841241C02AAC07 = {
 			children = (
+				B2CAF12204AD17B000A80002,
 				B2C2DB5A048D48B900A80002,
 				B2C2DB5C048D48C000A80002,
+				B2C41A9004AE4D0700A80002,
+				B2C41A9104AE4D0700A80002,
 				B2BC8C60048679EE00A80002,
 				089C167DFE841241C02AAC07,
 			);
@@ -241,12 +260,6 @@
 			name = AppKit.framework;
 			path = /System/Library/Frameworks/AppKit.framework;
 			refType = 0;
-		};
-		089C1680FE841241C02AAC07 = {
-			fileRef = 089C167DFE841241C02AAC07;
-			isa = PBXBuildFile;
-			settings = {
-			};
 		};
 		08FB77AFFE84173DC02AAC07 = {
 			children = (
@@ -385,6 +398,122 @@
 //B22
 //B23
 //B24
+		B2013CE004AB410D00A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			name = Base64.h;
+			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/Base64.h;
+			refType = 0;
+		};
+		B2013CE104AB410D00A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			name = Base64.m;
+			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/Base64.m;
+			refType = 0;
+		};
+		B2013CE204AB410D00A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			name = Registrar.h;
+			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/Registrar.h;
+			refType = 0;
+		};
+		B2013CE304AB410D00A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			name = Registrar.m;
+			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/Registrar.m;
+			refType = 0;
+		};
+		B2013CE404AB410D00A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			name = RSACrypto.h;
+			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/RSACrypto.h;
+			refType = 0;
+		};
+		B2013CE504AB410D00A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			name = RSACrypto.m;
+			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/RSACrypto.m;
+			refType = 0;
+		};
+		B2013CE604AB410D00A80002 = {
+			fileRef = B2013CE004AB410D00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2013CE704AB410D00A80002 = {
+			fileRef = B2013CE104AB410D00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2013CE804AB410D00A80002 = {
+			fileRef = B2013CE204AB410D00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2013CE904AB410D00A80002 = {
+			fileRef = B2013CE304AB410D00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2013CEA04AB410D00A80002 = {
+			fileRef = B2013CE404AB410D00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2013CEB04AB410D00A80002 = {
+			fileRef = B2013CE504AB410D00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2013CEC04AB418800A80002 = {
+			isa = PBXFileReference;
+			name = libcrypto.dylib;
+			path = /usr/lib/libcrypto.dylib;
+			refType = 0;
+		};
+		B2013CED04AB418800A80002 = {
+			fileRef = B2013CEC04AB418800A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2013CEE04AB61CF00A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			name = MD5.h;
+			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/MD5.h;
+			refType = 0;
+		};
+		B2013CEF04AB61CF00A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			name = MD5.m;
+			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/MD5.m;
+			refType = 0;
+		};
+		B2013CF004AB61CF00A80002 = {
+			fileRef = B2013CEE04AB61CF00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2013CF104AB61CF00A80002 = {
+			fileRef = B2013CEF04AB61CF00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		B2098B30049252CA00A80002 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
@@ -667,6 +796,7 @@
 				B2C2DB64048D4D5A00A80002,
 				B2C2DB65048D4D5A00A80002,
 				B2C2DB66048D4D5A00A80002,
+				B2CAF13604AD191900A80002,
 			);
 			isa = PBXGroup;
 			name = "External Sources";
@@ -736,6 +866,78 @@
 			isa = PBXBuildFile;
 			settings = {
 			};
+		};
+		B2C41A9004AE4D0700A80002 = {
+			isa = PBXFileReference;
+			name = pref64.tiff;
+			path = Resources/pref64.tiff;
+			refType = 2;
+		};
+		B2C41A9104AE4D0700A80002 = {
+			isa = PBXFileReference;
+			name = xboxhid.icns;
+			path = Resources/xboxhid.icns;
+			refType = 2;
+		};
+		B2C41A9204AE4D0700A80002 = {
+			fileRef = B2C41A9004AE4D0700A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C41A9304AE4D0700A80002 = {
+			fileRef = B2C41A9104AE4D0700A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C41A9404AE549D00A80002 = {
+			fileRef = 089C167DFE841241C02AAC07;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2CAF12204AD17B000A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			name = pubkey;
+			path = ../../private/pubkey;
+			refType = 2;
+		};
+		B2CAF12304AD17B000A80002 = {
+			fileRef = B2CAF12204AD17B000A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2CAF13404AD191300A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			name = Debug.h;
+			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/Debug.h;
+			refType = 0;
+		};
+		B2CAF13504AD191300A80002 = {
+			fileRef = B2CAF13404AD191300A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2CAF13604AD191900A80002 = {
+			children = (
+				B2CAF13404AD191300A80002,
+				B2013CE204AB410D00A80002,
+				B2013CE304AB410D00A80002,
+				B2013CEE04AB61CF00A80002,
+				B2013CEF04AB61CF00A80002,
+				B2013CE004AB410D00A80002,
+				B2013CE104AB410D00A80002,
+				B2013CE404AB410D00A80002,
+				B2013CE504AB410D00A80002,
+			);
+			isa = PBXGroup;
+			name = Registrar;
+			refType = 4;
 		};
 	};
 	rootObject = 089C1669FE841209C02AAC07;
