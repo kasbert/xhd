@@ -1,0 +1,11 @@
+#!/bin/sh
+# finish up the installation
+echo "Running postdelete script"
+umask 022
+
+echo "User is \"$USER\""
+
+rm -rf ~/Library/PreferencePanes/XboxHIDPrefsPane.prefPane
+rm -rf /System/Library/Extensions/DWXboxHIDDriver.kext
+
+# todo: remove login item

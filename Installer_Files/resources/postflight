@@ -1,0 +1,27 @@
+#!/bin/sh
+# finish up the installation
+echo "Running postflight script"
+umask 022
+
+echo "User is \"$USER\""
+
+PKGROOT="$1/Contents/Resources"
+ROOT=$2
+
+# delete any existing installation first
+
+
+"$PKGROOT/postdelete"
+
+echo "Moving prefs pane to ~/Library/PreferencePanes"
+sudo -u $USER mkdir -p ~/Library/PreferencePanes
+sudo -u $USER mv -f $ROOT/XboxHIDPrefsPane.prefPane ~/Library/PreferencePanes
+
+echo "Moving daemon to ~/Library/PreferencePanes/XboxHIDPrefsPane.prefPane/Contents/Resources"
+sudo -u $USER mv -f $ROOT/XboxHIDDaemonLauncher.app ~/Library/PreferencePanes/XboxHIDPrefsPane.prefPane/Contents/Resources
+
+echo "Installing login item"
+sudo -u $USER "$PKGROOT/installLoginItem" $USER ~/Library/PreferencePanes/XboxHIDPrefsPane.prefPane/Contents/Resources/XboxHIDDaemonLauncher.app 1
+
+echo "Installing kernel extension"
+mv -f $ROOT/DWXboxHIDDriver.kext /System/Library/Extensions
