@@ -1,0 +1,742 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 38;
+	objects = {
+		014CEA410018CDE011CA2923 = {
+			isa = PBXBundleReference;
+			path = DWXBoxHIDPrefsPane.prefPane;
+			refType = 3;
+		};
+		014CEA420018CDE011CA2923 = {
+			buildRules = (
+			);
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				OPTIMIZATION_CFLAGS = "-O0";
+			};
+			isa = PBXBuildStyle;
+			name = Development;
+		};
+		014CEA430018CDE011CA2923 = {
+			buildRules = (
+			);
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			isa = PBXBuildStyle;
+			name = Deployment;
+		};
+//010
+//011
+//012
+//013
+//014
+//080
+//081
+//082
+//083
+//084
+		089C1669FE841209C02AAC07 = {
+			buildStyles = (
+				014CEA420018CDE011CA2923,
+				014CEA430018CDE011CA2923,
+			);
+			hasScannedForEncodings = 1;
+			isa = PBXProject;
+			mainGroup = 089C166AFE841209C02AAC07;
+			projectDirPath = "";
+			targets = (
+				089C1673FE841209C02AAC07,
+			);
+		};
+		089C166AFE841209C02AAC07 = {
+			children = (
+				08FB77AFFE84173DC02AAC07,
+				32C88E010371C26100C91783,
+				B2C2DB62048D4D2700A80002,
+				089C167CFE841241C02AAC07,
+				089C1671FE841209C02AAC07,
+				19C28FB8FE9D52D311CA2CBB,
+			);
+			isa = PBXGroup;
+			name = DWXBoxHIDPrefsPane;
+			refType = 4;
+		};
+		089C1671FE841209C02AAC07 = {
+			children = (
+				1058C7ACFEA557BF11CA2CBB,
+				1058C7AEFEA557BF11CA2CBB,
+			);
+			isa = PBXGroup;
+			name = "Frameworks and Libraries";
+			refType = 4;
+		};
+		089C1672FE841209C02AAC07 = {
+			isa = PBXFrameworkReference;
+			name = Foundation.framework;
+			path = /System/Library/Frameworks/Foundation.framework;
+			refType = 0;
+		};
+		089C1673FE841209C02AAC07 = {
+			buildPhases = (
+				089C1674FE841209C02AAC07,
+				089C1675FE841209C02AAC07,
+				089C1676FE841209C02AAC07,
+				089C1677FE841209C02AAC07,
+				089C1679FE841209C02AAC07,
+				B2C2D7C6048BF1EB00A80002,
+			);
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "";
+				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRECOMPILE_PREFIX_HEADER = YES;
+				PREFIX_HEADER = DWXBoxHIDPrefsPane_Prefix.h;
+				PRODUCT_NAME = DWXBoxHIDPrefsPane;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+				WRAPPER_EXTENSION = prefPane;
+			};
+			dependencies = (
+			);
+			isa = PBXBundleTarget;
+			name = DWXBoxHIDPrefsPane;
+			productInstallPath = "$(HOME)/Library/PreferencePanes";
+			productName = DWXBoxHIDPrefsPane;
+			productReference = 014CEA410018CDE011CA2923;
+			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>DWXBoxHIDPrefsPane</string>
+	<key>CFBundleIconFile</key>
+	<string></string>
+	<key>CFBundleIdentifier</key>
+	<string>org.walisser.DWXBoxHIDDriver</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>DWXBoxHIDPrefsPane</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>v1.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>NSMainNibFile</key>
+	<string>PrefsPane</string>
+	<key>NSPrefPaneIconLabel</key>
+	<string>XBox HID Driver</string>
+	<key>NSPrincipalClass</key>
+	<string>DWXBoxHIDPrefsPane</string>
+</dict>
+</plist>
+";
+		};
+		089C1674FE841209C02AAC07 = {
+			buildActionMask = 2147483647;
+			files = (
+				32DBCF640370AF2F00C91783,
+				B2BC8C5E048678DB00A80002,
+				B2C2DB4A048C44AB00A80002,
+				B2C2DB4E048C637100A80002,
+				B2C2DB52048D187600A80002,
+				B2C2DB56048D18AF00A80002,
+				B2C2DB67048D4D5A00A80002,
+				B2C2DB69048D4D5A00A80002,
+				B22B985D048E734900A80002,
+				B22B9879048E9C3300A80002,
+				B2098B32049252CA00A80002,
+				B21A2DBF04929C6100A80002,
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		089C1675FE841209C02AAC07 = {
+			buildActionMask = 2147483647;
+			files = (
+				089C1680FE841241C02AAC07,
+				B2BC8C62048679EE00A80002,
+				B2C2DB5B048D48B900A80002,
+				B2C2DB5D048D48C000A80002,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		089C1676FE841209C02AAC07 = {
+			buildActionMask = 2147483647;
+			files = (
+				08FB77B7FE84183AC02AAC07,
+				B2BC8C5F048678DB00A80002,
+				B2C2DB4B048C44AB00A80002,
+				B2C2DB4F048C637100A80002,
+				B2C2DB53048D187600A80002,
+				B2C2DB57048D18AF00A80002,
+				B2C2DB68048D4D5A00A80002,
+				B2C2DB6A048D4D5A00A80002,
+				B22B987A048E9C3300A80002,
+				B2098B33049252CA00A80002,
+				B21A2DC004929C6100A80002,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		089C1677FE841209C02AAC07 = {
+			buildActionMask = 2147483647;
+			files = (
+				1058C7AFFEA557BF11CA2CBB,
+				B2BC8C550486723300A80002,
+				B2C2DB6C048D4D9A00A80002,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		089C1679FE841209C02AAC07 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXRezBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		089C167CFE841241C02AAC07 = {
+			children = (
+				B2C2DB5A048D48B900A80002,
+				B2C2DB5C048D48C000A80002,
+				B2BC8C60048679EE00A80002,
+				089C167DFE841241C02AAC07,
+			);
+			isa = PBXGroup;
+			name = Resources;
+			refType = 4;
+		};
+		089C167DFE841241C02AAC07 = {
+			children = (
+				089C167EFE841241C02AAC07,
+			);
+			isa = PBXVariantGroup;
+			name = InfoPlist.strings;
+			refType = 4;
+		};
+		089C167EFE841241C02AAC07 = {
+			fileEncoding = 10;
+			isa = PBXFileReference;
+			name = English;
+			path = English.lproj/InfoPlist.strings;
+			refType = 4;
+		};
+		089C167FFE841241C02AAC07 = {
+			isa = PBXFrameworkReference;
+			name = AppKit.framework;
+			path = /System/Library/Frameworks/AppKit.framework;
+			refType = 0;
+		};
+		089C1680FE841241C02AAC07 = {
+			fileRef = 089C167DFE841241C02AAC07;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		08FB77AFFE84173DC02AAC07 = {
+			children = (
+				B2BC8C5C048678DB00A80002,
+				B2BC8C5D048678DB00A80002,
+				B2C2DB48048C44AB00A80002,
+				B2C2DB49048C44AB00A80002,
+				B2C2DB4C048C637100A80002,
+				B2C2DB4D048C637100A80002,
+				B2C2DB50048D187600A80002,
+				B2C2DB51048D187600A80002,
+				B2C2DB54048D18AF00A80002,
+				B2C2DB55048D18AF00A80002,
+				B22B9877048E9C3300A80002,
+				B22B9878048E9C3300A80002,
+				B2098B30049252CA00A80002,
+				B2098B31049252CA00A80002,
+				B21A2DBD04929C6100A80002,
+				B21A2DBE04929C6100A80002,
+			);
+			isa = PBXGroup;
+			name = Classes;
+			refType = 4;
+		};
+		08FB77B6FE84183AC02AAC07 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = main.c;
+			refType = 4;
+		};
+		08FB77B7FE84183AC02AAC07 = {
+			fileRef = 08FB77B6FE84183AC02AAC07;
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+				);
+			};
+		};
+//080
+//081
+//082
+//083
+//084
+//100
+//101
+//102
+//103
+//104
+		1058C7ACFEA557BF11CA2CBB = {
+			children = (
+				1058C7ADFEA557BF11CA2CBB,
+				B2BC8C540486723300A80002,
+				B2C2DB6B048D4D9A00A80002,
+			);
+			isa = PBXGroup;
+			name = "Linked Frameworks";
+			refType = 4;
+		};
+		1058C7ADFEA557BF11CA2CBB = {
+			isa = PBXFrameworkReference;
+			name = Cocoa.framework;
+			path = /System/Library/Frameworks/Cocoa.framework;
+			refType = 0;
+		};
+		1058C7AEFEA557BF11CA2CBB = {
+			children = (
+				089C1672FE841209C02AAC07,
+				089C167FFE841241C02AAC07,
+			);
+			isa = PBXGroup;
+			name = "Other Frameworks";
+			refType = 4;
+		};
+		1058C7AFFEA557BF11CA2CBB = {
+			fileRef = 1058C7ADFEA557BF11CA2CBB;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+//100
+//101
+//102
+//103
+//104
+//190
+//191
+//192
+//193
+//194
+		19C28FB8FE9D52D311CA2CBB = {
+			children = (
+				014CEA410018CDE011CA2923,
+			);
+			isa = PBXGroup;
+			name = Products;
+			refType = 4;
+		};
+//190
+//191
+//192
+//193
+//194
+//320
+//321
+//322
+//323
+//324
+		32C88E010371C26100C91783 = {
+			children = (
+				32DBCF630370AF2F00C91783,
+				08FB77B6FE84183AC02AAC07,
+			);
+			isa = PBXGroup;
+			name = "Other Sources";
+			refType = 4;
+		};
+		32DBCF630370AF2F00C91783 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = DWXBoxHIDPrefsPane_Prefix.h;
+			refType = 4;
+		};
+		32DBCF640370AF2F00C91783 = {
+			fileRef = 32DBCF630370AF2F00C91783;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+//320
+//321
+//322
+//323
+//324
+//B20
+//B21
+//B22
+//B23
+//B24
+		B2098B30049252CA00A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = DWActionableTextField.h;
+			refType = 4;
+		};
+		B2098B31049252CA00A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = DWActionableTextField.m;
+			refType = 4;
+		};
+		B2098B32049252CA00A80002 = {
+			fileRef = B2098B30049252CA00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2098B33049252CA00A80002 = {
+			fileRef = B2098B31049252CA00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B21A2DBD04929C6100A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = DWHIDUtilities.h;
+			refType = 4;
+		};
+		B21A2DBE04929C6100A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = DWHIDUtilities.m;
+			refType = 4;
+		};
+		B21A2DBF04929C6100A80002 = {
+			fileRef = B21A2DBD04929C6100A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B21A2DC004929C6100A80002 = {
+			fileRef = B21A2DBE04929C6100A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B22B985C048E734900A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			name = DWXBoxHIDDriverKeys.h;
+			path = ../DWXBoxHIDDriver/DWXBoxHIDDriverKeys.h;
+			refType = 2;
+		};
+		B22B985D048E734900A80002 = {
+			fileRef = B22B985C048E734900A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B22B9877048E9C3300A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = DWXBoxHIDNotifier.h;
+			refType = 2;
+		};
+		B22B9878048E9C3300A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = DWXBoxHIDNotifier.m;
+			refType = 2;
+		};
+		B22B9879048E9C3300A80002 = {
+			fileRef = B22B9877048E9C3300A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B22B987A048E9C3300A80002 = {
+			fileRef = B22B9878048E9C3300A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2BC8C540486723300A80002 = {
+			isa = PBXFrameworkReference;
+			name = PreferencePanes.framework;
+			path = /System/Library/Frameworks/PreferencePanes.framework;
+			refType = 0;
+		};
+		B2BC8C550486723300A80002 = {
+			fileRef = B2BC8C540486723300A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2BC8C5C048678DB00A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = DWXBoxHIDPrefsPane.h;
+			refType = 2;
+		};
+		B2BC8C5D048678DB00A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = DWXBoxHIDPrefsPane.m;
+			refType = 2;
+		};
+		B2BC8C5E048678DB00A80002 = {
+			fileRef = B2BC8C5C048678DB00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2BC8C5F048678DB00A80002 = {
+			fileRef = B2BC8C5D048678DB00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2BC8C60048679EE00A80002 = {
+			children = (
+				B2BC8C61048679EE00A80002,
+			);
+			isa = PBXVariantGroup;
+			name = PrefsPane.nib;
+			path = "";
+			refType = 4;
+		};
+		B2BC8C61048679EE00A80002 = {
+			isa = PBXFileReference;
+			name = English;
+			path = English.lproj/PrefsPane.nib;
+			refType = 4;
+		};
+		B2BC8C62048679EE00A80002 = {
+			fileRef = B2BC8C60048679EE00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C2D7C6048BF1EB00A80002 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			generatedFileNames = (
+			);
+			isa = PBXShellScriptBuildPhase;
+			neededFileNames = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Developer/Tools/CpMac -r build/$PRODUCT_NAME.$WRAPPER_EXTENSION $HOME/Library/PreferencePanes";
+		};
+		B2C2DB48048C44AB00A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = DWAxisPairView.h;
+			refType = 4;
+		};
+		B2C2DB49048C44AB00A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = DWAxisPairView.m;
+			refType = 4;
+		};
+		B2C2DB4A048C44AB00A80002 = {
+			fileRef = B2C2DB48048C44AB00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C2DB4B048C44AB00A80002 = {
+			fileRef = B2C2DB49048C44AB00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C2DB4C048C637100A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = DWTriggerView.h;
+			refType = 4;
+		};
+		B2C2DB4D048C637100A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = DWTriggerView.m;
+			refType = 4;
+		};
+		B2C2DB4E048C637100A80002 = {
+			fileRef = B2C2DB4C048C637100A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C2DB4F048C637100A80002 = {
+			fileRef = B2C2DB4D048C637100A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C2DB50048D187600A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = DWDPadView.h;
+			refType = 4;
+		};
+		B2C2DB51048D187600A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = DWDPadView.m;
+			refType = 4;
+		};
+		B2C2DB52048D187600A80002 = {
+			fileRef = B2C2DB50048D187600A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C2DB53048D187600A80002 = {
+			fileRef = B2C2DB51048D187600A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C2DB54048D18AF00A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = DWButtonView.h;
+			refType = 4;
+		};
+		B2C2DB55048D18AF00A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = DWButtonView.m;
+			refType = 4;
+		};
+		B2C2DB56048D18AF00A80002 = {
+			fileRef = B2C2DB54048D18AF00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C2DB57048D18AF00A80002 = {
+			fileRef = B2C2DB55048D18AF00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C2DB5A048D48B900A80002 = {
+			isa = PBXFileReference;
+			name = controller64.tiff;
+			path = Resources/controller64.tiff;
+			refType = 4;
+		};
+		B2C2DB5B048D48B900A80002 = {
+			fileRef = B2C2DB5A048D48B900A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C2DB5C048D48C000A80002 = {
+			isa = PBXFileReference;
+			name = remote64.tiff;
+			path = Resources/remote64.tiff;
+			refType = 4;
+		};
+		B2C2DB5D048D48C000A80002 = {
+			fileRef = B2C2DB5C048D48C000A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C2DB62048D4D2700A80002 = {
+			children = (
+				B22B985C048E734900A80002,
+				B2C2DB63048D4D5A00A80002,
+				B2C2DB64048D4D5A00A80002,
+				B2C2DB65048D4D5A00A80002,
+				B2C2DB66048D4D5A00A80002,
+			);
+			isa = PBXGroup;
+			name = "External Sources";
+			path = "";
+			refType = 4;
+		};
+		B2C2DB63048D4D5A00A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			name = DWXBoxHIDDriverInterface.h;
+			path = ../DWXBoxHIDDriver/DWXBoxHIDDriverInterface.h;
+			refType = 2;
+		};
+		B2C2DB64048D4D5A00A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			name = DWXBoxHIDDriverInterface.m;
+			path = ../DWXBoxHIDDriver/DWXBoxHIDDriverInterface.m;
+			refType = 2;
+		};
+		B2C2DB65048D4D5A00A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			name = DWXBoxHIDPrefsLoader.h;
+			path = ../DWXBoxHIDDriver/DWXBoxHIDPrefsLoader.h;
+			refType = 2;
+		};
+		B2C2DB66048D4D5A00A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			name = DWXBoxHIDPrefsLoader.m;
+			path = ../DWXBoxHIDDriver/DWXBoxHIDPrefsLoader.m;
+			refType = 2;
+		};
+		B2C2DB67048D4D5A00A80002 = {
+			fileRef = B2C2DB63048D4D5A00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C2DB68048D4D5A00A80002 = {
+			fileRef = B2C2DB64048D4D5A00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C2DB69048D4D5A00A80002 = {
+			fileRef = B2C2DB65048D4D5A00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C2DB6A048D4D5A00A80002 = {
+			fileRef = B2C2DB66048D4D5A00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2C2DB6B048D4D9A00A80002 = {
+			isa = PBXFrameworkReference;
+			name = IOKit.framework;
+			path = /System/Library/Frameworks/IOKit.framework;
+			refType = 0;
+		};
+		B2C2DB6C048D4D9A00A80002 = {
+			fileRef = B2C2DB6B048D4D9A00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+	};
+	rootObject = 089C1669FE841209C02AAC07;
+}

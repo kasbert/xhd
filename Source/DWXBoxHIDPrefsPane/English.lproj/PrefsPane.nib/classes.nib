@@ -1,0 +1,65 @@
+{
+    IBClasses = (
+        {CLASS = DWActionableTextField; LANGUAGE = ObjC; SUPERCLASS = NSTextField; }, 
+        {CLASS = DWAxisPairView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = DWButtonView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = DWDPadView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = DWTriggerView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            ACTIONS = {
+                changePadOption = id; 
+                deleteConfiguration = id; 
+                endModalSessionCancel = id; 
+                endModalSessionOK = id; 
+                loadConfiguration = id; 
+                newConfiguration = id; 
+                selectDevice = id; 
+            }; 
+            CLASS = DWXBoxHIDPrefsPane; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                "_askForItemToDeletePopUp" = id; 
+                "_askForItemToDeleteWindow" = id; 
+                "_askForNameTextField" = id; 
+                "_askForNameWindow" = id; 
+                "_betaExpiredWindow" = id; 
+                "_buttonView" = id; 
+                "_configBox" = id; 
+                "_configPopUp" = id; 
+                "_dPadView" = id; 
+                "_devicePopUpButton" = id; 
+                "_enableAnalogButtons" = id; 
+                "_largeErrorMessage" = id; 
+                "_leftStickInvertX" = id; 
+                "_leftStickInvertY" = id; 
+                "_leftStickView" = id; 
+                "_leftTriggerDeadzone" = id; 
+                "_leftTriggerDeadzoneField" = id; 
+                "_leftTriggerUsage" = id; 
+                "_leftTriggerView" = id; 
+                "_rightStickInvertX" = id; 
+                "_rightStickInvertY" = id; 
+                "_rightStickView" = id; 
+                "_rightTriggerDeadzone" = id; 
+                "_rightTriggerDeadzoneField" = id; 
+                "_rightTriggerUsage" = id; 
+                "_rightTriggerView" = id; 
+                "_tabView" = id; 
+            }; 
+            SUPERCLASS = NSPreferencePane; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            CLASS = NSPreferencePane; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                "_firstKeyView" = NSView; 
+                "_initialKeyView" = NSView; 
+                "_lastKeyView" = NSView; 
+                "_window" = NSWindow; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}
