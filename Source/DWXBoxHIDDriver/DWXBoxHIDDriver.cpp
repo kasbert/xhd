@@ -53,6 +53,30 @@ The Original Code and all software distributed under the License are distributed
                    -removed hardcoded reports - now stored in property list
                    -removed GetIndexedString() hack, replaced with property list strings if needed
                    -printing out more error messages
+        06-16-2003 - version 1.2 beta changes
+                    
+                    This is a major overhaul that allows an external program to modify the driver's
+                    settings. The way this works is that when the driver loads, it uses a default
+                    set of settings. A daemon application can detect when a driver loads and call
+                    the IORegistryEntrySetCFProperties() to modify the driver settings. Clients
+                    also can call IORegistryEntryCreateCFProperties() to see what the current
+                    settings are.
+            
+                    ¥ moved property list keys into a DWXBoxHIDDriverKeys.h
+                    ¥ removed device type enumeration - use string instead
+                    ¥ new pad options:
+                    - bool InvertXAxis;
+                    - bool InvertRyAxis;
+                    - bool InvertRxAxis;
+                    - bool ClampButtons;
+                    - bool ClampLeftTrigger;
+                    - bool ClampRightTrigger;
+                    - UInt8 LeftTriggerThreshold;
+                    - UInt8 RightTriggerThreshold;
+                    ¥ new methods to handle prefs setting from user space
+                    - setProperties( OSObject * properties );
+                    - setDefaultOptions();
+                    - setupDevice();
                    
  */
  
@@ -73,7 +97,7 @@ The Original Code and all software distributed under the License are distributed
 #include <IOKit/usb/IOUSBInterface.h>
 #include <IOKit/usb/IOUSBPipe.h>
 
-#define DEBUG_LEVEL 7
+#define DEBUG_LEVEL 0 // disable debugging
 #include <IOKit/usb/IOUSBLog.h>
 
 #include "DWXBoxHIDDriver.h"
@@ -296,7 +320,9 @@ DWXBoxHIDDriver::processPacket(void *data, UInt32 size)
     return;
 }
 
-/*
+/* NOTE: this code that is commented out kernel-paniced my machine. Rather than fix it, I realized the folly in my ways and moved this functionality a user-space program. This is just an experiement in how you could to HID
+configuration after the driver is instantiated - it is incomplete for the Xbox requirements.
+   
 bool 
 DWXBoxHIDDriver::setElementPropertyRec(OSArray *elements, OSNumber *elementCookie, OSString *key, OSObject *value)
 {
