@@ -20,6 +20,8 @@
 			);
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
+				DEBUGGING_SYMBOLS = NO;
+				OPTIMIZATION_CFLAGS = "-Os";
 			};
 			isa = PBXBuildStyle;
 			name = Deployment;
@@ -36,7 +38,7 @@
 //034
 		034768E6FF38A76511DB9C8B = {
 			isa = PBXExecutableFileReference;
-			path = DWXBoxHIDDaemon;
+			path = XboxHIDDaemon;
 			refType = 3;
 		};
 //030
@@ -128,7 +130,7 @@
 				OTHER_REZFLAGS = "";
 				PRECOMPILE_PREFIX_HEADER = YES;
 				PREFIX_HEADER = DWXBoxHIDDaemon_Prefix.h;
-				PRODUCT_NAME = DWXBoxHIDDaemon;
+				PRODUCT_NAME = XboxHIDDaemon;
 				REZ_EXECUTABLE = YES;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
@@ -396,6 +398,17 @@
 			settings = {
 			};
 		};
+		B2C41AA304AE587A00A80002 = {
+			isa = PBXFileReference;
+			path = xboxhid.icns;
+			refType = 2;
+		};
+		B2C41AA404AE587A00A80002 = {
+			fileRef = B2C41AA304AE587A00A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
 		B2FCEA21049CEE6F00A80002 = {
 			buildActionMask = 2147483647;
 			files = (
@@ -408,6 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2FCEA3A049CF0C100A80002,
+				B2C41AA404AE587A00A80002,
 			);
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -449,7 +463,7 @@
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = DWXBoxHIDDaemonLauncher;
+				PRODUCT_NAME = XboxHIDDaemonLauncher;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
 				WRAPPER_EXTENSION = app;
@@ -469,11 +483,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>DWXBoxHIDDaemonLauncher</string>
+	<string>XboxHIDDaemonLauncher</string>
 	<key>CFBundleGetInfoString</key>
 	<string>DWXBoxHIDDaemonLauncher</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>xboxhid.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.walisser.DWXBoxHIDDriver</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -483,11 +497,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>v1.0</string>
+	<string>v1.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.2</string>
 	<key>NSMainNibFile</key>
 	<string>mainMenu.nib</string>
 	<key>NSPrincipalClass</key>
@@ -498,7 +512,7 @@
 		};
 		B2FCEA27049CEE6F00A80002 = {
 			isa = PBXApplicationReference;
-			path = DWXBoxHIDDaemonLauncher.app;
+			path = XboxHIDDaemonLauncher.app;
 			refType = 3;
 		};
 		B2FCEA29049CEEA700A80002 = {
@@ -528,6 +542,7 @@
 		B2FCEA2F049CEF2100A80002 = {
 			children = (
 				B2FCEA39049CF0C100A80002,
+				B2C41AA304AE587A00A80002,
 			);
 			isa = PBXGroup;
 			name = Resources;
