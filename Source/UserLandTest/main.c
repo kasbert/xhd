@@ -41,6 +41,7 @@
 #include <IOKit/usb/IOUSBLib.h>
 
 #include <mach/mach.h>
+#include <sys/time.h>
 
 #include "hex2c.h"
 
@@ -62,7 +63,7 @@ static io_iterator_t		gRawAddedIter;
 static io_iterator_t		gRawRemovedIter;
 static io_iterator_t		gBulkTestAddedIter;
 static io_iterator_t		gBulkTestRemovedIter;
-static char			gBuffer[32];
+static unsigned char			gBuffer[32];
 
 IOReturn ConfigureAnchorDevice(IOUSBDeviceInterface **dev)
 {
@@ -154,6 +155,9 @@ void ReadCompletion(void *refCon, IOReturn result, void *arg0)
     UInt32 			numBytesRead = (UInt32) arg0;
     UInt32			i;
     IOReturn        kr;
+    static struct timeval then;
+    struct timeval now;
+    double elapsed = 0;
     
     printf("Async bulk read complete.\n");
     if (kIOReturnSuccess != result)
@@ -169,10 +173,24 @@ void ReadCompletion(void *refCon, IOReturn result, void *arg0)
     //for (i = 0; i < numBytesRead; i++)
     //    gBuffer[i] = ~gBuffer[i];
     
-    printf ("Read %ld bytes from endpoint: ", numBytesRead);
+    gettimeofday(&now, NULL);
+    elapsed = now.tv_sec - then.tv_sec;
+    elapsed += (now.tv_usec - then.tv_usec) / 1000000.0;
+    printf ("Read %ld bytes from endpoint (%fsec): ", numBytesRead, elapsed);
+    gettimeofday(&then, NULL);
     for (i = 0; i < numBytesRead; i++) {
     
-        printf("%3d ", (unsigned char)gBuffer[i]);
+     
+        unsigned char b = (unsigned char)gBuffer[i];
+        /*   
+        printf("%d%d%d%d%d%d%d%d ", 
+            (b >> 7) & 1, (b >> 6) & 1,
+        (b >> 5) & 1, (b >> 4) & 1,
+            (b >> 3) & 1, (b >> 2) & 1,
+            (b >> 1) & 1, b & 1);
+        */
+        //printf("%2x ", b);
+        printf("%d ", b);
     }
     printf ("\n");
     
@@ -659,8 +677,9 @@ int main (int argc, const char *argv[])
     if (argc > 2)
         usbProduct = atoi(argv[2]);
 
-    usbVendor = 0x045E;
-    usbProduct = 0x0202;
+    usbVendor = 0x045E; // microsoft
+    //usbProduct = 0x0202; // ms large controller
+    usbProduct = 0x0284; // ms dvd remote
     
     // Set up a signal handler so we can clean up when we're interrupted from the command line
     // Otherwise we stay in our run loop forever.
