@@ -35,12 +35,12 @@ The Original Code and all software distributed under the License are distributed
                    -initial remote control support
                     ¥ added IOTimerEventSource to send remote button-up events
                     ¥ added generateTimedEvent() method which fires at _xbTimedEventsInterval millisecond intervals (currently 80ms)
-                    ¥ added button lookup and structure packing to generate report in manipulateReport()
+                    ¥ added button lookup and structure packing to generate remote's report in manipulateReport()
                    
                    -generic device detection via property list (don't need the product id/vendor id for everything)
                     ¥ added isKnownDevice() method to check vendor/product id's
                     ¥ added findGenericDevice() method to handle detection of devices with unknown product ids
-                    ¥ added probe(), which calls the 2 previous methods (utilized by IOKit's device matching protocol)
+                    ¥ added probe(), which calls the 2 previous methods (utilized by IOKit's driver matching protocol)
                    
                    -initial options support
                     ¥ each device type can contain a dictionary for setting options
@@ -71,8 +71,10 @@ The Original Code and all software distributed under the License are distributed
 #include <IOKit/hid/IOHIDKeys.h>
 
 #include <IOKit/usb/IOUSBInterface.h>
-#include <IOKit/usb/IOUSBLog.h>
 #include <IOKit/usb/IOUSBPipe.h>
+
+#define DEBUG_LEVEL 7
+#include <IOKit/usb/IOUSBLog.h>
 
 #include "DWXBoxHIDDriver.h"
 
@@ -85,6 +87,8 @@ OSDefineMetaClassAndStructors(DWXBoxHIDDriver, super)
 bool 
 DWXBoxHIDDriver::init(OSDictionary *properties)
 {
+    USBLog(6, "DWXBoxHIDDriver[%p]::init", this);
+    
     if (!super::init(properties))
     {
         return false;
@@ -101,7 +105,7 @@ DWXBoxHIDDriver::init(OSDictionary *properties)
     _deviceUsage = 0;
     _deviceUsagePage = 0;
     
-    _xbDeviceType = kDeviceTypeUnknown;
+    _xbDeviceType = 0;
     _xbDeviceVendor = 0;
     _xbDeviceName = 0;
     _xbDeviceHIDReportDescriptor = 0;
@@ -160,74 +164,9 @@ DWXBoxHIDDriver::handleStart(IOService * provider)
         return false;
     }
 
+    if (!setupDevice()) {
     
-    // Load the Xbox device's HID descriptor
-    OSDictionary *dataDict = OSDynamicCast(OSDictionary, getProperty(kDeviceDataKey));
-    if (!dataDict) {
-        
-        USBError(1, "%s[%p]::handleStart - no data dictionary", getName(), this);
         return false;
-    }
-    
-    const char *key;
-    switch(_xbDeviceType) {
-    case kDeviceTypePad:
-        key = kDeviceTypePadKey;
-        break;
-    case kDeviceTypeIR:
-        key = kDeviceTypeIRKey;
-        break;
-    case kDeviceTypeUnknown:
-    default:
-        key = 0;
-    }
-    
-    if (!key) {
-        
-        USBError(1, "%s[%p]::handleStart - unsupported device type", getName(), this);
-        return false;
-    }
-    
-    OSDictionary *deviceDict = OSDynamicCast(OSDictionary, dataDict->getObject(key));
-    if (!deviceDict) {
-        
-        USBError(1, "%s[%p]::handleStart - no device support dictionary", getName(), this);
-        return false;
-    }
-        
-    // Now finally load the HID descriptor
-    _xbDeviceHIDReportDescriptor = OSDynamicCast(OSData, deviceDict->getObject(kDeviceHIDReportDescriptorKey));
-    if (!_xbDeviceHIDReportDescriptor ||
-        _xbDeviceHIDReportDescriptor->getLength() <= 0) {
-        
-        USBLog(1, "%s[%p]::handleStart - no hid descriptor for device", getName(), this);
-        return false;
-    }
-    
-    // Set the option descriptor too (note: can be NULL if device type has no options)
-    _xbDeviceOptionsDict = OSDynamicCast(OSDictionary, deviceDict->getObject(kDeviceOptionsKey));
-    
-    // Get the button map (can be NULL)
-    _xbDeviceButtonMapArray = OSDynamicCast(OSArray, deviceDict->getObject(kDeviceButtonMapKey));
-    
-    // Setup options from the device's option dictionary
-    this->setDeviceOptions();
-    
-    // If the device is a remote control, setup a timer for generating button-release events
-    if (_xbDeviceType == kDeviceTypeIR) {
-        
-        _xbWorkLoop = getWorkLoop();
-        if (_xbWorkLoop) {
-            
-            _xbTimerEventSource = IOTimerEventSource::timerEventSource(this, &generateTimedEvent);
-            if (_xbTimerEventSource) {
-            
-                if (kIOReturnSuccess != _xbWorkLoop->addEventSource(_xbTimerEventSource)) {
-                
-                    USBLog(1, "%s[%p]::handleStart - couldn't establish a timer", getName(), this);
-                }
-            }
-        }
     }
     
     // Get the size of the HID descriptor.
@@ -343,7 +282,7 @@ DWXBoxHIDDriver::handleStop(IOService * provider)
 void 
 DWXBoxHIDDriver::free()
 {
-    USBLog(7, "%s[%p]::free", getName(), this);
+    USBLog(6, "%s[%p]::free", getName(), this);
 
     super::free();    
 }
@@ -357,13 +296,211 @@ DWXBoxHIDDriver::processPacket(void *data, UInt32 size)
     return;
 }
 
-void DWXBoxHIDDriver::generateTimedEvent(OSObject *object, IOTimerEventSource *tes)
+/*
+bool 
+DWXBoxHIDDriver::setElementPropertyRec(OSArray *elements, OSNumber *elementCookie, OSString *key, OSObject *value)
+{
+    int i;
+    int count;
+    
+    count = elements->getCount();
+    
+    for (i = 0; i < count; i++) {
+    
+        OSDictionary *element;
+        
+        element = OSDynamicCast(OSDictionary, elements->getObject(i));
+        if (element) {
+        
+            OSNumber *cookie;
+            
+            cookie = OSDynamicCast(OSNumber, element->getObject(kIOHIDElementCookieKey));
+            if (cookie) {
+            
+                if (cookie->isEqualTo(elementCookie)) {
+                
+                    element->setObject(key, value);
+                    
+                    USBLog(6, "%s[%p]::setElementPropertyRec() %s", getName(), this,
+                        key->getCStringNoCopy());
+                        
+                    return true;
+                }
+                else {
+                
+                    OSArray *subElements;
+                    
+                    subElements = OSDynamicCast(OSArray, element->getObject(kIOHIDElementKey));
+                    if (subElements)
+                        this->setElementPropertyRec(subElements, elementCookie, key, value);
+                }
+            }
+        }
+        
+        else {
+            USBLog(6, "error 2");
+        }
+    }
+
+    
+    return false;
+}
+
+bool 
+DWXBoxHIDDriver::setElementProperty(OSNumber *elementCookie, OSString *key, OSObject *value)
+{
+    bool error = true;
+    OSArray *elements = 0;
+    
+    elements = OSDynamicCast(OSArray, getProperty(kIOHIDElementKey));
+    if (elements) {
+    
+        error = this->setElementPropertyRec(elements, elementCookie, key, value);
+    }
+    else {
+        USBLog(6, "error 1");
+    }
+    
+    return error;
+}
+
+void
+DWXBoxHIDDriver::reconfigureElements()
+{
+
+    if (_xbDeviceType->isEqualTo(kDeviceTypePadKey)) {
+    
+        OSString *key;
+        OSObject *value;
+        OSNumber *cookie;
+        
+        if (_xbDeviceOptions.pad.ClampTriggers) {
+        
+            USBLog(6, "%s[%p]::reconfigureElements - map triggers to buttons",
+                getName(), this);
+                
+            // map triggers to buttons 15 and 16
+            // set min/max to 0/1
+            for (int cookieNum = 20, buttonNum = 15;
+                 cookieNum <= 21 && buttonNum <= 16;
+                 cookieNum++, buttonNum++) {
+                    
+                cookie = OSNumber::withNumber(cookieNum, 8); // left trigger or right trigger
+                if (!cookie)
+                    return;
+                    
+                // set usage page
+                key = OSString::withCString(kIOHIDElementUsagePageKey);
+                value = OSNumber::withNumber(kHIDPage_Button, 16);
+                if (key && value) {
+                    setElementProperty(cookie, key, value);
+                    key->release();
+                    value->release();
+                }
+                
+                // set usage
+                key = OSString::withCString(kIOHIDElementUsageKey);
+                value = OSNumber::withNumber(buttonNum, 16); // button 15 or 16
+                if (key && value) {
+                    setElementProperty(cookie, key, value);
+                    key->release();
+                    value->release();
+                }
+                
+                // set max to 1
+                key = OSString::withCString(kIOHIDElementMaxKey);
+                value = OSNumber::withNumber(1, 8);
+                if (key && value) {
+                    setElementProperty(cookie, key, value);
+                    key->release();
+                }
+                
+                // set scaled max to 1
+                key = OSString::withCString(kIOHIDElementScaledMaxKey);
+                if (key && value) {
+                
+                    setElementProperty(cookie, key, value);
+                    key->release();
+                    cookie->release();
+                }
+                
+                cookie->release();
+            }
+        }
+        else {
+            
+                // map triggers to z and rz
+                // set min/max to 0/255
+        }
+    }
+}
+
+*/
+
+IOReturn 
+DWXBoxHIDDriver::setProperties(OSObject *properties)
+{
+    // called from IORegistryEntrySetCFProperties() from user context
+    
+    USBLog(6, "%s[%p]::setProperties", getName(), this);
+    
+    OSDictionary *dict;
+    OSString *deviceType;
+    
+    dict = OSDynamicCast(OSDictionary, properties);
+    if (dict) {
+    
+        // Check if client wants to manipulate device options
+        deviceType = OSDynamicCast(OSString, dict->getObject(kTypeKey));
+        if (deviceType && _xbDeviceType->isEqualTo(deviceType)) {
+        
+            USBLog(6, "%s[%p]::setProperties - change properties for a %s device",
+                getName(), this, deviceType->getCStringNoCopy());
+                
+            OSString *optionKey = OSDynamicCast(OSString, dict->getObject(kClientOptionKeyKey));
+            OSObject *optionValue = OSDynamicCast(OSObject, dict->getObject(kClientOptionValueKey));
+            
+            if (_xbDeviceOptionsDict && optionKey && optionValue) {
+            
+                // update properties
+                _xbDeviceOptionsDict->setObject(optionKey, optionValue);
+                
+                // rescan properties for options
+                setDeviceOptions();
+                
+                // Change elements structure to reflect changes
+                //reconfigureElements();
+                
+                return kIOReturnSuccess;
+            }
+        }
+        else {
+    
+            USBLog(6, "%s[%p]::setProperties - changing HID elements",
+                getName(), this);
+                
+            // check if client wants to change the HID elements structure
+            OSArray *newElements = OSDynamicCast(OSArray, dict->getObject(kClientOptionSetElementsKey));
+            if (newElements) {
+                    
+                setProperty(kIOHIDElementKey, newElements);
+                
+                return kIOReturnSuccess;
+            }
+        }
+    }
+    
+    return kIOReturnError;
+}
+
+void
+DWXBoxHIDDriver::generateTimedEvent(OSObject *object, IOTimerEventSource *tes)
 {
     DWXBoxHIDDriver *me = OSDynamicCast(DWXBoxHIDDriver, object);
     if (me) {
     
         //USBLog(1, "should generate event here...");
-        if (me->_xbDeviceType == kDeviceTypeIR) {
+        if (me->_xbDeviceType->isEqualTo(kDeviceTypeIRKey)) {
             
             if (me->_buffer) {
     
@@ -384,60 +521,221 @@ void DWXBoxHIDDriver::generateTimedEvent(OSObject *object, IOTimerEventSource *t
 }
 
 void
-DWXBoxHIDDriver::setDeviceOptions()
+DWXBoxHIDDriver::setDefaultOptions()
 {
-    switch(_xbDeviceType) {
-    case kDeviceTypePad:
+    if (_xbDeviceType->isEqualTo(kDeviceTypePadKey)) {
+    
         // fill in defaults
         _xbDeviceOptions.pad.InvertYAxis = true;
+        _xbDeviceOptions.pad.InvertXAxis = false;
+        _xbDeviceOptions.pad.InvertRyAxis = true;
+        _xbDeviceOptions.pad.InvertRxAxis = false;
         _xbDeviceOptions.pad.ClampButtons = true;
+        _xbDeviceOptions.pad.ClampLeftTrigger = false;
+        _xbDeviceOptions.pad.ClampRightTrigger = false;
+        //_xbDeviceOptions.pad.TriggersAreButtons = false;
+        _xbDeviceOptions.pad.LeftTriggerThreshold = 1;    
+        _xbDeviceOptions.pad.RightTriggerThreshold = 1;
         
+        // create options dict and populate it with defaults
+        _xbDeviceOptionsDict = OSDictionary::withCapacity(8);
+        if (_xbDeviceOptionsDict) {
+        
+            OSBoolean *boolean;
+            OSNumber  *number;
+                                    
+            #define SET_BOOLEAN(prop) \
+                boolean = OSBoolean::withBoolean(_xbDeviceOptions.pad.prop ); \
+                if (boolean) { \
+                    _xbDeviceOptionsDict->setObject(kOption ## prop ## Key, boolean); \
+                    boolean->release(); \
+                }
+            
+            SET_BOOLEAN(InvertYAxis)
+            SET_BOOLEAN(InvertXAxis)
+            SET_BOOLEAN(InvertRyAxis)
+            SET_BOOLEAN(InvertRxAxis)
+            SET_BOOLEAN(ClampButtons)
+            SET_BOOLEAN(ClampLeftTrigger)
+            SET_BOOLEAN(ClampRightTrigger)
+            
+            //SET_BOOLEAN(LeftTriggerIsButton)
+            //SET_BOOLEAN(RightTriggerIsButton)
+            
+            #undef SET_BOOLEAN
+            
+            number = OSNumber::withNumber(_xbDeviceOptions.pad.LeftTriggerThreshold, 8);
+            if (number) {
+                _xbDeviceOptionsDict->setObject(kOptionLeftTriggerThresholdKey, number);
+                number->release();
+            }
+            
+            number = OSNumber::withNumber(_xbDeviceOptions.pad.RightTriggerThreshold, 8);
+            if (number) {
+                _xbDeviceOptionsDict->setObject(kOptionRightTriggerThresholdKey, number);
+                number->release();
+            }
+        }
+    }
+    else {
+    
+        _xbDeviceOptionsDict = OSDictionary::withCapacity(1);
+    }
+    
+    // add options dict to our properties
+    if (_xbDeviceOptionsDict)
+        setProperty(kDeviceOptionsKey, _xbDeviceOptionsDict);
+}
+
+void
+DWXBoxHIDDriver::setDeviceOptions()
+{
+    if (_xbDeviceType->isEqualTo(kDeviceTypePadKey)) {
+            
         // override defaults with xml settings
         if (_xbDeviceOptionsDict) {
             
             OSBoolean *boolean;
-        
-            boolean = OSDynamicCast(OSBoolean, _xbDeviceOptionsDict->getObject(kOptionInvertYAxisKey));
-            if (boolean)
-                _xbDeviceOptions.pad.InvertYAxis = boolean->getValue();
+            OSNumber  *number;
             
-            boolean = OSDynamicCast(OSBoolean, _xbDeviceOptionsDict->getObject(kOptionClampButtonsKey));
-            if (boolean)
-                _xbDeviceOptions.pad.ClampButtons = boolean->getValue();
+            #define GET_BOOLEAN(field) \
+                boolean = OSDynamicCast(OSBoolean, _xbDeviceOptionsDict->getObject(kOption ## field ## Key)); \
+                if (boolean) \
+                    _xbDeviceOptions.pad.field = boolean->getValue();
+            
+            #define GET_UINT8_NUMBER(field) \
+                number = OSDynamicCast(OSNumber, _xbDeviceOptionsDict->getObject(kOption ## field ## Key)); \
+                if (number) \
+                    _xbDeviceOptions.pad.field = number->unsigned8BitValue();
+        
+            // axis inversion
+            GET_BOOLEAN(InvertYAxis)
+            GET_BOOLEAN(InvertXAxis)
+            GET_BOOLEAN(InvertRyAxis)
+            GET_BOOLEAN(InvertRxAxis)
+            
+            // triggers
+            GET_BOOLEAN(ClampLeftTrigger)
+            GET_BOOLEAN(ClampRightTrigger)
+            //GET_BOOLEAN(LeftTriggerIsButton)
+            //GET_BOOLEAN(RightTriggerIsButton)
+            GET_UINT8_NUMBER(LeftTriggerThreshold)
+            GET_UINT8_NUMBER(RightTriggerThreshold)
+            
+            // buttons
+            GET_BOOLEAN(ClampButtons)
+        
+            #undef GET_BOOLEAN
+            #undef GET_UINT8_NUMBER
         }
-        break;
-    case kDeviceTypeIR:
-    case kDeviceTypeUnknown:
-    default:
-        ;
     }
 }
+
+bool
+DWXBoxHIDDriver::setupDevice()
+{
+    // called from handleStart()
+    OSDictionary *deviceDict = 0;
+            
+    // Load the driver's deviceData dictionary
+    OSDictionary *dataDict = OSDynamicCast(OSDictionary, getProperty(kDeviceDataKey));
+    if (!dataDict) {
+        
+        USBError(1, "%s[%p]::setupDevice - no data dictionary", getName(), this);
+        return false;
+    }
+    
+    // Check that we have a device type (just in case...)
+    if (_xbDeviceType) {
+    
+        // ...and put in our properties for clients to see
+        setProperty(kTypeKey, _xbDeviceType);
+    }
+    
+    // Get device-specific dictionary
+    deviceDict = OSDynamicCast(OSDictionary, dataDict->getObject(_xbDeviceType));
+    if (!deviceDict) {
+        
+        USBError(1, "%s[%p]::setupDevice - no device support dictionary", getName(), this);
+        return false;
+    }
+        
+    // Finally load the HID descriptor
+    _xbDeviceHIDReportDescriptor = OSDynamicCast(OSData, deviceDict->getObject(kDeviceHIDReportDescriptorKey));
+    if (!_xbDeviceHIDReportDescriptor ||
+        _xbDeviceHIDReportDescriptor->getLength() <= 0) {
+        
+        USBLog(1, "%s[%p]::setupDevice - no hid descriptor for device", getName(), this);
+        return false;
+    }
+    
+    // Set the option dictionary too (note: can be NULL if device type has no options)
+    // _xbDeviceOptionsDict = OSDynamicCast(OSDictionary, deviceDict->getObject(kDeviceOptionsKey));
+    
+    // Get the button map (remote control only - can be NULL)
+    _xbDeviceButtonMapArray = OSDynamicCast(OSArray, deviceDict->getObject(kDeviceButtonMapKey));
+    
+    // If the device is a remote control, setup a timer for generating button-release events
+    if (_xbDeviceType->isEqualTo(kDeviceTypeIRKey)) {
+        
+        _xbWorkLoop = getWorkLoop();
+        if (_xbWorkLoop) {
+            
+            _xbTimerEventSource = IOTimerEventSource::timerEventSource(this, &generateTimedEvent);
+            if (_xbTimerEventSource) {
+            
+                if (kIOReturnSuccess != _xbWorkLoop->addEventSource(_xbTimerEventSource)) {
+                
+                    USBLog(1, "%s[%p]::setupDevice - couldn't establish a timer", getName(), this);
+                    return false;
+                }
+            }
+        }
+    }
+    
+    // Set default device options
+    setDefaultOptions();
+    
+    // Build _xbDeviceOptions structure from the device's option dictionary
+    // setDeviceOptions();
+    
+    return true;
+}
+
 
 bool
 DWXBoxHIDDriver::manipulateReport(IOBufferMemoryDescriptor *report)
 {
     // return true if report should be sent to HID layer
     // change the report before it's sent to the HID layer
-    
-    if (_xbDeviceType == kDeviceTypePad &&
+    if (_xbDeviceType->isEqualTo(kDeviceTypePadKey) &&
         report->getLength() == sizeof(XBPadReport)) {
     
         XBPadReport *raw = (XBPadReport*)(report->getBytesNoCopy());
         
-        if (_xbDeviceOptions.pad.InvertYAxis) {
+        #define INVERT_AXIS(name) \
+            SInt16 name = (raw->name ## hi << 8) | raw->name ## lo; \
+            name = -(name + 1); \
+            raw->name ## hi = name >> 8; \
+            raw->name ## lo = name & 0xFF;
             
-            // reverse the Y-Axis on the sticks so up is negative
-            SInt16 ly = (raw->lyhi << 8) | raw->lylo;
-            SInt16 ry = (raw->ryhi << 8) | raw->lylo;
-          
-            ly = -(ly + 1);
-            raw->lyhi = ly >> 8;
-            raw->lylo = ly & 0xFF;
-        
-            ry = -(ry + 1);
-            raw->ryhi = ry >> 8;
-            raw->rylo = ry & 0xFF;
+        if (_xbDeviceOptions.pad.InvertYAxis) {
+            INVERT_AXIS(ly)
         }
+        
+        if (_xbDeviceOptions.pad.InvertRyAxis) {
+            INVERT_AXIS(ry)
+        }
+        
+        if (_xbDeviceOptions.pad.InvertXAxis) {
+            INVERT_AXIS(lx)
+        }
+        
+        if (_xbDeviceOptions.pad.InvertRxAxis) {
+            INVERT_AXIS(rx)
+        }
+        
+        #undef INVERT_AXIS
         
         if (_xbDeviceOptions.pad.ClampButtons) {
         
@@ -454,9 +752,74 @@ DWXBoxHIDDriver::manipulateReport(IOBufferMemoryDescriptor *report)
             if (raw->white != 0)
                 raw->white = 1;
         }
+        
+        if (_xbDeviceOptions.pad.ClampLeftTrigger) {
+        
+            UInt8 threshold = _xbDeviceOptions.pad.LeftTriggerThreshold;
+
+            if (raw->lt < threshold)
+                raw->lt = 0;
+            else
+                raw->lt = 1;
+        }
+        else
+        if (_xbDeviceOptions.pad.LeftTriggerThreshold > 1) {
+        
+            int threshold = _xbDeviceOptions.pad.LeftTriggerThreshold;
+                        
+            if (raw->lt < threshold) {
+                
+                raw->lt = 0;
+            }
+            else
+            if (threshold < 255) {
+            
+                // use this system of equations to scale values from 1-255
+                // 1 = a(threshold) + b
+                // 255 = a(255) + b
+
+                raw->lt = (254*raw->lt + 255*(1 - threshold)) / (255 - threshold);
+            }
+            else {
+            
+                raw->lt = 255;
+            }
+        }
+    
+        if (_xbDeviceOptions.pad.ClampRightTrigger) {
+        
+            UInt8 threshold = _xbDeviceOptions.pad.RightTriggerThreshold;
+
+            if (raw->rt < threshold)
+                raw->rt = 0;
+            else
+                raw->rt = 1;   
+        }
+        else
+        if (_xbDeviceOptions.pad.RightTriggerThreshold > 1) {
+        
+            UInt8 threshold = _xbDeviceOptions.pad.RightTriggerThreshold;
+            
+            if (raw->rt < threshold) {
+                raw->rt = 0;
+            }
+            else
+            if (threshold < 255) {
+                
+                // use this system of equations to scale values from 1-255
+                // 1 = a(threshold) + b
+                // 255 = a(255) + b
+                
+                raw->rt = (254*raw->rt + 255*(1 - threshold)) / (255 - threshold);
+            }
+            else {
+            
+                raw->rt = 255;
+            }
+        }
     }
     else
-    if (_xbDeviceType == kDeviceTypeIR &&
+    if (_xbDeviceType->isEqualTo(kDeviceTypeIRKey) &&
         report->getLength() == sizeof(XBActualRemoteReport) &&
         _xbDeviceButtonMapArray) {
         
@@ -518,7 +881,7 @@ DWXBoxHIDDriver::manipulateReport(IOBufferMemoryDescriptor *report)
     return true;
 }
 
-bool DWXBoxHIDDriver::isKnownDevice(IOService *provider, XBoxDeviceType *outType)
+bool DWXBoxHIDDriver::isKnownDevice(IOService *provider)
 {
     ///
     // Check for a known vendor and product id
@@ -561,11 +924,8 @@ bool DWXBoxHIDDriver::isKnownDevice(IOService *provider, XBoxDeviceType *outType
                                 
                             isKnown = true;
                             
-                            if (typeName->isEqualTo(kDeviceTypePadKey))
-                                _xbDeviceType = kDeviceTypePad;
-                            else
-                            if (typeName->isEqualTo(kDeviceTypeIRKey))
-                                _xbDeviceType = kDeviceTypeIR;
+                            if (typeName)
+                                _xbDeviceType = typeName;
                             else
                                 isKnown = false;
 
@@ -581,7 +941,7 @@ bool DWXBoxHIDDriver::isKnownDevice(IOService *provider, XBoxDeviceType *outType
     return isKnown;
 }
 
-bool DWXBoxHIDDriver::findGenericDevice(IOService *provider, XBoxDeviceType *outType)
+bool DWXBoxHIDDriver::findGenericDevice(IOService *provider)
 {
     IOUSBInterface 		*interface   = 0;
     IOUSBDevice 		*device      = 0;
@@ -748,13 +1108,8 @@ bool DWXBoxHIDDriver::findGenericDevice(IOService *provider, XBoxDeviceType *out
                                 
                                     foundGenericDevice = true;
                                     
-                                    // note: this compare works because strings are interned (pooled)
-                                    // so they have the same address
-                                    if (typesList[i] == kDeviceTypePadKey)
-                                        _xbDeviceType = kDeviceTypePad;
-                                    else
-                                    if (typesList[i] == kDeviceTypeIRKey)
-                                        _xbDeviceType = kDeviceTypeIR;
+                                    if (typesList[i])
+                                        _xbDeviceType = OSString::withCString(typesList[i]);
                                     else
                                         foundGenericDevice = false;
                                     
@@ -764,7 +1119,7 @@ bool DWXBoxHIDDriver::findGenericDevice(IOService *provider, XBoxDeviceType *out
                                         foundGenericDevice = false;
                                         
                                     if (foundGenericDevice) {
-                                    
+                                                                            
                                         USBLog(3, "%s[%p]::findGenericDevice - found %s %s", getName(), this,
                                             _xbDeviceVendor->getCStringNoCopy(), _xbDeviceName->getCStringNoCopy());
                                     
@@ -784,10 +1139,8 @@ bool DWXBoxHIDDriver::findGenericDevice(IOService *provider, XBoxDeviceType *out
 }
 
 IOService* DWXBoxHIDDriver::probe(IOService *provider, SInt32 *score)
-{
-    XBoxDeviceType outDeviceType;
-        
-    if (this->isKnownDevice(provider, &outDeviceType)) {
+{        
+    if (this->isKnownDevice(provider)) {
     
         USBLog(3,  "%s[%p]::probe found known device", getName(), this);
 
@@ -795,7 +1148,7 @@ IOService* DWXBoxHIDDriver::probe(IOService *provider, SInt32 *score)
         *score += 10000;
     }
     else
-    if (this->findGenericDevice(provider, &outDeviceType)) {
+    if (this->findGenericDevice(provider)) {
 
         // there might be a better driver, so don't increase the score
         USBLog(3,  "%s[%p]::probe found generic device", getName(), this);
@@ -813,6 +1166,8 @@ IOService* DWXBoxHIDDriver::probe(IOService *provider, SInt32 *score)
     return this;
 }
 
+
+
 // ***********************************************************************************
 // ************************ HID Driver Dispatch Table Functions *********************
 // **********************************************************************************
@@ -829,7 +1184,7 @@ DWXBoxHIDDriver::getReport( IOMemoryDescriptor * report,
                             IOOptionBits         options )
 {
     //UInt8     reportID;
-    IOReturn        ret;
+    IOReturn        ret = kIOReturnSuccess;
     UInt8       usbReportType;
     //IOUSBDevRequestDesc requestPB;
     
@@ -848,7 +1203,9 @@ DWXBoxHIDDriver::getReport( IOMemoryDescriptor * report,
     
     if (kUSBIn == usbReportType || kUSBNone == usbReportType) {
         
-        ret = _interruptPipe->Read(report);
+        // don't support this on remote controls - it can block indefinitely until a button is pressed
+        if (! _xbDeviceType->isEqualTo(kDeviceTypeIRKey))
+            ret = _interruptPipe->Read(report);
     }
     else {
     
@@ -1568,6 +1925,7 @@ DWXBoxHIDDriver::start(IOService *provider)
         USBError(1, "%s[%p]::start -  USB HID Device @ %d (0x%x)", getName(), this, _device->GetAddress(), strtol(_device->getLocation(), (char **)NULL, 16));
         
         DecrementOutstandingIO();       // release the hold we put on at the beginning
+
         return true;
         
     } while (false);
@@ -1662,7 +2020,7 @@ DWXBoxHIDDriver::InterruptReadHandler(IOReturn status, UInt32 bufferSizeRemainin
             if (manipulateReport(_buffer))
                 handleReport(_buffer);
         
-            if (_xbDeviceType == kDeviceTypeIR)
+            if (_xbDeviceType->isEqualTo(kDeviceTypeIRKey))
                 if (_xbTimerEventSource) {
                     _xbTimerEventSource->cancelTimeout();
                     _xbTimerEventSource->setTimeoutMS(_xbTimedEventsInterval);

@@ -70,46 +70,10 @@ The Original Code and all software distributed under the License are distributed
 #include <IOKit/usb/IOUSBInterface.h>
 #include <IOKit/usb/USB.h>
 
-// -- keys for XML configuration -----------------
-// -----------------------------------------------
-
-#define kDeviceDataKey "DeviceData"
-
-#define kKnownDevicesKey "KnownDevices"
-
-// device types
-#define kDeviceTypePadKey "Pad"   
-#define kDeviceTypeIRKey "IR"
-//kDeviceTypeWheel "Wheel"
-//kDeviceTypeStick "Stick"
-//add more later
-
-// top-level device properties
-#define kDeviceGenericPropertiesKey   "GenericProperties"
-#define kDeviceHIDReportDescriptorKey "HIDReportDescriptor"
-#define kDeviceUSBStringTableKey      "USBStrings"
-#define kDeviceOptionsKey             "Options"
-#define kDeviceButtonMapKey           "ButtonMap"
-
-// options
-#define kOptionInvertYAxisKey        "InvertYAxis"
-#define kOptionClampButtonsKey        "ClampButtons"
-
-// generic device properties
-#define kGenericInterfacesKey      "Interfaces"
-#define kGenericEndpointsKey       "Endpoints"
-#define kGenericMaxPacketSizeKey   "MaxPacketSize"
-#define kGenericPollingIntervalKey "PollingInterval"
-#define kGenericAttributesKey      "Attributes"
-
-// general usage keys
-#define kVendorKey  "Vendor"
-#define kNameKey    "Name"
-#define kTypeKey    "Type"
-
-// ----------------------------------------------------
+#include "DWXBoxHIDDriverKeys.h"
 
 // xbox device type
+/*
 typedef enum {
 
     kDeviceTypeUnknown = 0,
@@ -119,6 +83,7 @@ typedef enum {
     kDeviceTypeWheel
     
 } XBoxDeviceType;
+*/
 
 // remote control keys (index into ButtonMapping table)
 typedef enum {
@@ -303,7 +268,7 @@ class DWXBoxHIDDriver : public IOHIDDevice
     UInt32          _deviceUsagePage;
     
     // xbox additions
-    XBoxDeviceType  _xbDeviceType;
+    OSString *      _xbDeviceType;
     OSString *      _xbDeviceVendor;
     OSString *      _xbDeviceName;
     OSData *        _xbDeviceHIDReportDescriptor;
@@ -320,8 +285,19 @@ class DWXBoxHIDDriver : public IOHIDDevice
     // xbox device options
     union {
         struct { 
-            bool InvertYAxis; // invert Y axis on sticks (default = true)
-            bool ClampButtons; // clamp face buttons to 0-1 (default = true)
+            bool InvertYAxis;        // invert sticks (default = true for Y, false for X)
+            bool InvertXAxis;
+            bool InvertRyAxis;
+            bool InvertRxAxis;
+            bool ClampButtons;       // clamp face buttons to 0-1 (default = true)
+            bool ClampLeftTrigger;      // clamp triggers to 0-1 (default = false)
+            bool ClampRightTrigger;
+            
+            //bool LeftTriggerIsButton; // triggers are mapped to buttons, not axis (default = false)
+            //bool RightTriggerIsButton;
+            
+            UInt8 LeftTriggerThreshold;  // point at which trigger press is realized (default = 1)
+            UInt8 RightTriggerThreshold;
         } pad;
         // add more devices here...
     } _xbDeviceOptions;
@@ -405,22 +381,38 @@ public:
     virtual bool manipulateReport(IOBufferMemoryDescriptor *report);
     
     // check the device product/vendor id's
-    virtual bool isKnownDevice(IOService *provider, XBoxDeviceType *outType);
+    virtual bool isKnownDevice(IOService *provider);
     
     // fallback: probe device for #of interfaces, endpoints, etc
-    virtual bool findGenericDevice(IOService *provider, XBoxDeviceType *outType);
+    virtual bool findGenericDevice(IOService *provider);
 
     // use active matching to determine the device type (gamepad, joystick, etc..)
     // so we can support 3rd-party devices
     virtual IOService* probe(IOService *service, SInt32 *score);
-    
-    // set device-specific options from our property list
-    virtual void setDeviceOptions();
+
 
     // callback for timer event source
     static void generateTimedEvent(OSObject *object, IOTimerEventSource *tes);
+    
+    virtual IOReturn setProperties( OSObject * properties );
 
-
+    // create and publish default option settings
+    virtual void setDefaultOptions();
+    
+    // set device-specific options from our property list
+    virtual void setDeviceOptions();
+    
+    // in handleStart() do any initialization we need here
+    virtual bool setupDevice();
+    
+    /*
+    virtual bool setElementPropertyRec(OSArray *elements, OSNumber *elementCookie, OSString *key, OSObject *value);
+    
+    virtual bool setElementProperty(OSNumber *elementCookie, OSString *key, OSObject *value);
+    
+    virtual void reconfigureElements();
+    */
+    
 private:    // Should these be protected or virtual?
     IOReturn GetHIDDescriptor(UInt8 inDescriptorType, UInt8 inDescriptorIndex, UInt8 *vOutBuf, UInt32 *vOutSize);
     IOReturn GetReport(UInt8 inReportType, UInt8 inReportID, UInt8 *vInBuf, UInt32 *vInSize);

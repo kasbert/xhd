@@ -1,0 +1,1069 @@
+// !$*UTF8*$!
+{
+	000000000000000001490710 = {
+		activeExec = 0;
+		executables = (
+			B2C9CC900488531E00A80002,
+		);
+	};
+	0000000000000000014A0950 = {
+		activeBuildStyle = 0000000000000000014908E0;
+		activeExecutable = B2C9CC900488531E00A80002;
+		activeTarget = 00000000000000000159C630;
+		addToTargets = (
+			000000000000000001490710,
+		);
+		breakpoints = (
+			B2C052F7048BB9C300A80002,
+		);
+		executables = (
+			B2C9CC900488531E00A80002,
+		);
+		perUserDictionary = {
+			PBXPerProjectTemplateStateSaveDate = 77489147;
+			PBXWorkspaceContents = (
+				{
+					LeftSlideOut = {
+						Split0 = {
+							Split0 = {
+								NavContent0 = {
+									bookmark = B2AF00630498138500A80002;
+									history = (
+										B28D2D620488543D00A80002,
+										B2C05300048BF0FE00A80002,
+										B2C05303048BF0FE00A80002,
+										B2C05304048BF0FE00A80002,
+										B2C2DB71048D785900A80002,
+										B22B987B048E9C4E00A80002,
+										B22B987C048E9C4E00A80002,
+										B22B987D048E9C4E00A80002,
+										B22B987E048E9C4E00A80002,
+										B22B987F048E9C4E00A80002,
+										B2C0A77904923B9200A80002,
+										B2C0A77A04923B9200A80002,
+										B2C0A77B04923B9200A80002,
+										B2AF00620498138500A80002,
+									);
+									nextStack = (
+										B2C0A77E04923B9200A80002,
+									);
+									prevStack = (
+										B28D2D650488543D00A80002,
+										B28D2D660488543D00A80002,
+										B2C05306048BF0FE00A80002,
+										B2C05307048BF0FE00A80002,
+										B2C05308048BF0FE00A80002,
+										B2C05309048BF0FE00A80002,
+										B2C0530A048BF0FE00A80002,
+										B2C0530B048BF0FE00A80002,
+										B2C0530C048BF0FE00A80002,
+										B2C0530D048BF0FE00A80002,
+										B2C0530E048BF0FE00A80002,
+										B2C0530F048BF0FE00A80002,
+										B2C05310048BF0FE00A80002,
+										B2C05311048BF0FE00A80002,
+										B2C05312048BF0FE00A80002,
+										B2C05313048BF0FE00A80002,
+										B2C05314048BF0FE00A80002,
+										B2C05315048BF0FE00A80002,
+										B2C05316048BF0FE00A80002,
+										B2C05317048BF0FE00A80002,
+										B2C05318048BF0FE00A80002,
+										B2C05319048BF0FE00A80002,
+										B2C0531A048BF0FE00A80002,
+										B2C0531B048BF0FE00A80002,
+										B2C0531C048BF0FE00A80002,
+										B2C0531D048BF0FE00A80002,
+										B2C0531E048BF0FE00A80002,
+										B2C0531F048BF0FE00A80002,
+										B2C05320048BF0FE00A80002,
+										B2C05321048BF0FE00A80002,
+										B2C05322048BF0FE00A80002,
+										B2C05323048BF0FE00A80002,
+										B2C05324048BF0FE00A80002,
+										B2C05325048BF0FE00A80002,
+										B2C05326048BF0FE00A80002,
+										B2C05327048BF0FE00A80002,
+										B2C05328048BF0FE00A80002,
+										B2C05329048BF0FE00A80002,
+										B2C0532A048BF0FE00A80002,
+										B2C0532B048BF0FE00A80002,
+										B2C0532C048BF0FE00A80002,
+										B2C0532D048BF0FE00A80002,
+										B2C0532E048BF0FE00A80002,
+										B2C0532F048BF0FE00A80002,
+										B2C05330048BF0FE00A80002,
+										B2C05331048BF0FE00A80002,
+										B2C05332048BF0FE00A80002,
+										B2C2DB72048D785900A80002,
+										B22B9881048E9C4E00A80002,
+										B22B9882048E9C4E00A80002,
+										B2C0A77D04923B9200A80002,
+									);
+								};
+								NavCount = 1;
+								NavGeometry0 = {
+									Frame = "{{0, 0}, {622, 393}}";
+									NavBarVisible = YES;
+								};
+								NavSplitVertical = NO;
+							};
+							SplitCount = 1;
+							Tab1 = {
+								Debugger = {
+									Split0 = {
+										SplitCount = 2;
+									};
+									SplitCount = 1;
+									TabCount = 2;
+								};
+								LauncherConfigVersion = 7;
+							};
+							Tab2 = {
+								LauncherConfigVersion = 3;
+								Runner = {
+								};
+							};
+							TabCount = 5;
+						};
+						SplitCount = 1;
+						Tab1 = {
+							OptionsSetName = "Hierarchy, all classes";
+						};
+						TabCount = 5;
+					};
+				},
+			);
+			PBXWorkspaceGeometries = (
+				{
+					ContentSize = "{933, 732}";
+					LeftSlideOut = {
+						ActiveTab = 0;
+						ActiveTabName = PBXGroupTreeModule;
+						Collapsed = NO;
+						Frame = "{{0, 23}, {933, 709}}";
+						Split0 = {
+							ActiveTab = 1;
+							ActiveTabName = PBXRunSessionModule;
+							Collapsed = NO;
+							Frame = "{{311, 0}, {622, 709}}";
+							Split0 = {
+								Frame = "{{0, 316}, {622, 393}}";
+							};
+							SplitCount = 1;
+							Tab0 = {
+								Frame = "{{0, 0}, {572, 214}}";
+							};
+							Tab1 = {
+								Debugger = {
+									ActiveTab = 0;
+									ActiveTabName = PBXDebugCLIModule;
+									Collapsed = NO;
+									Frame = "{{0, 0}, {909, 343}}";
+									Split0 = {
+										Frame = "{{0, 343}, {909, 0}}";
+										Split0 = {
+											Frame = "{{0, 0}, {446, 0}}";
+										};
+										Split1 = {
+											DebugVariablesTableConfiguration = (
+												Name,
+												123,
+												Value,
+												85,
+												Summary,
+												220.123,
+											);
+											Frame = "{{455, 0}, {454, 0}}";
+										};
+										SplitCount = 2;
+									};
+									SplitCount = 1;
+									Tab0 = {
+										Frame = "{{0, 0}, {909, 319}}";
+									};
+									Tab1 = {
+										Frame = "{{0, 0}, {909, 319}}";
+									};
+									TabCount = 2;
+									TabsVisible = YES;
+								};
+								Frame = "{{0, 0}, {909, 343}}";
+								LauncherConfigVersion = 7;
+							};
+							Tab2 = {
+								Frame = "{{0, 0}, {622, 292}}";
+								LauncherConfigVersion = 3;
+								Runner = {
+									Frame = "{{0, 0}, {622, 292}}";
+								};
+							};
+							Tab3 = {
+								BuildMessageFrame = "{{0, 0}, {911, 193}}";
+								BuildTranscriptFrame = "{{0, 202}, {911, 0}}";
+								BuildTranscriptFrameExpanded = YES;
+								Frame = "{{0, 0}, {909, 224}}";
+							};
+							Tab4 = {
+								Frame = "{{0, 0}, {909, 295}}";
+							};
+							TabCount = 5;
+							TabsVisible = YES;
+						};
+						SplitCount = 1;
+						Tab0 = {
+							Frame = "{{0, 0}, {287, 709}}";
+							GroupTreeTableConfiguration = (
+								SCMStatusColumn,
+								22,
+								TargetStatusColumn,
+								18,
+								MainColumn,
+								232,
+							);
+						};
+						Tab1 = {
+							ClassesFrame = "{{0, 0}, {247, 330}}";
+							ClassesTreeTableConfiguration = (
+								PBXBookColumnIdentifier,
+								20,
+								PBXClassColumnIdentifier,
+								204,
+							);
+							Frame = "{{0, 0}, {245, 549}}";
+							MembersFrame = "{{0, 339}, {247, 210}}";
+							MembersTreeTableConfiguration = (
+								PBXBookColumnIdentifier,
+								20,
+								PBXMethodColumnIdentifier,
+								203,
+							);
+						};
+						Tab2 = {
+							Frame = "{{0, 0}, {226, 549}}";
+						};
+						Tab3 = {
+							Frame = "{{0, 0}, {191, 549}}";
+							TargetTableConfiguration = (
+								ActiveObject,
+								16,
+								ObjectNames,
+								202.296,
+							);
+						};
+						Tab4 = {
+							BreakpointsTreeTableConfiguration = (
+								breakpointColumn,
+								138,
+								enabledColumn,
+								31,
+							);
+							Frame = "{{0, 0}, {191, 549}}";
+						};
+						TabCount = 5;
+						TabsVisible = YES;
+					};
+					NavBarShownByDefault = YES;
+					StatusViewVisible = YES;
+					Template = F5F68CF101725D4C0D7A8F4C;
+					ToolbarVisible = YES;
+					WindowLocation = "{139, 58}";
+				},
+			);
+			PBXWorkspaceStateSaveDate = 77489147;
+		};
+		perUserProjectItems = {
+			B22B987B048E9C4E00A80002 = B22B987B048E9C4E00A80002;
+			B22B987C048E9C4E00A80002 = B22B987C048E9C4E00A80002;
+			B22B987D048E9C4E00A80002 = B22B987D048E9C4E00A80002;
+			B22B987E048E9C4E00A80002 = B22B987E048E9C4E00A80002;
+			B22B987F048E9C4E00A80002 = B22B987F048E9C4E00A80002;
+			B22B9881048E9C4E00A80002 = B22B9881048E9C4E00A80002;
+			B22B9882048E9C4E00A80002 = B22B9882048E9C4E00A80002;
+			B28D2D620488543D00A80002 = B28D2D620488543D00A80002;
+			B28D2D650488543D00A80002 = B28D2D650488543D00A80002;
+			B28D2D660488543D00A80002 = B28D2D660488543D00A80002;
+			B2AF00620498138500A80002 = B2AF00620498138500A80002;
+			B2AF00630498138500A80002 = B2AF00630498138500A80002;
+			B2C05300048BF0FE00A80002 = B2C05300048BF0FE00A80002;
+			B2C05303048BF0FE00A80002 = B2C05303048BF0FE00A80002;
+			B2C05304048BF0FE00A80002 = B2C05304048BF0FE00A80002;
+			B2C05306048BF0FE00A80002 = B2C05306048BF0FE00A80002;
+			B2C05307048BF0FE00A80002 = B2C05307048BF0FE00A80002;
+			B2C05308048BF0FE00A80002 = B2C05308048BF0FE00A80002;
+			B2C05309048BF0FE00A80002 = B2C05309048BF0FE00A80002;
+			B2C0530A048BF0FE00A80002 = B2C0530A048BF0FE00A80002;
+			B2C0530B048BF0FE00A80002 = B2C0530B048BF0FE00A80002;
+			B2C0530C048BF0FE00A80002 = B2C0530C048BF0FE00A80002;
+			B2C0530D048BF0FE00A80002 = B2C0530D048BF0FE00A80002;
+			B2C0530E048BF0FE00A80002 = B2C0530E048BF0FE00A80002;
+			B2C0530F048BF0FE00A80002 = B2C0530F048BF0FE00A80002;
+			B2C05310048BF0FE00A80002 = B2C05310048BF0FE00A80002;
+			B2C05311048BF0FE00A80002 = B2C05311048BF0FE00A80002;
+			B2C05312048BF0FE00A80002 = B2C05312048BF0FE00A80002;
+			B2C05313048BF0FE00A80002 = B2C05313048BF0FE00A80002;
+			B2C05314048BF0FE00A80002 = B2C05314048BF0FE00A80002;
+			B2C05315048BF0FE00A80002 = B2C05315048BF0FE00A80002;
+			B2C05316048BF0FE00A80002 = B2C05316048BF0FE00A80002;
+			B2C05317048BF0FE00A80002 = B2C05317048BF0FE00A80002;
+			B2C05318048BF0FE00A80002 = B2C05318048BF0FE00A80002;
+			B2C05319048BF0FE00A80002 = B2C05319048BF0FE00A80002;
+			B2C0531A048BF0FE00A80002 = B2C0531A048BF0FE00A80002;
+			B2C0531B048BF0FE00A80002 = B2C0531B048BF0FE00A80002;
+			B2C0531C048BF0FE00A80002 = B2C0531C048BF0FE00A80002;
+			B2C0531D048BF0FE00A80002 = B2C0531D048BF0FE00A80002;
+			B2C0531E048BF0FE00A80002 = B2C0531E048BF0FE00A80002;
+			B2C0531F048BF0FE00A80002 = B2C0531F048BF0FE00A80002;
+			B2C05320048BF0FE00A80002 = B2C05320048BF0FE00A80002;
+			B2C05321048BF0FE00A80002 = B2C05321048BF0FE00A80002;
+			B2C05322048BF0FE00A80002 = B2C05322048BF0FE00A80002;
+			B2C05323048BF0FE00A80002 = B2C05323048BF0FE00A80002;
+			B2C05324048BF0FE00A80002 = B2C05324048BF0FE00A80002;
+			B2C05325048BF0FE00A80002 = B2C05325048BF0FE00A80002;
+			B2C05326048BF0FE00A80002 = B2C05326048BF0FE00A80002;
+			B2C05327048BF0FE00A80002 = B2C05327048BF0FE00A80002;
+			B2C05328048BF0FE00A80002 = B2C05328048BF0FE00A80002;
+			B2C05329048BF0FE00A80002 = B2C05329048BF0FE00A80002;
+			B2C0532A048BF0FE00A80002 = B2C0532A048BF0FE00A80002;
+			B2C0532B048BF0FE00A80002 = B2C0532B048BF0FE00A80002;
+			B2C0532C048BF0FE00A80002 = B2C0532C048BF0FE00A80002;
+			B2C0532D048BF0FE00A80002 = B2C0532D048BF0FE00A80002;
+			B2C0532E048BF0FE00A80002 = B2C0532E048BF0FE00A80002;
+			B2C0532F048BF0FE00A80002 = B2C0532F048BF0FE00A80002;
+			B2C05330048BF0FE00A80002 = B2C05330048BF0FE00A80002;
+			B2C05331048BF0FE00A80002 = B2C05331048BF0FE00A80002;
+			B2C05332048BF0FE00A80002 = B2C05332048BF0FE00A80002;
+			B2C0A77904923B9200A80002 = B2C0A77904923B9200A80002;
+			B2C0A77A04923B9200A80002 = B2C0A77A04923B9200A80002;
+			B2C0A77B04923B9200A80002 = B2C0A77B04923B9200A80002;
+			B2C0A77D04923B9200A80002 = B2C0A77D04923B9200A80002;
+			B2C0A77E04923B9200A80002 = B2C0A77E04923B9200A80002;
+			B2C2DB71048D785900A80002 = B2C2DB71048D785900A80002;
+			B2C2DB72048D785900A80002 = B2C2DB72048D785900A80002;
+		};
+		projectwideBuildSettings = {
+		};
+		wantsIndex = 1;
+		wantsSCM = -1;
+	};
+	00000000000000000159C630 = {
+		activeExec = 0;
+	};
+	B22B987B048E9C4E00A80002 = {
+		fRef = 000000000000000001490CD0;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.m: 131";
+		rLen = 0;
+		rLoc = 3566;
+		rType = 0;
+		vrLen = 1255;
+		vrLoc = 2356;
+	};
+	B22B987C048E9C4E00A80002 = {
+		fRef = B22B9884048E9C4E00A80002;
+		isa = PBXTextBookmark;
+		name = "CFRunLoop.h: 180";
+		rLen = 18;
+		rLoc = 6199;
+		rType = 0;
+		vrLen = 1030;
+		vrLoc = 5775;
+	};
+	B22B987D048E9C4E00A80002 = {
+		fRef = B22B9885048E9C4E00A80002;
+		isa = PBXTextBookmark;
+		name = "IOKitLib.h: 126";
+		rLen = 25;
+		rLoc = 5278;
+		rType = 0;
+		vrLen = 1196;
+		vrLoc = 4431;
+	};
+	B22B987E048E9C4E00A80002 = {
+		fRef = B22B9886048E9C4E00A80002;
+		isa = PBXTextBookmark;
+		name = "NSObject.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 829;
+		vrLoc = 0;
+	};
+	B22B987F048E9C4E00A80002 = {
+		fRef = 000000000000000001497190;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverKeys.h: kOptionTriggersAreButtonsKey";
+		rLen = 18;
+		rLoc = 1483;
+		rType = 0;
+		vrLen = 1318;
+		vrLoc = 688;
+	};
+	B22B9881048E9C4E00A80002 = {
+		fRef = 000000000000000001490CD0;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.m: 131";
+		rLen = 0;
+		rLoc = 3566;
+		rType = 0;
+		vrLen = 1255;
+		vrLoc = 2356;
+	};
+	B22B9882048E9C4E00A80002 = {
+		fRef = 000000000000000001497190;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverKeys.h: kOptionTriggersAreButtonsKey";
+		rLen = 18;
+		rLoc = 1483;
+		rType = 0;
+		vrLen = 1318;
+		vrLoc = 688;
+	};
+	B22B9884048E9C4E00A80002 = {
+		isa = PBXFileReference;
+		name = CFRunLoop.h;
+		path = /System/Library/Frameworks/CoreFoundation.framework/Versions/A/Headers/CFRunLoop.h;
+		refType = 0;
+	};
+	B22B9885048E9C4E00A80002 = {
+		isa = PBXFileReference;
+		name = IOKitLib.h;
+		path = /System/Library/Frameworks/IOKit.framework/Versions/A/Headers/IOKitLib.h;
+		refType = 0;
+	};
+	B22B9886048E9C4E00A80002 = {
+		isa = PBXFileReference;
+		name = NSObject.h;
+		path = /System/Library/Frameworks/Foundation.framework/Versions/C/Headers/NSObject.h;
+		refType = 0;
+	};
+	B28D2D620488543D00A80002 = {
+		isa = PBXTargetBookmark;
+		trg = 00000000000000000159C630;
+	};
+	B28D2D650488543D00A80002 = {
+		isa = PBXTargetBookmark;
+		trg = 00000000000000000159C630;
+	};
+	B28D2D660488543D00A80002 = {
+		fRef = 000000000000000001495220;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriver.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1574;
+		vrLoc = 0;
+	};
+	B2AF00620498138500A80002 = {
+		fRef = 00000000000000000159C480;
+		isa = PBXTextBookmark;
+		rLen = 1;
+		rLoc = 1207;
+		rType = 1;
+	};
+	B2AF00630498138500A80002 = {
+		fRef = 00000000000000000159C480;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriver.cpp: 1207";
+		rLen = 0;
+		rLoc = 47188;
+		rType = 0;
+		vrLen = 904;
+		vrLoc = 46682;
+	};
+	B2C052F7048BB9C300A80002 = {
+		fileReference = 000000000000000001490CD0;
+		isa = PBXFileBreakpoint;
+		lineNumber = 248;
+		state = 1;
+	};
+	B2C05300048BF0FE00A80002 = {
+		fRef = 000000000000000001490C30;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.h: driver";
+		rLen = 21;
+		rLoc = 1029;
+		rType = 0;
+		vrLen = 845;
+		vrLoc = 406;
+	};
+	B2C05303048BF0FE00A80002 = {
+		fRef = B28D2DA30489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.m: 13";
+		rLen = 0;
+		rLoc = 302;
+		rType = 0;
+		vrLen = 662;
+		vrLoc = 168;
+	};
+	B2C05304048BF0FE00A80002 = {
+		fRef = B28D2DA20489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.h: savePreferencesForDevice:";
+		rLen = 0;
+		rLoc = 416;
+		rType = 0;
+		vrLen = 429;
+		vrLoc = 0;
+	};
+	B2C05306048BF0FE00A80002 = {
+		fRef = 000000000000000001497190;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverKeys.h: kOptionTriggerButtonThresholdKey";
+		rLen = 22;
+		rLoc = 1547;
+		rType = 0;
+		vrLen = 1664;
+		vrLoc = 342;
+	};
+	B2C05307048BF0FE00A80002 = {
+		fRef = B28D2DA20489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 381;
+		vrLoc = 0;
+	};
+	B2C05308048BF0FE00A80002 = {
+		fRef = B28D2DA30489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.m: savePreferencesForDevice:";
+		rLen = 0;
+		rLoc = 1102;
+		rType = 0;
+		vrLen = 594;
+		vrLoc = 610;
+	};
+	B2C05309048BF0FE00A80002 = {
+		fRef = 000000000000000001490C30;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.h: 55";
+		rLen = 0;
+		rLoc = 1174;
+		rType = 0;
+		vrLen = 975;
+		vrLoc = 607;
+	};
+	B2C0530A048BF0FE00A80002 = {
+		fRef = 000000000000000001490CD0;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.m: interfaceWithDriver:";
+		rLen = 0;
+		rLoc = 7827;
+		rType = 0;
+		vrLen = 1181;
+		vrLoc = 6068;
+	};
+	B2C0530B048BF0FE00A80002 = {
+		fRef = 000000000000000001490C30;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.h: deviceOptions";
+		rLen = 0;
+		rLoc = 1172;
+		rType = 0;
+		vrLen = 936;
+		vrLoc = 607;
+	};
+	B2C0530C048BF0FE00A80002 = {
+		fRef = B28D2DA30489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.m: savePreferencesForDevice:";
+		rLen = 78;
+		rLoc = 1063;
+		rType = 0;
+		vrLen = 594;
+		vrLoc = 610;
+	};
+	B2C0530D048BF0FE00A80002 = {
+		fRef = 000000000000000001490C30;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.h: deviceOptions";
+		rLen = 0;
+		rLoc = 1158;
+		rType = 0;
+		vrLen = 845;
+		vrLoc = 406;
+	};
+	B2C0530E048BF0FE00A80002 = {
+		fRef = 000000000000000001490CD0;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.m: elementWithCookie:";
+		rLen = 0;
+		rLoc = 2830;
+		rType = 0;
+		vrLen = 1163;
+		vrLoc = 1396;
+	};
+	B2C0530F048BF0FE00A80002 = {
+		fRef = B28D2DA20489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 381;
+		vrLoc = 0;
+	};
+	B2C05310048BF0FE00A80002 = {
+		fRef = B28D2DA30489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.m: savePreferencesForDevice:";
+		rLen = 78;
+		rLoc = 1063;
+		rType = 0;
+		vrLen = 603;
+		vrLoc = 601;
+	};
+	B2C05311048BF0FE00A80002 = {
+		fRef = 000000000000000001495220;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriver.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1855;
+		vrLoc = 0;
+	};
+	B2C05312048BF0FE00A80002 = {
+		fRef = 00000000000000000159C480;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriver.cpp: __GNUC__";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1879;
+		vrLoc = 0;
+	};
+	B2C05313048BF0FE00A80002 = {
+		fRef = 000000000000000001495220;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriver.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 719;
+		vrLoc = 3415;
+	};
+	B2C05314048BF0FE00A80002 = {
+		fRef = 000000000000000001497190;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverKeys.h: kOptionTriggersAreButtonsKey";
+		rLen = 18;
+		rLoc = 1483;
+		rType = 0;
+		vrLen = 1459;
+		vrLoc = 434;
+	};
+	B2C05315048BF0FE00A80002 = {
+		fRef = 000000000000000001490CD0;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.m: elementWithCookie:";
+		rLen = 0;
+		rLoc = 2830;
+		rType = 0;
+		vrLen = 1163;
+		vrLoc = 1396;
+	};
+	B2C05316048BF0FE00A80002 = {
+		fRef = 00000000000000000159C480;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriver.cpp: 524";
+		rLen = 34;
+		rLoc = 16998;
+		rType = 0;
+		vrLen = 1596;
+		vrLoc = 16998;
+	};
+	B2C05317048BF0FE00A80002 = {
+		fRef = 000000000000000001495220;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriver.h: 296";
+		rLen = 0;
+		rLoc = 9622;
+		rType = 0;
+		vrLen = 1542;
+		vrLoc = 8163;
+	};
+	B2C05318048BF0FE00A80002 = {
+		fRef = 000000000000000001490CD0;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.m: elementWithCookie:";
+		rLen = 0;
+		rLoc = 2830;
+		rType = 0;
+		vrLen = 1163;
+		vrLoc = 1396;
+	};
+	B2C05319048BF0FE00A80002 = {
+		fRef = B28D2DA30489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.m: savePreferencesForDevice:";
+		rLen = 78;
+		rLoc = 1063;
+		rType = 0;
+		vrLen = 603;
+		vrLoc = 601;
+	};
+	B2C0531A048BF0FE00A80002 = {
+		fRef = 000000000000000001490CD0;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.m: elementWithCookie:";
+		rLen = 0;
+		rLoc = 2830;
+		rType = 0;
+		vrLen = 1163;
+		vrLoc = 1396;
+	};
+	B2C0531B048BF0FE00A80002 = {
+		fRef = B28D2DA20489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 381;
+		vrLoc = 0;
+	};
+	B2C0531C048BF0FE00A80002 = {
+		fRef = 000000000000000001490CD0;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.m: elementWithCookie:";
+		rLen = 0;
+		rLoc = 2904;
+		rType = 0;
+		vrLen = 956;
+		vrLoc = 2470;
+	};
+	B2C0531D048BF0FE00A80002 = {
+		fRef = B28D2DA30489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.m: savePreferencesForDevice:";
+		rLen = 78;
+		rLoc = 1063;
+		rType = 0;
+		vrLen = 906;
+		vrLoc = 0;
+	};
+	B2C0531E048BF0FE00A80002 = {
+		fRef = 000000000000000001495470;
+		isa = PBXTextBookmark;
+		name = "testdrivercontrol.m: doMenuEditOptionsForPadDevice";
+		rLen = 0;
+		rLoc = 4172;
+		rType = 0;
+		vrLen = 1014;
+		vrLoc = 2368;
+	};
+	B2C0531F048BF0FE00A80002 = {
+		fRef = 000000000000000001495220;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriver.h: 296";
+		rLen = 0;
+		rLoc = 9622;
+		rType = 0;
+		vrLen = 1542;
+		vrLoc = 8163;
+	};
+	B2C05320048BF0FE00A80002 = {
+		fRef = 000000000000000001495470;
+		isa = PBXTextBookmark;
+		name = "testdrivercontrol.m: doMenuEditOptionsForPadDevice";
+		rLen = 0;
+		rLoc = 4109;
+		rType = 0;
+		vrLen = 674;
+		vrLoc = 2684;
+	};
+	B2C05321048BF0FE00A80002 = {
+		fRef = 000000000000000001490CD0;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.m: driver";
+		rLen = 0;
+		rLoc = 5928;
+		rType = 0;
+		vrLen = 271;
+		vrLoc = 5682;
+	};
+	B2C05322048BF0FE00A80002 = {
+		fRef = B28D2DA30489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.m: savePreferencesForDevice:";
+		rLen = 0;
+		rLoc = 867;
+		rType = 0;
+		vrLen = 344;
+		vrLoc = 860;
+	};
+	B2C05323048BF0FE00A80002 = {
+		fRef = 000000000000000001490CD0;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.m: interfaceWithDriver:";
+		rLen = 0;
+		rLoc = 5304;
+		rType = 0;
+		vrLen = 429;
+		vrLoc = 4913;
+	};
+	B2C05324048BF0FE00A80002 = {
+		fRef = B28D2DA30489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.m: savePreferencesForDevice:";
+		rLen = 0;
+		rLoc = 906;
+		rType = 0;
+		vrLen = 325;
+		vrLoc = 879;
+	};
+	B2C05325048BF0FE00A80002 = {
+		fRef = 000000000000000001490CD0;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.m: hasOptions";
+		rLen = 0;
+		rLoc = 6071;
+		rType = 0;
+		vrLen = 499;
+		vrLoc = 5786;
+	};
+	B2C05326048BF0FE00A80002 = {
+		fRef = B28D2DA30489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.m: savePreferencesForDevice:";
+		rLen = 0;
+		rLoc = 1063;
+		rType = 0;
+		vrLen = 238;
+		vrLoc = 966;
+	};
+	B2C05327048BF0FE00A80002 = {
+		fRef = 000000000000000001490CD0;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.m: deviceType";
+		rLen = 0;
+		rLoc = 5981;
+		rType = 0;
+		vrLen = 381;
+		vrLoc = 5726;
+	};
+	B2C05328048BF0FE00A80002 = {
+		fRef = B28D2DA30489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.m: savePreferencesForDevice:";
+		rLen = 0;
+		rLoc = 1196;
+		rType = 0;
+		vrLen = 238;
+		vrLoc = 966;
+	};
+	B2C05329048BF0FE00A80002 = {
+		fRef = 000000000000000001495470;
+		isa = PBXTextBookmark;
+		name = "testdrivercontrol.m: __VERSION__";
+		rLen = 36;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1313;
+		vrLoc = 4118;
+	};
+	B2C0532A048BF0FE00A80002 = {
+		fRef = B28D2DA30489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.m: loadPreferencesForDevice:";
+		rLen = 0;
+		rLoc = 473;
+		rType = 0;
+		vrLen = 1123;
+		vrLoc = 0;
+	};
+	B2C0532B048BF0FE00A80002 = {
+		fRef = 000000000000000001490CD0;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.m: interfaceWithDriver:";
+		rLen = 38;
+		rLoc = 8274;
+		rType = 0;
+		vrLen = 1391;
+		vrLoc = 9803;
+	};
+	B2C0532C048BF0FE00A80002 = {
+		fRef = B28D2DA30489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.m: loadPreferencesForDevice:";
+		rLen = 0;
+		rLoc = 473;
+		rType = 0;
+		vrLen = 1123;
+		vrLoc = 0;
+	};
+	B2C0532D048BF0FE00A80002 = {
+		fRef = 000000000000000001490CD0;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriverInterface.m: loadOptions:";
+		rLen = 0;
+		rLoc = 6256;
+		rType = 0;
+		vrLen = 1035;
+		vrLoc = 5788;
+	};
+	B2C0532E048BF0FE00A80002 = {
+		fRef = 000000000000000001495470;
+		isa = PBXTextBookmark;
+		name = "testdrivercontrol.m: doMenuEditOptionsForPadDevice";
+		rLen = 0;
+		rLoc = 4276;
+		rType = 0;
+		vrLen = 692;
+		vrLoc = 2368;
+	};
+	B2C0532F048BF0FE00A80002 = {
+		fRef = B28D2DA30489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.m: __OBJC__";
+		rLen = 0;
+		rLoc = 205;
+		rType = 0;
+		vrLen = 1105;
+		vrLoc = 0;
+	};
+	B2C05330048BF0FE00A80002 = {
+		fRef = B28D2DA20489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.h: savePreferencesForDevice:";
+		rLen = 0;
+		rLoc = 421;
+		rType = 0;
+		vrLen = 427;
+		vrLoc = 0;
+	};
+	B2C05331048BF0FE00A80002 = {
+		fRef = B28D2DA30489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.m: 13";
+		rLen = 0;
+		rLoc = 302;
+		rType = 0;
+		vrLen = 662;
+		vrLoc = 168;
+	};
+	B2C05332048BF0FE00A80002 = {
+		fRef = B28D2DA20489B7A900A80002;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDPrefsLoader.h: savePreferencesForDevice:";
+		rLen = 0;
+		rLoc = 416;
+		rType = 0;
+		vrLen = 429;
+		vrLoc = 0;
+	};
+	B2C0A77904923B9200A80002 = {
+		fRef = 000000000000000001495220;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriver.h: 299";
+		rLen = 0;
+		rLoc = 9566;
+		rType = 0;
+		vrLen = 1366;
+		vrLoc = 8679;
+	};
+	B2C0A77A04923B9200A80002 = {
+		fRef = B2C0A78204923B9200A80002;
+		isa = PBXTextBookmark;
+		name = "IOUSBLog.h: 108";
+		rLen = 22;
+		rLoc = 3320;
+		rType = 0;
+		vrLen = 559;
+		vrLoc = 6805;
+	};
+	B2C0A77B04923B9200A80002 = {
+		fRef = B2C0A78004923B9200A80002;
+		isa = PBXTextBookmark;
+		name = "IOLib.h: 213";
+		rLen = 39;
+		rLoc = 10377;
+		rType = 0;
+		vrLen = 1078;
+		vrLoc = 9717;
+	};
+	B2C0A77D04923B9200A80002 = {
+		fRef = 000000000000000001495220;
+		isa = PBXTextBookmark;
+		name = "DWXBoxHIDDriver.h: 299";
+		rLen = 0;
+		rLoc = 9566;
+		rType = 0;
+		vrLen = 1366;
+		vrLoc = 8679;
+	};
+	B2C0A77E04923B9200A80002 = {
+		fRef = B2C0A78104923B9200A80002;
+		isa = PBXTextBookmark;
+		name = "IOLib.h: 213";
+		rLen = 39;
+		rLoc = 10377;
+		rType = 0;
+		vrLen = 1078;
+		vrLoc = 9717;
+	};
+	B2C0A78004923B9200A80002 = {
+		isa = PBXFileReference;
+		name = IOLib.h;
+		path = /System/Library/Frameworks/Kernel.framework/Versions/A/Headers/IOKit/IOLib.h;
+		refType = 0;
+	};
+	B2C0A78104923B9200A80002 = {
+		isa = PBXFileReference;
+		name = IOLib.h;
+		path = /System/Library/Frameworks/Kernel.framework/Versions/A/Headers/IOKit/IOLib.h;
+		refType = 0;
+	};
+	B2C0A78204923B9200A80002 = {
+		isa = PBXFileReference;
+		name = IOUSBLog.h;
+		path = /System/Library/Frameworks/Kernel.framework/Versions/A/Headers/IOKit/usb/IOUSBLog.h;
+		refType = 0;
+	};
+	B2C2DB71048D785900A80002 = {
+		fRef = 000000000000000001495470;
+		isa = PBXTextBookmark;
+		name = "testdrivercontrol.m: doMenuEditOptionsForPadDevice";
+		rLen = 0;
+		rLoc = 4276;
+		rType = 0;
+		vrLen = 1393;
+		vrLoc = 2368;
+	};
+	B2C2DB72048D785900A80002 = {
+		fRef = 000000000000000001495470;
+		isa = PBXTextBookmark;
+		name = "testdrivercontrol.m: doMenuEditOptionsForPadDevice";
+		rLen = 0;
+		rLoc = 4276;
+		rType = 0;
+		vrLen = 1393;
+		vrLoc = 2368;
+	};
+	B2C9CC900488531E00A80002 = {
+		activeArgIndex = 2147483647;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		configStateDict = {
+		};
+		debuggerPlugin = GDBDebugging;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		isa = PBXExecutable;
+		name = testdrivercontrol;
+		shlibInfoDictList = (
+		);
+		sourceDirectories = (
+		);
+	};
+}

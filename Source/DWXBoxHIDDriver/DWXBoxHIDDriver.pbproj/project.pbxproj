@@ -5,32 +5,354 @@
 	};
 	objectVersion = 38;
 	objects = {
-		00000000000000000149DC10 = {
-			isa = PBXBundleReference;
-			path = DWXBoxHIDDriver.kext;
-			refType = 3;
+		0000000000000000000839C0 = {
+			fileRef = 000000000000000001495470;
+			isa = PBXBuildFile;
+			settings = {
+			};
 		};
-		00000000000000000149DC90 = {
+		00000000000000000017B5A0 = {
+			fileRef = 000000000000000001497190;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0000000000000000014843D0 = {
+			fileRef = 00000000000000000159C480;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		000000000000000001490410 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXRezBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000000000000000001490510 = {
+			children = (
+				00000000000000000159C3E0,
+				000000000000000001494E00,
+				000000000000000001490D70,
+			);
+			isa = PBXGroup;
+			name = DWXBoxController;
+			refType = 4;
+		};
+		0000000000000000014905B0 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000000000000000001490710 = {
+			buildPhases = (
+				00000000000000000159C310,
+				000000000000000001497230,
+				0000000000000000014917D0,
+				000000000000000001497430,
+			);
+			buildSettings = {
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = testdrivercontrol;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+			};
+			dependencies = (
+			);
+			isa = PBXToolTarget;
+			name = testdrivercontrol;
+			productInstallPath = /usr/local/bin;
+			productName = testdrivercontrol;
+			productReference = 00000000000000000159BFF0;
+		};
+		0000000000000000014908E0 = {
+			buildRules = (
+			);
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				OPTIMIZATION_CFLAGS = "-O0";
+			};
+			isa = PBXBuildStyle;
+			name = Development;
+		};
+		000000000000000001490930 = {
+			buildActionMask = 2147483647;
+			files = (
+				0000000000000000014843D0,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000000000000000001490C30 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = DWXBoxHIDDriverInterface.h;
+			refType = 4;
+		};
+		000000000000000001490CD0 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			path = DWXBoxHIDDriverInterface.m;
+			refType = 4;
+		};
+		000000000000000001490D70 = {
+			children = (
+				0000000000000000014970A0,
+				00000000000000000159BFF0,
+			);
+			isa = PBXGroup;
+			name = Products;
+			refType = 4;
+		};
+		000000000000000001490DF0 = {
+			fileRef = 000000000000000001490CD0;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		000000000000000001491670 = {
+			fileRef = 000000000000000001495220;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		000000000000000001491760 = {
+			children = (
+				00000000000000000159C770,
+			);
+			isa = PBXGroup;
+			name = Resources;
+			path = "";
+			refType = 4;
+		};
+		0000000000000000014917D0 = {
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000001494F70,
+				000000000000000001494E70,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000000000000000001494E00 = {
+			children = (
+				000000000000000001495470,
+				000000000000000001490C30,
+				000000000000000001490CD0,
+				B28D2DA20489B7A900A80002,
+				B28D2DA30489B7A900A80002,
+				000000000000000001495290,
+				000000000000000001497120,
+			);
+			isa = PBXGroup;
+			name = Configuration;
+			path = "";
+			refType = 4;
+		};
+		000000000000000001494E70 = {
+			fileRef = 000000000000000001497120;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		000000000000000001494F40 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			generatedFileNames = (
+			);
+			isa = PBXShellScriptBuildPhase;
+			neededFileNames = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "script=\"${SYSTEM_DEVELOPER_DIR}/ProjectBuilder Extras/Kernel Extension Support/KEXTPreprocess\";\nif [ -x \"$script\" ]; then\n    . \"$script\"\nfi";
+		};
+		000000000000000001494F70 = {
+			fileRef = 000000000000000001495290;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		000000000000000001495220 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = DWXBoxHIDDriver.h;
 			refType = 4;
 		};
-		00000000000000000149DCE0 = {
+		000000000000000001495290 = {
+			isa = PBXFrameworkReference;
+			name = Cocoa.framework;
+			path = /System/Library/Frameworks/Cocoa.framework;
+			refType = 0;
+		};
+		000000000000000001495330 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			generatedFileNames = (
+			);
+			isa = PBXShellScriptBuildPhase;
+			neededFileNames = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "script=\"${SYSTEM_DEVELOPER_DIR}/ProjectBuilder Extras/Kernel Extension Support/KEXTPostprocess\";\nif [ -x \"$script\" ]; then\n    . \"$script\"\nfi";
+		};
+		000000000000000001495470 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = testdrivercontrol.m;
+			refType = 4;
+		};
+		000000000000000001496FD0 = {
+			fileRef = 000000000000000001490C30;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0000000000000000014970A0 = {
+			isa = PBXBundleReference;
+			path = DWXBoxHIDDriver.kext;
+			refType = 3;
+		};
+		000000000000000001497120 = {
+			isa = PBXFrameworkReference;
+			name = IOKit.framework;
+			path = /System/Library/Frameworks/IOKit.framework;
+			refType = 0;
+		};
+		000000000000000001497190 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = DWXBoxHIDDriverKeys.h;
+			refType = 4;
+		};
+		000000000000000001497230 = {
+			buildActionMask = 2147483647;
+			files = (
+				0000000000000000000839C0,
+				000000000000000001490DF0,
+				B28D2DA50489B7A900A80002,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000000000000000001497330 = {
+			buildActionMask = 2147483647;
+			files = (
+				00000000000000000159C210,
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000000000000000001497430 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXRezBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0000000000000000014A0950 = {
+			buildStyles = (
+				0000000000000000014908E0,
+				0000000000000000014A6B80,
+			);
+			hasScannedForEncodings = 1;
+			isa = PBXProject;
+			mainGroup = 000000000000000001490510;
+			projectDirPath = "";
+			targets = (
+				00000000000000000159C630,
+				000000000000000001490710,
+			);
+		};
+		0000000000000000014A6B80 = {
+			buildRules = (
+			);
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			isa = PBXBuildStyle;
+			name = Deployment;
+		};
+		00000000000000000159BFF0 = {
+			isa = PBXExecutableFileReference;
+			path = testdrivercontrol;
+			refType = 3;
+		};
+		00000000000000000159C0A0 = {
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000001491670,
+				00000000000000000017B5A0,
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		00000000000000000159C170 = {
+			fileEncoding = 10;
+			isa = PBXFileReference;
+			name = English;
+			path = English.lproj/InfoPlist.strings;
+			refType = 4;
+		};
+		00000000000000000159C210 = {
+			fileRef = 00000000000000000159C770;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		00000000000000000159C310 = {
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000001496FD0,
+				B28D2DA40489B7A900A80002,
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		00000000000000000159C3E0 = {
+			children = (
+				00000000000000000159C480,
+				000000000000000001495220,
+				000000000000000001497190,
+				000000000000000001491760,
+				00000000000000000159C5B0,
+			);
+			isa = PBXGroup;
+			name = Driver;
+			path = "";
+			refType = 4;
+		};
+		00000000000000000159C480 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = DWXBoxHIDDriver.cpp;
 			refType = 4;
 		};
-		00000000000000000149DD80 = {
+		00000000000000000159C5B0 = {
+			isa = PBXFrameworkReference;
+			name = Kernel.framework;
+			path = /System/Library/Frameworks/Kernel.framework;
+			refType = 0;
+		};
+		00000000000000000159C630 = {
 			buildPhases = (
-				0000000000000000015A6580,
-				0000000000000000014ADAF0,
-				0000000000000000015A6B70,
-				0000000000000000015A6E30,
-				0000000000000000015A64B0,
-				0000000000000000014B9C20,
-				0000000000000000015A6B40,
+				000000000000000001494F40,
+				00000000000000000159C0A0,
+				000000000000000001497330,
+				000000000000000001490930,
+				0000000000000000014905B0,
+				000000000000000001490410,
+				000000000000000001495330,
 			);
 			buildSettings = {
 				DEBUGGING_SYMBOLS = NO;
@@ -56,7 +378,7 @@
 			name = DWXBoxHIDDriver;
 			productInstallPath = "$(SYSTEM_LIBRARY_DIR)/Extensions";
 			productName = DWXBoxHIDDriver;
-			productReference = 00000000000000000149DC10;
+			productReference = 0000000000000000014970A0;
 			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
 <plist version=\"1.0\">
@@ -76,7 +398,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.1.0</string>
+	<string>1.2.0</string>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>Generic Xbox Device</key>
@@ -218,13 +540,6 @@
 					</data>
 					<key>Name</key>
 					<string>Xbox Controller</string>
-					<key>Options</key>
-					<dict>
-						<key>ClampButtons</key>
-						<true/>
-						<key>InvertYAxis</key>
-						<true/>
-					</dict>
 					<key>Vendor</key>
 					<string>Unknown Third-Party</string>
 				</dict>
@@ -252,178 +567,48 @@
 </plist>
 ";
 		};
-		0000000000000000014ADAF0 = {
-			buildActionMask = 2147483647;
-			files = (
-				0000000000000000015A6350,
-			);
-			isa = PBXHeadersBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0000000000000000014B9BA0 = {
-			buildRules = (
-			);
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-			};
-			isa = PBXBuildStyle;
-			name = Deployment;
-		};
-		0000000000000000014B9C20 = {
-			buildActionMask = 2147483647;
-			files = (
-			);
-			isa = PBXRezBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0000000000000000014B9DF0 = {
-			buildStyles = (
-				0000000000000000015A71D0,
-				0000000000000000014B9BA0,
-			);
-			hasScannedForEncodings = 1;
-			isa = PBXProject;
-			mainGroup = 0000000000000000015A70D0;
-			projectDirPath = "";
-			targets = (
-				00000000000000000149DD80,
-			);
-		};
-		0000000000000000014B9FB0 = {
+		00000000000000000159C770 = {
 			children = (
-				0000000000000000015A6FD0,
-			);
-			isa = PBXGroup;
-			name = Resources;
-			refType = 4;
-		};
-		0000000000000000015A6090 = {
-			isa = PBXFrameworkReference;
-			name = Kernel.framework;
-			path = /System/Library/Frameworks/Kernel.framework;
-			refType = 0;
-		};
-		0000000000000000015A6250 = {
-			children = (
-				00000000000000000149DCE0,
-				00000000000000000149DC90,
-			);
-			isa = PBXGroup;
-			name = Source;
-			path = "";
-			refType = 4;
-		};
-		0000000000000000015A6350 = {
-			fileRef = 00000000000000000149DC90;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		0000000000000000015A64B0 = {
-			buildActionMask = 2147483647;
-			files = (
-			);
-			isa = PBXFrameworksBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0000000000000000015A6580 = {
-			buildActionMask = 2147483647;
-			files = (
-			);
-			generatedFileNames = (
-			);
-			isa = PBXShellScriptBuildPhase;
-			neededFileNames = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "script=\"${SYSTEM_DEVELOPER_DIR}/ProjectBuilder Extras/Kernel Extension Support/KEXTPreprocess\";\nif [ -x \"$script\" ]; then\n    . \"$script\"\nfi";
-		};
-		0000000000000000015A68D0 = {
-			fileRef = 0000000000000000015A6FD0;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		0000000000000000015A69D0 = {
-			fileEncoding = 10;
-			isa = PBXFileReference;
-			name = English;
-			path = English.lproj/InfoPlist.strings;
-			refType = 4;
-		};
-		0000000000000000015A6A40 = {
-			fileRef = 00000000000000000149DCE0;
-			isa = PBXBuildFile;
-			settings = {
-			};
-		};
-		0000000000000000015A6B40 = {
-			buildActionMask = 2147483647;
-			files = (
-			);
-			generatedFileNames = (
-			);
-			isa = PBXShellScriptBuildPhase;
-			neededFileNames = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "script=\"${SYSTEM_DEVELOPER_DIR}/ProjectBuilder Extras/Kernel Extension Support/KEXTPostprocess\";\nif [ -x \"$script\" ]; then\n    . \"$script\"\nfi";
-		};
-		0000000000000000015A6B70 = {
-			buildActionMask = 2147483647;
-			files = (
-				0000000000000000015A68D0,
-			);
-			isa = PBXResourcesBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0000000000000000015A6E30 = {
-			buildActionMask = 2147483647;
-			files = (
-				0000000000000000015A6A40,
-			);
-			isa = PBXSourcesBuildPhase;
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0000000000000000015A6F30 = {
-			children = (
-				00000000000000000149DC10,
-			);
-			isa = PBXGroup;
-			name = Products;
-			refType = 4;
-		};
-		0000000000000000015A6FD0 = {
-			children = (
-				0000000000000000015A69D0,
+				00000000000000000159C170,
 			);
 			isa = PBXVariantGroup;
 			name = InfoPlist.strings;
 			refType = 4;
 		};
-		0000000000000000015A70D0 = {
-			children = (
-				0000000000000000015A6250,
-				0000000000000000014B9FB0,
-				0000000000000000015A6090,
-				0000000000000000015A6F30,
-			);
-			isa = PBXGroup;
-			name = DWXBoxController;
+//000
+//001
+//002
+//003
+//004
+//B20
+//B21
+//B22
+//B23
+//B24
+		B28D2DA20489B7A900A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = DWXBoxHIDPrefsLoader.h;
 			refType = 4;
 		};
-		0000000000000000015A71D0 = {
-			buildRules = (
-			);
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				OPTIMIZATION_CFLAGS = "-O0";
+		B28D2DA30489B7A900A80002 = {
+			fileEncoding = 4;
+			isa = PBXFileReference;
+			path = DWXBoxHIDPrefsLoader.m;
+			refType = 4;
+		};
+		B28D2DA40489B7A900A80002 = {
+			fileRef = B28D2DA20489B7A900A80002;
+			isa = PBXBuildFile;
+			settings = {
 			};
-			isa = PBXBuildStyle;
-			name = Development;
+		};
+		B28D2DA50489B7A900A80002 = {
+			fileRef = B28D2DA30489B7A900A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
 		};
 	};
-	rootObject = 0000000000000000014B9DF0;
+	rootObject = 0000000000000000014A0950;
 }
