@@ -1,0 +1,96 @@
+<html>
+	<head>
+		<title>Xbox HID Driver for Mac OS X: Frequently Asked Questions</title>
+		<link rel=stylesheet type="text/css" href=xboxhid.css>
+	</head>
+<body>
+
+<table>
+<tr valign=center>
+	<td><image src="xbx-apple.jpg"></image></td>
+	<td><h1>Xbox HID Driver FAQ</h1></td>
+</tr>
+</table>
+
+<table width=50%>
+<tr align=center>
+	<td><a href=index.html>Home</a></td>
+	<td><a href=index.html#download>Download</a></td>
+	<td><a href=buy.html>Buy</a></td>
+	<td><a href=index.html#help>Get Help</a></td>
+	<td>FAQ</td>
+</tr>
+</table>
+<hr>
+
+<h3>What games is it compatible with?</h3>
+
+<p>It works with any Mac OS X-native game that supports joystick input (sorry, no Classic/Mac OS 9 games will work). It can work with Mac OS X games that have
+no joystick support by using additional software like <a href="http://www.carvware.com/gamepadcompanion.html">GamePad Companion</a>. 
+
+<h3>Why doesn't USB OverDrive work?</h3>
+
+<p><a href="http://www.usboverdrive.com">USB OverDrive</a> only works with native USB HID devices, which most Xbox devices are not (which is what my driver is for, of course!).
+
+<h3>Does Force-Feedback work?</h3>
+
+No. That feature may be added in the future.
+
+<h3>How do I get Unreal Tournament 2003 to work?</h3>
+
+<p>First, open ~/Library/Application Support/Unreal Tournament 2003/User.ini, and make sure you have
+these lines:
+<pre><blockquote>
+	JoyX=Axis aStrafe SpeedBase=32768.0 DeadZone=0.2
+	JoyY=Axis aBaseY SpeedBase=32768.0 DeadZone=0.2 Invert=-1
+	JoyZ=Axis aBaseX SpeedBase=1.0 DeadZone=0.2
+	JoyR=Axis aLookUp SpeedBase=1.0 DeadZone=0.2 Invert=-1
+	JoyU=
+	JoyV=
+	JoySlider1=
+	JoySlider2=
+</blockquote></pre>
+
+<p>Note, you can adjust the DeadZone and SpeedBase parameters here to adjust sensitivity.
+
+<p>Second, go into the preference pane, and make sure both triggers are mapped to buttons, and that both sticks have the "Invert Y Axis" option enabled.
+
+<p>Third, open Unreal Tournament, go into the input options, and map the buttons to what you want (select the action with the mouse and press the joystick button you want mapped to it). 
+
+<p>Lastly, the first time you start a game, move each stick in a full circle so UT can calibrate each stick.
+
+
+
+<h3>Why doesn't GamePad Companion mouse emulation work with the sticks?</h3>
+
+<p>Not all games will behave the same when emulating a mouse with the Xbox controller's sticks. This is due to limitations in GPC, how games expect the mouse to work, and the fundamental problem of mapping an absolute-motion device (joystick) to a relative-motion device (mouse). 
+
+<p>In Quake-style games, for example,
+you may see a number of symptoms, including endlessly spinning or being stuck in one view/direction, abrupt rotation and movement, and not being able to spin in a complete circle.
+
+<p> Depending on the game, it may be impossible to get the desired result. However, there are some things you can try that will fix some games. Depending on the symptoms, the solution will be different. Here is a general guide:
+<ul>
+<li>Spinning in one direction or stuck in one view. Usually this is because the sensitivity is too high - turn it down.
+</li>
+
+<li>Unable to spin 360 degrees. The mouse cursor is probably hitting the edge of the screen (even though the cursor may be hidden), so GPC doesn't send any more mouse events to the application, and you get stuck. You may be able to decrease this effect by running the game at a higher screen resolution than you normally would.
+</li>
+
+<li>Jerky rotation and movement. With GPC, there isn't much you can do about this. What you need is GPC to generate more mouse events per second, each with smaller deltas.
+</li>
+
+</ul>
+
+
+<hr>
+<table width=50%>
+<tr align=center>
+	<td><a href=index.html>Home</a></td>
+	<td><a href=index.html#download>Download</a></td>
+	<td><a href=buy.html>Buy</a></td>
+	<td><a href=index.html#help>Get Help</a></td>
+	<td>FAQ</td>
+</tr>
+</table>
+</body>
+</html>

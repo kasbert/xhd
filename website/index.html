@@ -1,26 +1,75 @@
 <html>
-<head>
-<title>XBox HID Driver for Mac OS X</title>
-</head>
+	<head>
+		<title>Xbox HID Driver for Mac OS X</title>
+		<link rel=stylesheet type="text/css" href=xboxhid.css>
+	</head>
 <body>
 
-<h1>XBox HID Driver for Mac OS X (v1.0 - May 18, 2003)</h1>
+<table>
+<tr valign=center>
+	<td><image src="xbx-apple.jpg"></image></td>
+	<td><h1>Xbox HID Driver for Mac OS X</h1></td>
+</tr>
+</table>
+<table width=50%>
+<tr align=center>
+	<td>Home</td>
+	<td><a href=index.html#download>Download</a></td>
+	<td><a href=buy.html>Buy</a></td>
+	<td><a href=index.html#help>Get Help</a></td>
+	<td><a href=faq.html>FAQ</a></td>
+</tr>
+</table>
+<hr>
 <h2>About</h2>
-<p>This software enables the XBox USB gamepad on Mac OS X by installing a HID (Human Interface Device) kernel extension in the system extensions folder. It is completely free, with an optional donation to support future development. The source code is also included, and is subject to the <a href="http://www.opensource.apple.com/apsl/">Apple Public Source License</a>.<br>
-<p>While it currently only supports gamepads, this driver can be extended to support other XBox devices, including wheels, IR receivers, headsets, and memory units.
+<p>This software enables the Xbox USB gamepad, DVD remote, and other Xbox devices on Mac OS X. It installs a HID (Human Interface Device) kernel extension and works at a low-level so any game that supports joysticks can use it. Games that do not support joysticks can use Xbox devices through additional software such as <a href="http://www.carvware.com/gamepadcompanion.html">GamePad Companion</a>.
 
+<p>You can use the Xbox HID Driver as long as you want. However, the demo version will not allow you to customize the controllers after 30 days. You can register online for just $5 to remove the demo time limit.
+
+<p>The source code to the kernel extension component is included, and is subject to the <a href="http://www.opensource.apple.com/apsl/">Apple Public Source License (APSL)</a>. The driver can be extended to support additional Xbox devices, including wheels, IR receivers, headsets, and memory units. The full source code for other components may be released sometime in the future.
+
+<p>
+<h2>What's New in Version 1.2</h2>
+<ul>
+<li>Added preference pane to configure joystick behavior.</li>
+<li>Added support for multiple devices (each may have its own preferences)</li>
+<li>Added background application to load saved preferences when plugging in a device.</li>
+</ul>
+
+<h2>Requirements</h2>
+<ul>
+<li>Mac OS X 10.2.6 or later</li>
+<li>Xbox Controller with USB adapter (like <a href="controller+adapter.jpg">this</a>)</li>
+<li>Xbox DVD Remote with USB adapter</li>
+</ul>
+
+<a name=download></a>
 <h2>Download</h2>
 <p>Before you download, please note: this driver requires <b>Mac OS X 10.2.6 or later</b>, which was recently released, so make sure to upgrade. The download contains a detailed ReadMe with information about known bugs and limitations, which you should consult first before emailing me.
 
-<p><a href="XBoxHIDDriver.sit">Click Here to Download</a>
+<p><a href="XboxHIDDriver.sit">Click here to download the demo.</a>
+
+<a name=help></a>
+<h2>Getting Help</h2>
+
+<p>I'm maintaining an <a href="faq.html">FAQ</a> for common problems and help getting various games to work with the Xbox controller.
+
+<p>The download contains a detailed Readme which might help you.
+
+<p>Also, <a  href="http://www.lik-sang.com"><image src="lsi_button88x33_1.gif" border="0"></image><a> is hosting a forum where you can get help running your favorite game/application with Xbox devices, voice complaints, start a flame war about controller design, etc. Click <a href="http://forum.lik-sang.com/forumdisplay.php?s=&forumid=3&likref=macHID">here</a> to visit the forum.
+
+<p>There is also a <a href="http://www.insidemacgames.com/forum/viewtopic.php?t=9513&postdays=0&postorder=asc&start=0">forum</a> at <a href="www.insidemacgames.com">Inside Mac Games</a>.
+
+<h2>Getting a USB Adapter</h2>
+<p><a  href="http://www.lik-sang.com"><image src="lsi_button88x33_1.gif" border="0"></image><a> sells <a href="http://www.lik-sang.com/info.php?category=163&products_id=2701&likref=macHID">Xbox USB adapters</a> and controllers.
 
 <h2>Donations</h2>
-<p>Donations will be used to purchase additional XBox devices and gadgets, and motivate future updates and enhancements (calibration w/dead zones, rapid-fire buttons, invertable axes, 3rd-party controllers...).
+<p>Donations will be used to purchase additional Xbox devices and gadgets, and  will motivate future updates and enhancements (calibration w/dead zones, rapid-fire buttons, invertable axes, 3rd-party controllers...).
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_xclick">
 <input type="hidden" name="business" value="walisser@mac.com">
-<input type="hidden" name="item_name" value="XBox HID Driver">
+<input type="hidden" name="item_name" value="Xbox HID Driver">
 <input type="hidden" name="item_number" value="1">
 <input type="hidden" name="no_note" value="1">
 <input type="hidden" name="currency_code" value="USD">
@@ -28,5 +77,15 @@
 <input type="image" src="https://www.paypal.com/images/x-click-but21.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
 </form>
 
+<hr>
+<table width=50%>
+<tr align=center>
+	<td>Home</td>
+	<td><a href=index.html#download>Download</a></td>
+	<td><a href=buy.html>Buy</a></td>
+	<td><a href=index.html#help>Get Help</a></td>
+	<td><a href=faq.html>FAQ</a></td>
+</tr>
+</table>
 </body>
 </html>
