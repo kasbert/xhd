@@ -28,6 +28,23 @@ The Original Code and all software distributed under the License are distributed
                      ¥ property list keys for configuration and data
                      ¥ structures to abstract reports for remote and controller
                      ¥ enumerations for device type and remote control key map
+        06-16-2003 - version 1.2 beta changes
+                     ¥ moved property list keys into a DWXBoxHIDDriverKeys.h
+                     ¥ removed device type enumeration - use string instead
+                     ¥ new pad options:
+                        - bool InvertXAxis;
+                        - bool InvertRyAxis;
+                        - bool InvertRxAxis;
+                        - bool ClampButtons;
+                        - bool ClampLeftTrigger;
+                        - bool ClampRightTrigger;
+                        - UInt8 LeftTriggerThreshold;
+                        - UInt8 RightTriggerThreshold;
+                     ¥ new methods to handle prefs setting from user space
+                        - setProperties( OSObject * properties );
+                        - setDefaultOptions();
+                        - setupDevice();
+                    
     Background:
         This class is a modified IOUSBHIDDriver for use with XBox USB devices. I wanted to
         just subclass IOUSBHIDDriver, but because the XBox has no HID descriptor (or HID
