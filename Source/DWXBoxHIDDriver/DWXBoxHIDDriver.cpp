@@ -564,7 +564,7 @@ DWXBoxHIDDriver::setDefaultOptions()
         _xbDeviceOptions.pad.RightTriggerThreshold = 1;
         
         // create options dict and populate it with defaults
-        _xbDeviceOptionsDict = OSDictionary::withCapacity(8);
+        _xbDeviceOptionsDict = OSDictionary::withCapacity(9);
         if (_xbDeviceOptionsDict) {
         
             OSBoolean *boolean;
