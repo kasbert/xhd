@@ -14,6 +14,7 @@
 #import "DWAxisPairView.h"
 #import "DWButtonView.h"
 #import "DWDPadView.h"
+#import "Registrar.h"
 
 #define kTriggerAxisIndex 0
 #define kTriggerButtonIndex 1
@@ -74,6 +75,7 @@
         }
         else {
         
+            deviceNum = 0;
             icon = @"";
         }
         
@@ -170,6 +172,7 @@
 - (void)createNewConfigDidEnd:(NSWindow*)sheet returnCode:(int)returnCode 
     contextInfo:(void*)contextInfo
 {
+    [ _sheet close ];
     if (returnCode) {
     
         NSString *name = [ _askForNameTextField stringValue ];
@@ -196,6 +199,7 @@
 - (void)deleteConfigDidEnd:(NSWindow*)sheet returnCode:(int)returnCode 
     contextInfo:(void*)contextInfo
 {
+    [ _sheet close ];
     if (returnCode) {
     
         NSString *deleteName = [ _askForItemToDeletePopUp titleOfSelectedItem ];
@@ -480,7 +484,7 @@
 
 - (void)devicesPluggedOrUnplugged
 {
-    NSLog(@"device plugged or unplugged");
+    //NSLog(@"device plugged or unplugged");
     
     // should save anything we need to before reconfiguring,
     // but by now it's too late!
@@ -492,7 +496,7 @@
 
 - (void)deviceConfigDidChange:(id)anObject
 {
-    NSLog(@"device config changed");
+    // NSLog(@"device config changed");
     
     [ self buildConfigurationPopUpButton ];
     [ self configureInterface ];
@@ -529,6 +533,7 @@
         object:kDWDistributedNotificationsObject ];    
 }
 
+/*
 - (void)betaExpiredDidEnd:(NSWindow*)sheet returnCode:(int)returnCode 
     contextInfo:(void*)contextInfo
 {
@@ -543,16 +548,18 @@
 {
     BOOL expired = YES;
     
-    NSDate *date = [ NSDate date ];
-    NSTimeInterval interval;
     
-    interval = [ date timeIntervalSince1970 ];
-    interval += 60*60; // add 1 hour;
+    #if 0
+        NSDate *date = [ NSDate date ];
+        NSTimeInterval interval;
     
-    NSLog(@"%f", interval);
+        interval = [ date timeIntervalSince1970 ];
+        interval += 60*60*24*30; // add 30 days;
     
+        NSLog(@"%f", interval);
+    #endif
     
-    NSTimeInterval expireInterval = 1055796723.988571;
+    NSTimeInterval expireInterval = 1058402634.426905;
     NSDate *now = [ NSDate date ];
     NSDate *then = [ NSDate dateWithTimeIntervalSince1970:expireInterval ];
     
@@ -566,13 +573,289 @@
     
         _sheet = _betaExpiredWindow;
         [ NSApp beginSheet:_betaExpiredWindow 
-            modalForWindow:[ [ self mainView ] window ]
+            modalForWindow:[ NSApp mainWindow ]
             modalDelegate:self 
             didEndSelector:@selector(betaExpiredDidEnd:returnCode:contextInfo:)
             contextInfo:nil ];
     }
     
     return expired;
+}
+*/
+
+#pragma mark -- Registration Methods ----------------------
+
+// a hacked-up URI-escape routine
+- (NSString*)URIEscape:(NSString*)src
+{
+    NSMutableString *str = [ src mutableCopy ];
+    
+    #define numEscapies 5
+    const char* escapies[numEscapies] = {" ", "\n", "\t", ":", "\""}; // there are more, but I don't need them yet (RFC 2396)
+    
+    int i;
+    for (i = 0; i < numEscapies; i++) {
+    
+        while (1) {
+        
+            NSRange range = [ str rangeOfString:[ NSString stringWithCString:escapies[i]] ];
+            if (range.length != 0) {
+            
+                [ str replaceCharactersInRange:range withString: 
+                    [ NSString stringWithFormat:@"%%%.2X", escapies[i][0], nil ] ];
+            }
+            else {
+            
+                break;
+            }
+        }
+    }
+    
+    #undef numEscapies
+    
+    return str;
+}
+
+- (void)sendEmailTo:(NSString*)recipient withSubject:(NSString*)subject
+    withMessageBody:(NSString*)messageBody
+{
+    NSString *urlstr;
+    NSURL *url;
+        
+   urlstr =  [ NSString stringWithFormat:
+                @"mailto:%@?subject=%@&body=%@",
+                recipient,
+                [ self URIEscape:subject ], 
+                [ self URIEscape:messageBody ], nil ];
+    
+    url = [ NSURL URLWithString:urlstr ];
+     
+    [ [ NSWorkspace sharedWorkspace ] openURL:url ];
+}
+
+#define kRegKey @"org.walisser.DWXboxHIDDriver.RegKey"
+#define kHashKey @"org.walisser.DWXBoxHIDDriver.Hash"
+#define kPublicKey @"pubkey"
+#define kBuyPage @"http://homepage.mac.com/walisser/xboxhiddriver/buy.html"
+#define kRegistrationID @"org.walisser.XboxHIDDriver.Registration"
+
+- (void)thanksDialogDidEnd:(NSWindow*)sheet returnCode:(int)returnCode 
+    contextInfo:(void*)contextInfo
+{
+    [ _sheet close ];
+}
+
+- (void)doThanksDialog
+{
+    _sheet = _thanksWindow;
+    [ NSApp beginSheet:_sheet 
+        modalForWindow:[ NSApp mainWindow ]
+        modalDelegate:self 
+        didEndSelector:@selector(thanksDialogDidEnd:returnCode:contextInfo:)
+        contextInfo:nil ];
+}
+
+- (void)invalidCodeDialogDidEnd:(NSWindow*)sheet returnCode:(int)returnCode 
+    contextInfo:(void*)contextInfo
+{
+    [ _sheet close ];
+    
+    if (returnCode == 1) // try again
+        [ self performSelector:@selector(doEnterRegistrationDialog) ];
+    else
+    if (returnCode == 0) // give up
+        [ self performSelector:@selector(doDemoMessageDialog) ];
+}
+
+- (void)doInvalidCodeDialog
+{
+    _sheet = _invalidCodeWindow;
+    [ NSApp beginSheet:_sheet 
+        modalForWindow:[ NSApp mainWindow ]
+        modalDelegate:self 
+        didEndSelector:@selector(invalidCodeDialogDidEnd:returnCode:contextInfo:)
+        contextInfo:nil ];
+}
+
+- (void)codeExpiredDialogDidEnd:(NSWindow*)sheet returnCode:(int)returnCode 
+    contextInfo:(void*)contextInfo
+{
+    [ _sheet close ];
+    if (returnCode == 1)
+        [ self sendEmailTo:@"walisser@mac.com" withSubject:@"XBox HID Driver New Code Request"
+            withMessageBody:@"Please supply the following information so your new code can be sent out as soon as possible:\n\nYour Name: \n\nExpired Code: \n\nQuestions/Comments?:" ];
+    
+    [ self performSelector:@selector(doDemoMessageDialog) ];
+}
+
+- (void)doCodeExpiredDialog
+{
+    _sheet = _codeExpiredWindow;
+    [ NSApp beginSheet:_sheet 
+        modalForWindow:[ NSApp mainWindow ]
+        modalDelegate:self 
+        didEndSelector:@selector(codeExpiredDialogDidEnd:returnCode:contextInfo:)
+        contextInfo:nil ];
+}
+
+- (void)enterRegistrationDialogDidEnd:(NSWindow*)sheet returnCode:(int)returnCode 
+    contextInfo:(void*)contextInfo
+{
+    [ _sheet close ];
+    
+    NSString *regString = [ _registrationCodeTextField stringValue ];
+    NSString *outRegHash = nil;
+    
+    NSString *publicKeyFile = [ [ [ self bundle ] resourcePath ] 
+        stringByAppendingFormat:@"/%@", kPublicKey, nil ];
+    
+    if (publicKeyFile && regString) {
+    
+        RegistrationError err;
+        
+        err = [ Registrar checkRegistration:regString 
+            withPublicKeyFile:publicKeyFile inOutRegistrationHash:&outRegHash ];
+        
+        switch(err) {
+        case kRegistrationNoError:
+        {
+            NSUserDefaults *userDefaults = [ NSUserDefaults standardUserDefaults ]; 
+            NSMutableDictionary *defaults = [ NSMutableDictionary dictionary ];
+            [ defaults setObject:regString forKey:kRegKey ];
+            [ defaults setObject:outRegHash forKey:kHashKey ];
+            [ userDefaults setPersistentDomain:defaults forName:kRegistrationID ];
+            [ userDefaults synchronize ];
+            // unlock UI
+            _enable = YES;
+            [ self willSelect ];
+            [ self doThanksDialog ];
+            break;
+        }
+        case kRegistrationErrorNoPublicKey:
+        case kRegistrationCodeBadFormat:
+        case kRegistrationInvalidCode:
+            [ self doInvalidCodeDialog ];
+            break;
+        case kRegistrationCodeExpired:
+            [ self doCodeExpiredDialog ];
+            break;
+        }
+    }
+}
+
+- (void)doEnterRegistrationDialog
+{
+    _sheet = _enterCodeWindow;
+    [ NSApp beginSheet:_sheet 
+        modalForWindow:[ NSApp mainWindow ]
+        modalDelegate:self 
+        didEndSelector:@selector(enterRegistrationDialogDidEnd:returnCode:contextInfo:)
+        contextInfo:nil ];
+}
+
+- (void)demoMessageDialogDidEnd:(NSWindow*)sheet returnCode:(int)returnCode 
+    contextInfo:(void*)contextInfo
+{
+    [ _sheet close ];
+    
+    if (returnCode == 0) { // open URL
+    
+        NSURL *theURL = [ NSURL URLWithString:kBuyPage ];
+        [ [ NSWorkspace sharedWorkspace ] openURL:theURL ];
+    }
+    else
+    if (returnCode == 1) { // keep on truckin'
+    
+        return;
+    }
+    else
+    if (returnCode == 2) { // enter code
+    
+        [ self doEnterRegistrationDialog ];
+    }
+    else { // die, die, die!
+    
+        exit(-1);
+    }
+}
+
+- (void)doDemoMessageDialog
+{    
+    _sheet = _demoMessageWindow;
+     [ NSApp beginSheet:_sheet 
+        modalForWindow:[ NSApp mainWindow ]
+        modalDelegate:self 
+        didEndSelector:@selector(demoMessageDialogDidEnd:returnCode:contextInfo:)
+        contextInfo:nil ];
+}
+
+
+// check demo/registration, return if they're not allowed to use the app
+- (BOOL)checkDemoAndRegistration
+{
+    BOOL regError = YES;
+    
+    NSString *publicKeyFile = [ [ [ self bundle ] resourcePath ] 
+        stringByAppendingFormat:@"/%@", kPublicKey, nil ];
+    
+    NSUserDefaults *userDefaults = [ NSUserDefaults standardUserDefaults ];
+    [ userDefaults synchronize ];
+    NSDictionary *defaults = [ userDefaults persistentDomainForName:kRegistrationID ];
+    NSString *regString = [ defaults objectForKey:kRegKey ];
+    NSString *regHash   = [ defaults objectForKey:kHashKey ];
+    
+    if (publicKeyFile && regString && regHash) {
+    
+        RegistrationError err;
+        
+        err = [ Registrar checkRegistration:regString 
+            withPublicKeyFile:publicKeyFile inOutRegistrationHash:&regHash ];
+        
+        switch(err) {
+        case kRegistrationNoError: 
+            regError = NO; 
+            break;
+        default:    
+            break;
+        }
+    }
+    
+    if (regError) {
+    
+        NSTimeInterval demoStamp = [ Registrar readSecretTimestamp:@"com.apple.Finder" ];
+    
+        NSTimeInterval now = [ [ NSDate date ] timeIntervalSince1970 ];
+        
+        if ((now - demoStamp) < (60*60*24*30))
+            regError = NO;
+        
+        int daysLeft = 30 - ((now - demoStamp)/60/60/24);
+        if (daysLeft < 0)
+            daysLeft = 0;
+    
+        NSString *message;
+        
+            if (daysLeft > 0)
+                message = [ NSString stringWithFormat:
+                    @"You have %d more %@ to try this software. %@",
+                    daysLeft,
+                    daysLeft > 1 ? @"days" : @"day",
+                    @"After that, you won't be able to change the controller settings.",
+                    nil ];
+            else
+                message = @"Unfortunately, the 30-day demo has expired. The driver will continue to work but you won't be able to customize settings." ;
+                
+        NSMutableString *str = [ [ _demoMessageText stringValue ] mutableCopy ];
+        NSRange range = [ str rangeOfString:@"$TIME_MESSAGE$" ];
+        if (range.length > 0)
+            [ str replaceCharactersInRange:range withString:message ];
+        
+        [ _demoMessageText setStringValue:str ];
+        
+        [ self doDemoMessageDialog ];
+    }
+    
+    return regError;
 }
 
 #pragma mark -- NSPreferencesPane Methods ----------------
@@ -589,8 +872,18 @@
 */
 - (void)mainViewDidLoad
 {
-    // install view visibility hack
-    //[ DWInvisibleNSView install ];
+    if ([ self checkDemoAndRegistration ]) {
+        
+        [ self showLargeError:@"Demo has expired." ];
+        [ self disableConfigPopUpButton ];
+        [ self clearDevicesPopUpButton ];
+    
+        _enable = NO;
+    }
+    else
+    {
+        _enable = YES;
+    }
 
 }
 
@@ -601,13 +894,7 @@
 
 - (void)willSelect
 {
-    if ([ self checkBetaExpired ] ) {
-    
-        [ self showLargeError:@"Beta has expired." ];
-        [ self disableConfigPopUpButton ];
-        [ self clearDevicesPopUpButton ];
-    }
-    else {
+    if (_enable) {
         [ self configureInterface ];
         [ self registerForNotifications ];
         [ self startHIDDeviceInput ];
@@ -674,17 +961,19 @@
     [ DWXBoxHIDPrefsLoader saveConfigForDevice:device ];
 }
 
-
 - (IBAction)endModalSessionOK:(id)sender
 {
     [ NSApp endSheet:_sheet returnCode:1 ];
-    [ _sheet close ];
 }
 
 - (IBAction)endModalSessionCancel:(id)sender
 {
     [ NSApp endSheet:_sheet returnCode:0 ];
-    [ _sheet close ];
+}
+
+- (IBAction)endModalSessionAlt:(id)sender
+{
+    [ NSApp endSheet:_sheet returnCode:2 ];
 }
 
 @end

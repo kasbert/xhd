@@ -55,10 +55,20 @@
     // beta expire
     IBOutlet id _betaExpiredWindow;
     
+    // registration
+    IBOutlet id _demoMessageWindow;
+    IBOutlet id _enterCodeWindow;
+    IBOutlet id _codeExpiredWindow;
+    IBOutlet id _invalidCodeWindow;
+    IBOutlet id _thanksWindow;
+    IBOutlet id _registrationCodeTextField;
+    IBOutlet id _demoMessageText;
+    
     NSArray *_devices;
     DWXBoxHIDNotifier *_notifier;
     NSTimer *_timer;
     NSWindow *_sheet;
+    BOOL _enable;
 }
 
 - (IBAction)selectDevice:(id)sender;
@@ -71,5 +81,6 @@
 
 - (IBAction)endModalSessionOK:(id)sender;
 - (IBAction)endModalSessionCancel:(id)sender;
+- (IBAction)endModalSessionAlt:(id)sender;
 
 @end
