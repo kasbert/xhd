@@ -16,7 +16,7 @@
 
 #define kConfigNameDefault @"Default"
 
-#define kDefaultsSuiteIdentifier @"org.walisser.DWXBoxHIDDriver"
+#define kDefaultsSuiteIdentifier @"org.walisser.XboxHIDDriver"
 
 @implementation DWXBoxHIDPrefsLoader
 
