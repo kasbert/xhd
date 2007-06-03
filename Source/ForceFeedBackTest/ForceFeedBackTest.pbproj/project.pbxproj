@@ -140,6 +140,7 @@
 			children = (
 				080E96DDFE201D6D7F000001,
 				29B97315FDCFA39411CA2CEA,
+				B2BC8C4404859D9300A80002,
 				29B97317FDCFA39411CA2CEA,
 				29B97323FDCFA39411CA2CEA,
 				19C28FACFE9D520D11CA2CBB,
@@ -273,6 +274,7 @@
 			files = (
 				32CA4F650368D2AA00C91783,
 				B2B0592A047DA23200A80002,
+				B2BC8C4304859D8400A80002,
 			);
 			isa = PBXHeadersBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -421,6 +423,28 @@
 			isa = PBXBuildFile;
 			settings = {
 			};
+		};
+		B2BC8C4204859D8400A80002 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			name = DWXBoxHIDDriverKeys.h;
+			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/DWXBoxHIDDriver/DWXBoxHIDDriverKeys.h;
+			refType = 0;
+		};
+		B2BC8C4304859D8400A80002 = {
+			fileRef = B2BC8C4204859D8400A80002;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		B2BC8C4404859D9300A80002 = {
+			children = (
+				B2BC8C4204859D8400A80002,
+			);
+			isa = PBXGroup;
+			name = "External Sources";
+			path = "";
+			refType = 4;
 		};
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA;

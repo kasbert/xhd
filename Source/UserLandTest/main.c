@@ -423,7 +423,7 @@ IOReturn FindInterfaces(IOUSBDeviceInterface **dev)
         kr = (*intf)->ReadPipeAsync(intf, 1, gBuffer, sizeof(gBuffer), ReadCompletion, (void *) intf);
         if (kIOReturnSuccess != kr)
         {
-            printf("unable to do async bulk write (%08x)\n", kr);
+            printf("unable to do async bulk read (%08x)\n", kr);
             (void) (*intf)->USBInterfaceClose(intf);
             (void) (*intf)->Release(intf);
             break;
@@ -661,9 +661,109 @@ void SignalHandler(int sigraised)
     _exit(0);
 }
 
+void listDevices()
+{
+	mach_port_t 		masterPort;
+    CFMutableDictionaryRef 	matchingDict;
+
+	kern_return_t		kr;
+	
+	SInt32	usbInterfaceClass = 88;
+	SInt32	usbInterfaceSubClass = 66;
+	SInt32  usbInterfaceProtocol = 0;
+
+
+	io_iterator_t	devices = 0;
+	io_object_t     device  = 0;
+	
+	 // first create a master_port for my task
+    kr = IOMasterPort(MACH_PORT_NULL, &masterPort);
+    if (kr || !masterPort)
+    {
+        printf("ERR: Couldn't create a master IOKit Port(%08x)\n", kr);
+        return;
+    }
+
+    //printf("Looking for devices matching vendor ID=%ld and product ID=%ld\n", usbVendor, usbProduct);
+
+    // Set up the matching criteria for the devices we're interested in
+    matchingDict = IOServiceMatching("IOUSBInterface");	// Interested in instances of class IOUSBDevice and its subclasses
+    if (!matchingDict)
+    {
+        printf("Can't create a USB matching dictionary\n");
+        mach_port_deallocate(mach_task_self(), masterPort);
+        return;
+    }
+	
+	
+	CFDictionarySetValue( 
+            matchingDict, 
+            CFSTR(kUSBInterfaceClass), 
+            CFNumberCreate(kCFAllocatorDefault, kCFNumberSInt32Type, &usbInterfaceClass));
+
+    
+	CFDictionarySetValue( 
+            matchingDict, 
+            CFSTR(kUSBInterfaceSubClass), 
+            CFNumberCreate(kCFAllocatorDefault, kCFNumberSInt32Type, &usbInterfaceSubClass));
+	
+	
+	CFDictionarySetValue( 
+            matchingDict, 
+            CFSTR(kUSBInterfaceProtocol), 
+            CFNumberCreate(kCFAllocatorDefault, kCFNumberSInt32Type, &usbInterfaceProtocol));
+
+
+	kr = IOServiceGetMatchingServices (masterPort, matchingDict, &devices);
+	if (kIOReturnSuccess != kr)
+	{
+		printf("Couldn't get object iterator\n");
+		return;
+	}
+	
+	
+	if (0 == devices)
+	{
+		printf("No devices found\n");
+		return;
+	}
+	
+	while (device = IOIteratorNext(devices))
+	{
+		io_name_t	className;
+		
+		IOObjectGetClass(device, className);
+		
+		printf("Device: %s\n", className);
+	
+		CFMutableDictionaryRef ioRegistryProperties = 0; 
+
+		// get the ioregistry properties
+		if (kIOReturnSuccess != 
+			IORegistryEntryCreateCFProperties(
+				device,
+				&ioRegistryProperties,
+				kCFAllocatorDefault,
+				0))
+			continue;
+
+		if (!ioRegistryProperties)
+			continue;
+			
+		CFShow(ioRegistryProperties);
+		
+		
+
+	}
+}
+
+
 int main (int argc, const char *argv[])
 {
-    mach_port_t 		masterPort;
+	listDevices();
+	
+/*	
+	mach_port_t 		masterPort;
     CFMutableDictionaryRef 	matchingDict;
     CFRunLoopSourceRef		runLoopSource;
     kern_return_t		kr;
@@ -671,15 +771,26 @@ int main (int argc, const char *argv[])
     SInt32			usbProduct = kOurProductID;
     sig_t			oldHandler;
     
+	
+	
+	io_iterator_t devices = NULL;
+	
     // pick up command line arguments
     if (argc > 1)
         usbVendor = atoi(argv[1]);
     if (argc > 2)
         usbProduct = atoi(argv[2]);
 
-    usbVendor = 0x045E; // microsoft
+    
+    usbVendor = 1118;
+    usbProduct = 643;
+    
+    //usbVendor = 0x0D2F;
+    //usbProduct = 0x0001;
+    
+    //usbVendor = 0x045E; // microsoft
     //usbProduct = 0x0202; // ms large controller
-    usbProduct = 0x0284; // ms dvd remote
+    //usbProduct = 0x0284; // ms dvd remote
     
     // Set up a signal handler so we can clean up when we're interrupted from the command line
     // Otherwise we stay in our run loop forever.
@@ -707,16 +818,23 @@ int main (int argc, const char *argv[])
     }
     
     // Add our vendor and product IDs to the matching criteria
-    CFDictionarySetValue( 
+ 
+   CFDictionarySetValue( 
             matchingDict, 
             CFSTR(kUSBVendorID), 
             CFNumberCreate(kCFAllocatorDefault, kCFNumberSInt32Type, &usbVendor)); 
-    CFDictionarySetValue( 
+    
+	
+	CFDictionarySetValue( 
             matchingDict, 
             CFSTR(kUSBProductID), 
             CFNumberCreate(kCFAllocatorDefault, kCFNumberSInt32Type, &usbProduct)); 
 
-    // Create a notification port and add its run loop event source to our run loop
+    
+	
+	
+	
+	// Create a notification port and add its run loop event source to our run loop
     // This is how async notifications get set up.
     gNotifyPort = IONotificationPortCreate(masterPort);
     runLoopSource = IONotificationPortGetRunLoopSource(gNotifyPort);
@@ -788,7 +906,7 @@ int main (int argc, const char *argv[])
 
     // Start the run loop. Now we'll receive notifications.
     CFRunLoopRun();
-        
+*/        
     // We should never get here
     return 0;
 }

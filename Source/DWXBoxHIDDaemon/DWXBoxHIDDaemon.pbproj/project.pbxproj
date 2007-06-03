@@ -3,25 +3,28 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 38;
+	objectVersion = 39;
 	objects = {
 		014CEA4F0018CE4811CA2923 = {
-			buildRules = (
-			);
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				OPTIMIZATION_CFLAGS = "-O0";
+				ZERO_LINK = YES;
 			};
 			isa = PBXBuildStyle;
 			name = Development;
 		};
 		014CEA500018CE4811CA2923 = {
-			buildRules = (
-			);
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				DEBUGGING_SYMBOLS = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				OPTIMIZATION_CFLAGS = "-Os";
+				ZERO_LINK = NO;
 			};
 			isa = PBXBuildStyle;
 			name = Deployment;
@@ -37,9 +40,11 @@
 //033
 //034
 		034768E6FF38A76511DB9C8B = {
-			isa = PBXExecutableFileReference;
+			explicitFileType = "compiled.mach-o.executable";
+			isa = PBXFileReference;
 			path = XboxHIDDaemon;
 			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 //030
 //031
@@ -52,6 +57,8 @@
 //083
 //084
 		08FB7793FE84155DC02AAC07 = {
+			buildSettings = {
+			};
 			buildStyles = (
 				014CEA4F0018CE4811CA2923,
 				014CEA500018CE4811CA2923,
@@ -77,6 +84,7 @@
 			isa = PBXGroup;
 			name = DWXBoxHIDDaemon;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		08FB7795FE84155DC02AAC07 = {
 			children = (
@@ -89,12 +97,15 @@
 			isa = PBXGroup;
 			name = Source;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		08FB7796FE84155DC02AAC07 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = daemon.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		08FB779DFE84155DC02AAC07 = {
 			children = (
@@ -105,12 +116,15 @@
 			isa = PBXGroup;
 			name = "External Frameworks and Libraries";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		08FB779EFE84155DC02AAC07 = {
-			isa = PBXFrameworkReference;
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
 			name = Foundation.framework;
 			path = /System/Library/Frameworks/Foundation.framework;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		08FB779FFE84155DC02AAC07 = {
 			buildPhases = (
@@ -212,6 +226,7 @@
 			isa = PBXGroup;
 			name = Products;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 //1A0
 //1A1
@@ -226,8 +241,10 @@
 		32A70AAB03705E1F00C91783 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = DWXBoxHIDDaemon_Prefix.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		32A70AAC03705E1F00C91783 = {
 			fileRef = 32A70AAB03705E1F00C91783;
@@ -300,15 +317,19 @@
 			productReference = B21CAEFD049E3BC200A80002;
 		};
 		B21CAEFD049E3BC200A80002 = {
-			isa = PBXExecutableFileReference;
+			explicitFileType = "compiled.mach-o.executable";
+			isa = PBXFileReference;
 			path = installLoginItem;
 			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		B21CAEFF049E3BEB00A80002 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = installLoginItem.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B21CAF01049E3F5300A80002 = {
 			fileRef = B21CAEFF049E3BEB00A80002;
@@ -322,11 +343,20 @@
 			settings = {
 			};
 		};
+		B2865C6307C8FE2000F5B613 = {
+			containerPortal = 08FB7793FE84155DC02AAC07;
+			isa = PBXContainerItemProxy;
+			proxyType = 1;
+			remoteGlobalIDString = 08FB779FFE84155DC02AAC07;
+			remoteInfo = DWXBoxHIDDaemon;
+		};
 		B28D2D6B04892F7500A80002 = {
-			isa = PBXFrameworkReference;
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
 			name = IOKit.framework;
 			path = /System/Library/Frameworks/IOKit.framework;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		B28D2D6C04892F7500A80002 = {
 			fileRef = B28D2D6B04892F7500A80002;
@@ -337,16 +367,20 @@
 		B292527B049A586F00A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			name = DWXBoxHIDPrefsLoader.h;
 			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/DWXBoxHIDDriver/DWXBoxHIDPrefsLoader.h;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		B292527C049A586F00A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			name = DWXBoxHIDPrefsLoader.m;
 			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/DWXBoxHIDDriver/DWXBoxHIDPrefsLoader.m;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		B292527D049A586F00A80002 = {
 			fileRef = B292527B049A586F00A80002;
@@ -371,20 +405,25 @@
 			name = "External Source";
 			path = "";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2925280049A590500A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			name = DWXBoxHIDDriverInterface.h;
 			path = ../DWXBoxHIDDriver/DWXBoxHIDDriverInterface.h;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		B2925281049A590500A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			name = DWXBoxHIDDriverInterface.m;
 			path = ../DWXBoxHIDDriver/DWXBoxHIDDriverInterface.m;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		B2925282049A590500A80002 = {
 			fileRef = B2925280049A590500A80002;
@@ -400,8 +439,10 @@
 		};
 		B2C41AA304AE587A00A80002 = {
 			isa = PBXFileReference;
+			lastKnownFileType = image.icns;
 			path = xboxhid.icns;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		B2C41AA404AE587A00A80002 = {
 			fileRef = B2C41AA304AE587A00A80002;
@@ -511,21 +552,27 @@
 ";
 		};
 		B2FCEA27049CEE6F00A80002 = {
-			isa = PBXApplicationReference;
+			explicitFileType = wrapper.application;
+			isa = PBXFileReference;
 			path = XboxHIDDaemonLauncher.app;
 			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		B2FCEA29049CEEA700A80002 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = DWXBoxHIDDaemonLauncher.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2FCEA2A049CEEA700A80002 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = DWXBoxHIDDaemonLauncher.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2FCEA2D049CEEB100A80002 = {
 			fileRef = B2FCEA2A049CEEA700A80002;
@@ -548,6 +595,7 @@
 			name = Resources;
 			path = "";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2FCEA33049CEF7500A80002 = {
 			fileRef = 08FB779EFE84155DC02AAC07;
@@ -556,10 +604,12 @@
 			};
 		};
 		B2FCEA34049CEF8E00A80002 = {
-			isa = PBXFrameworkReference;
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
 			name = Cocoa.framework;
 			path = /System/Library/Frameworks/Cocoa.framework;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		B2FCEA35049CEF8E00A80002 = {
 			fileRef = B2FCEA34049CEF8E00A80002;
@@ -569,8 +619,10 @@
 		};
 		B2FCEA39049CF0C100A80002 = {
 			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
 			path = mainMenu.nib;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2FCEA3A049CF0C100A80002 = {
 			fileRef = B2FCEA39049CF0C100A80002;
@@ -581,6 +633,7 @@
 		B2FCEA3D049CF25500A80002 = {
 			isa = PBXTargetDependency;
 			target = 08FB779FFE84155DC02AAC07;
+			targetProxy = B2865C6307C8FE2000F5B613;
 		};
 		B2FCEA3E049CF26500A80002 = {
 			buildActionMask = 2147483647;
