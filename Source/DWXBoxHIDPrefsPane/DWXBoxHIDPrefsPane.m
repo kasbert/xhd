@@ -1,3 +1,21 @@
+/*
+    This file is part of the Xbox HID Driver, Copyright (c) 2007 Darrell Walisser
+    walisser@mac.com http://sourceforge.net/projects/xhd
+
+    The Xbox HID Driver is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    The Xbox HID Driver is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with the Xbox HID Driver; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 //
 //  DWXBoxHIDPrefsPane.m
 //  DWXBoxHIDPrefsPane
@@ -14,7 +32,7 @@
 #import "DWAxisPairView.h"
 #import "DWButtonView.h"
 #import "DWDPadView.h"
-#import "Registrar.h"
+//#import "Registrar.h"
 
 #define kTriggerAxisIndex 0
 #define kTriggerButtonIndex 1
@@ -583,7 +601,63 @@
 }
 */
 
+
+- (void)patchIntroDialogDidEnd:(NSWindow*)sheet returnCode:(int)returnCode 
+    contextInfo:(void*)contextInfo
+{
+	[ _sheet close ];
+	if (returnCode)
+	{
+		if (0 < [ self scanForDevices ])
+		{
+			_sheet = _patcherUIWindow;
+			[ NSApp beginSheet:_sheet 
+				modalForWindow:[ NSApp mainWindow ]
+				modalDelegate:self 
+				didEndSelector:@selector(patchUIDialogDidEnd:returnCode:contextInfo:)
+				contextInfo:nil ];
+		}
+		else
+		{
+			_sheet = _patcherNoDevicesWindow;
+			[ NSApp beginSheet:_sheet 
+				modalForWindow:[ NSApp mainWindow ]
+				modalDelegate:self 
+				didEndSelector:@selector(patchUIDialogDidEnd:returnCode:contextInfo:)
+				contextInfo:nil ];
+		}
+	
+	}
+}
+
+- (void)patchUIDialogDidEnd:(NSWindow*)sheet returnCode:(int)returnCode 
+    contextInfo:(void*)contextInfo
+{
+	[ _sheet close ];
+
+}
+
+- (int)scanForDevices
+{
+	int numDevices = 0;
+
+
+	return numDevices;
+}
+
+- (void)getVersion
+{
+	NSBundle* b = [ NSBundle bundleWithIdentifier:@"org.walisser.XBoxHIDDriver" ];
+	
+	NSString* version = [ [ b infoDictionary ] objectForKey:@"CFBundleShortVersionString" ];
+	
+	[ _versionText setStringValue:version ];
+}
+
 #pragma mark -- Registration Methods ----------------------
+
+// registration stuff has been removed, I kept some interesting bits
+//
 
 // a hacked-up URI-escape routine
 - (NSString*)URIEscape:(NSString*)src
@@ -633,230 +707,7 @@
     [ [ NSWorkspace sharedWorkspace ] openURL:url ];
 }
 
-#define kRegKey @"org.walisser.DWXboxHIDDriver.RegKey"
-#define kHashKey @"org.walisser.DWXBoxHIDDriver.Hash"
-#define kPublicKey @"pubkey"
-#define kBuyPage @"http://homepage.mac.com/walisser/xboxhiddriver/buy.html"
-#define kRegistrationID @"org.walisser.XboxHIDDriver.Registration"
-
-- (void)thanksDialogDidEnd:(NSWindow*)sheet returnCode:(int)returnCode 
-    contextInfo:(void*)contextInfo
-{
-    [ _sheet close ];
-}
-
-- (void)doThanksDialog
-{
-    _sheet = _thanksWindow;
-    [ NSApp beginSheet:_sheet 
-        modalForWindow:[ NSApp mainWindow ]
-        modalDelegate:self 
-        didEndSelector:@selector(thanksDialogDidEnd:returnCode:contextInfo:)
-        contextInfo:nil ];
-}
-
-- (void)invalidCodeDialogDidEnd:(NSWindow*)sheet returnCode:(int)returnCode 
-    contextInfo:(void*)contextInfo
-{
-    [ _sheet close ];
-    
-    if (returnCode == 1) // try again
-        [ self performSelector:@selector(doEnterRegistrationDialog) ];
-    else
-    if (returnCode == 0) // give up
-        [ self performSelector:@selector(doDemoMessageDialog) ];
-}
-
-- (void)doInvalidCodeDialog
-{
-    _sheet = _invalidCodeWindow;
-    [ NSApp beginSheet:_sheet 
-        modalForWindow:[ NSApp mainWindow ]
-        modalDelegate:self 
-        didEndSelector:@selector(invalidCodeDialogDidEnd:returnCode:contextInfo:)
-        contextInfo:nil ];
-}
-
-- (void)codeExpiredDialogDidEnd:(NSWindow*)sheet returnCode:(int)returnCode 
-    contextInfo:(void*)contextInfo
-{
-    [ _sheet close ];
-    if (returnCode == 1)
-        [ self sendEmailTo:@"walisser@mac.com" withSubject:@"XBox HID Driver New Code Request"
-            withMessageBody:@"Please supply the following information so your new code can be sent out as soon as possible:\n\nYour Name: \n\nExpired Code: \n\nQuestions/Comments?:" ];
-    
-    [ self performSelector:@selector(doDemoMessageDialog) ];
-}
-
-- (void)doCodeExpiredDialog
-{
-    _sheet = _codeExpiredWindow;
-    [ NSApp beginSheet:_sheet 
-        modalForWindow:[ NSApp mainWindow ]
-        modalDelegate:self 
-        didEndSelector:@selector(codeExpiredDialogDidEnd:returnCode:contextInfo:)
-        contextInfo:nil ];
-}
-
-- (void)enterRegistrationDialogDidEnd:(NSWindow*)sheet returnCode:(int)returnCode 
-    contextInfo:(void*)contextInfo
-{
-    [ _sheet close ];
-    
-    NSString *regString = [ _registrationCodeTextField stringValue ];
-    NSString *outRegHash = nil;
-    
-    NSString *publicKeyFile = [ [ [ self bundle ] resourcePath ] 
-        stringByAppendingFormat:@"/%@", kPublicKey, nil ];
-    
-    if (publicKeyFile && regString) {
-    
-        RegistrationError err;
-        
-        err = [ Registrar checkRegistration:regString 
-            withPublicKeyFile:publicKeyFile inOutRegistrationHash:&outRegHash ];
-        
-        switch(err) {
-        case kRegistrationNoError:
-        {
-            NSUserDefaults *userDefaults = [ NSUserDefaults standardUserDefaults ]; 
-            NSMutableDictionary *defaults = [ NSMutableDictionary dictionary ];
-            [ defaults setObject:regString forKey:kRegKey ];
-            [ defaults setObject:outRegHash forKey:kHashKey ];
-            [ userDefaults setPersistentDomain:defaults forName:kRegistrationID ];
-            [ userDefaults synchronize ];
-            // unlock UI
-            _enable = YES;
-            [ self willSelect ];
-            [ self doThanksDialog ];
-            break;
-        }
-        case kRegistrationErrorNoPublicKey:
-        case kRegistrationCodeBadFormat:
-        case kRegistrationInvalidCode:
-            [ self doInvalidCodeDialog ];
-            break;
-        case kRegistrationCodeExpired:
-            [ self doCodeExpiredDialog ];
-            break;
-        }
-    }
-}
-
-- (void)doEnterRegistrationDialog
-{
-    _sheet = _enterCodeWindow;
-    [ NSApp beginSheet:_sheet 
-        modalForWindow:[ NSApp mainWindow ]
-        modalDelegate:self 
-        didEndSelector:@selector(enterRegistrationDialogDidEnd:returnCode:contextInfo:)
-        contextInfo:nil ];
-}
-
-- (void)demoMessageDialogDidEnd:(NSWindow*)sheet returnCode:(int)returnCode 
-    contextInfo:(void*)contextInfo
-{
-    [ _sheet close ];
-    
-    if (returnCode == 0) { // open URL
-    
-        NSURL *theURL = [ NSURL URLWithString:kBuyPage ];
-        [ [ NSWorkspace sharedWorkspace ] openURL:theURL ];
-    }
-    else
-    if (returnCode == 1) { // keep on truckin'
-    
-        return;
-    }
-    else
-    if (returnCode == 2) { // enter code
-    
-        [ self doEnterRegistrationDialog ];
-    }
-    else { // die, die, die!
-    
-        exit(-1);
-    }
-}
-
-- (void)doDemoMessageDialog
-{    
-    _sheet = _demoMessageWindow;
-     [ NSApp beginSheet:_sheet 
-        modalForWindow:[ NSApp mainWindow ]
-        modalDelegate:self 
-        didEndSelector:@selector(demoMessageDialogDidEnd:returnCode:contextInfo:)
-        contextInfo:nil ];
-}
-
-
-// check demo/registration, return if they're not allowed to use the app
-- (BOOL)checkDemoAndRegistration
-{
-    BOOL regError = YES;
-    
-    NSString *publicKeyFile = [ [ [ self bundle ] resourcePath ] 
-        stringByAppendingFormat:@"/%@", kPublicKey, nil ];
-    
-    NSUserDefaults *userDefaults = [ NSUserDefaults standardUserDefaults ];
-    [ userDefaults synchronize ];
-    NSDictionary *defaults = [ userDefaults persistentDomainForName:kRegistrationID ];
-    NSString *regString = [ defaults objectForKey:kRegKey ];
-    NSString *regHash   = [ defaults objectForKey:kHashKey ];
-    
-    if (publicKeyFile && regString && regHash) {
-    
-        RegistrationError err;
-        
-        err = [ Registrar checkRegistration:regString 
-            withPublicKeyFile:publicKeyFile inOutRegistrationHash:&regHash ];
-        
-        switch(err) {
-        case kRegistrationNoError: 
-            regError = NO; 
-            break;
-        default:    
-            break;
-        }
-    }
-    
-    if (regError) {
-    
-        NSTimeInterval demoStamp = [ Registrar readSecretTimestamp:@"com.apple.Finder" ];
-    
-        NSTimeInterval now = [ [ NSDate date ] timeIntervalSince1970 ];
-        
-        if ((now - demoStamp) < (60*60*24*30))
-            regError = NO;
-        
-        int daysLeft = 30 - ((now - demoStamp)/60/60/24);
-        if (daysLeft < 0)
-            daysLeft = 0;
-    
-        NSString *message;
-        
-            if (daysLeft > 0)
-                message = [ NSString stringWithFormat:
-                    @"You have %d more %@ to try this software. %@",
-                    daysLeft,
-                    daysLeft > 1 ? @"days" : @"day",
-                    @"After that, you won't be able to change the controller settings.",
-                    nil ];
-            else
-                message = @"Unfortunately, the 30-day demo has expired. The driver will continue to work but you won't be able to customize settings." ;
-                
-        NSMutableString *str = [ [ _demoMessageText stringValue ] mutableCopy ];
-        NSRange range = [ str rangeOfString:@"$TIME_MESSAGE$" ];
-        if (range.length > 0)
-            [ str replaceCharactersInRange:range withString:message ];
-        
-        [ _demoMessageText setStringValue:str ];
-        
-        [ self doDemoMessageDialog ];
-    }
-    
-    return regError;
-}
+/* registration stuff removed */
 
 #pragma mark -- NSPreferencesPane Methods ----------------
 
@@ -872,7 +723,9 @@
 */
 - (void)mainViewDidLoad
 {
-    if ([ self checkDemoAndRegistration ]) {
+ /* disable registration stuff
+ 
+	   if ([ self checkDemoAndRegistration ]) {
         
         [ self showLargeError:@"Demo has expired." ];
         [ self disableConfigPopUpButton ];
@@ -884,6 +737,8 @@
     {
         _enable = YES;
     }
+*/
+	_enable = YES;
 
 }
 
@@ -898,6 +753,7 @@
         [ self configureInterface ];
         [ self registerForNotifications ];
         [ self startHIDDeviceInput ];
+		[ self getVersion ];
     }
 }
 
@@ -960,6 +816,17 @@
     // save the current config
     [ DWXBoxHIDPrefsLoader saveConfigForDevice:device ];
 }
+
+- (IBAction)locateDevices:(id)sender
+{
+	_sheet = _patcherIntroWindow;
+	[ NSApp beginSheet:_sheet 
+        modalForWindow:[ NSApp mainWindow ]
+        modalDelegate:self 
+        didEndSelector:@selector(patchIntroDialogDidEnd:returnCode:contextInfo:)
+        contextInfo:nil ];
+}
+
 
 - (IBAction)endModalSessionOK:(id)sender
 {

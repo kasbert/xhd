@@ -3,30 +3,35 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 38;
+	objectVersion = 39;
 	objects = {
 		014CEA410018CDE011CA2923 = {
-			isa = PBXBundleReference;
+			explicitFileType = wrapper.cfbundle;
+			isa = PBXFileReference;
 			path = XboxHIDPrefsPane.prefPane;
 			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		014CEA420018CDE011CA2923 = {
-			buildRules = (
-			);
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				OPTIMIZATION_CFLAGS = "-O0";
+				ZERO_LINK = YES;
 			};
 			isa = PBXBuildStyle;
 			name = Development;
 		};
 		014CEA430018CDE011CA2923 = {
-			buildRules = (
-			);
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				DEBUGGING_SYMBOLS = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				OPTIMIZATION_CFLAGS = "-Os";
+				ZERO_LINK = NO;
 			};
 			isa = PBXBuildStyle;
 			name = Deployment;
@@ -42,6 +47,8 @@
 //083
 //084
 		089C1669FE841209C02AAC07 = {
+			buildSettings = {
+			};
 			buildStyles = (
 				014CEA420018CDE011CA2923,
 				014CEA430018CDE011CA2923,
@@ -66,6 +73,7 @@
 			isa = PBXGroup;
 			name = DWXBoxHIDPrefsPane;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		089C1671FE841209C02AAC07 = {
 			children = (
@@ -76,12 +84,15 @@
 			isa = PBXGroup;
 			name = "Frameworks and Libraries";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		089C1672FE841209C02AAC07 = {
-			isa = PBXFrameworkReference;
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
 			name = Foundation.framework;
 			path = /System/Library/Frameworks/Foundation.framework;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		089C1673FE841209C02AAC07 = {
 			buildPhases = (
@@ -133,11 +144,11 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>v1.2</string>
+	<string>v1.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.2</string>
+	<string>1.3</string>
 	<key>NSMainNibFile</key>
 	<string>PrefsPane</string>
 	<key>NSPrefPaneIconFile</key>
@@ -239,6 +250,7 @@
 			isa = PBXGroup;
 			name = Resources;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		089C167DFE841241C02AAC07 = {
 			children = (
@@ -247,19 +259,24 @@
 			isa = PBXVariantGroup;
 			name = InfoPlist.strings;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		089C167EFE841241C02AAC07 = {
 			fileEncoding = 10;
 			isa = PBXFileReference;
+			lastKnownFileType = text.plist.strings;
 			name = English;
 			path = English.lproj/InfoPlist.strings;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		089C167FFE841241C02AAC07 = {
-			isa = PBXFrameworkReference;
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
 			name = AppKit.framework;
 			path = /System/Library/Frameworks/AppKit.framework;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		08FB77AFFE84173DC02AAC07 = {
 			children = (
@@ -283,12 +300,15 @@
 			isa = PBXGroup;
 			name = Classes;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		08FB77B6FE84183AC02AAC07 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.c;
 			path = main.c;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		08FB77B7FE84183AC02AAC07 = {
 			fileRef = 08FB77B6FE84183AC02AAC07;
@@ -317,12 +337,15 @@
 			isa = PBXGroup;
 			name = "Linked Frameworks";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1058C7ADFEA557BF11CA2CBB = {
-			isa = PBXFrameworkReference;
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
 			name = Cocoa.framework;
 			path = /System/Library/Frameworks/Cocoa.framework;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		1058C7AEFEA557BF11CA2CBB = {
 			children = (
@@ -332,6 +355,7 @@
 			isa = PBXGroup;
 			name = "Other Frameworks";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		1058C7AFFEA557BF11CA2CBB = {
 			fileRef = 1058C7ADFEA557BF11CA2CBB;
@@ -356,6 +380,7 @@
 			isa = PBXGroup;
 			name = Products;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 //190
 //191
@@ -375,12 +400,15 @@
 			isa = PBXGroup;
 			name = "Other Sources";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		32DBCF630370AF2F00C91783 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = DWXBoxHIDPrefsPane_Prefix.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		32DBCF640370AF2F00C91783 = {
 			fileRef = 32DBCF630370AF2F00C91783;
@@ -401,44 +429,56 @@
 		B2013CE004AB410D00A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			name = Base64.h;
 			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/Base64.h;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		B2013CE104AB410D00A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			name = Base64.m;
 			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/Base64.m;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		B2013CE204AB410D00A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			name = Registrar.h;
 			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/Registrar.h;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		B2013CE304AB410D00A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			name = Registrar.m;
 			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/Registrar.m;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		B2013CE404AB410D00A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			name = RSACrypto.h;
 			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/RSACrypto.h;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		B2013CE504AB410D00A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			name = RSACrypto.m;
 			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/RSACrypto.m;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		B2013CE604AB410D00A80002 = {
 			fileRef = B2013CE004AB410D00A80002;
@@ -478,9 +518,11 @@
 		};
 		B2013CEC04AB418800A80002 = {
 			isa = PBXFileReference;
+			lastKnownFileType = "compiled.mach-o.dylib";
 			name = libcrypto.dylib;
 			path = /usr/lib/libcrypto.dylib;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		B2013CED04AB418800A80002 = {
 			fileRef = B2013CEC04AB418800A80002;
@@ -491,16 +533,20 @@
 		B2013CEE04AB61CF00A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			name = MD5.h;
 			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/MD5.h;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		B2013CEF04AB61CF00A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			name = MD5.m;
 			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/MD5.m;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		B2013CF004AB61CF00A80002 = {
 			fileRef = B2013CEE04AB61CF00A80002;
@@ -517,14 +563,18 @@
 		B2098B30049252CA00A80002 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = DWActionableTextField.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2098B31049252CA00A80002 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = DWActionableTextField.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2098B32049252CA00A80002 = {
 			fileRef = B2098B30049252CA00A80002;
@@ -541,14 +591,18 @@
 		B21A2DBD04929C6100A80002 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = DWHIDUtilities.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B21A2DBE04929C6100A80002 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = DWHIDUtilities.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B21A2DBF04929C6100A80002 = {
 			fileRef = B21A2DBD04929C6100A80002;
@@ -565,9 +619,11 @@
 		B22B985C048E734900A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			name = DWXBoxHIDDriverKeys.h;
 			path = ../DWXBoxHIDDriver/DWXBoxHIDDriverKeys.h;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		B22B985D048E734900A80002 = {
 			fileRef = B22B985C048E734900A80002;
@@ -578,14 +634,18 @@
 		B22B9877048E9C3300A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = DWXBoxHIDNotifier.h;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		B22B9878048E9C3300A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = DWXBoxHIDNotifier.m;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		B22B9879048E9C3300A80002 = {
 			fileRef = B22B9877048E9C3300A80002;
@@ -600,10 +660,12 @@
 			};
 		};
 		B2BC8C540486723300A80002 = {
-			isa = PBXFrameworkReference;
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
 			name = PreferencePanes.framework;
 			path = /System/Library/Frameworks/PreferencePanes.framework;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		B2BC8C550486723300A80002 = {
 			fileRef = B2BC8C540486723300A80002;
@@ -614,14 +676,18 @@
 		B2BC8C5C048678DB00A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = DWXBoxHIDPrefsPane.h;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		B2BC8C5D048678DB00A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = DWXBoxHIDPrefsPane.m;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		B2BC8C5E048678DB00A80002 = {
 			fileRef = B2BC8C5C048678DB00A80002;
@@ -643,12 +709,15 @@
 			name = PrefsPane.nib;
 			path = "";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2BC8C61048679EE00A80002 = {
 			isa = PBXFileReference;
+			lastKnownFileType = wrapper.nib;
 			name = English;
 			path = English.lproj/PrefsPane.nib;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2BC8C62048679EE00A80002 = {
 			fileRef = B2BC8C60048679EE00A80002;
@@ -660,11 +729,7 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			generatedFileNames = (
-			);
 			isa = PBXShellScriptBuildPhase;
-			neededFileNames = (
-			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/Developer/Tools/CpMac -r build/$PRODUCT_NAME.$WRAPPER_EXTENSION $HOME/Library/PreferencePanes";
@@ -672,14 +737,18 @@
 		B2C2DB48048C44AB00A80002 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = DWAxisPairView.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2C2DB49048C44AB00A80002 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = DWAxisPairView.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2C2DB4A048C44AB00A80002 = {
 			fileRef = B2C2DB48048C44AB00A80002;
@@ -696,14 +765,18 @@
 		B2C2DB4C048C637100A80002 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = DWTriggerView.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2C2DB4D048C637100A80002 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = DWTriggerView.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2C2DB4E048C637100A80002 = {
 			fileRef = B2C2DB4C048C637100A80002;
@@ -720,14 +793,18 @@
 		B2C2DB50048D187600A80002 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = DWDPadView.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2C2DB51048D187600A80002 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = DWDPadView.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2C2DB52048D187600A80002 = {
 			fileRef = B2C2DB50048D187600A80002;
@@ -744,14 +821,18 @@
 		B2C2DB54048D18AF00A80002 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			path = DWButtonView.h;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2C2DB55048D18AF00A80002 = {
 			fileEncoding = 4;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			path = DWButtonView.m;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2C2DB56048D18AF00A80002 = {
 			fileRef = B2C2DB54048D18AF00A80002;
@@ -767,9 +848,11 @@
 		};
 		B2C2DB5A048D48B900A80002 = {
 			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
 			name = controller64.tiff;
 			path = Resources/controller64.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2C2DB5B048D48B900A80002 = {
 			fileRef = B2C2DB5A048D48B900A80002;
@@ -779,9 +862,11 @@
 		};
 		B2C2DB5C048D48C000A80002 = {
 			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
 			name = remote64.tiff;
 			path = Resources/remote64.tiff;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2C2DB5D048D48C000A80002 = {
 			fileRef = B2C2DB5C048D48C000A80002;
@@ -802,34 +887,43 @@
 			name = "External Sources";
 			path = "";
 			refType = 4;
+			sourceTree = "<group>";
 		};
 		B2C2DB63048D4D5A00A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			name = DWXBoxHIDDriverInterface.h;
 			path = ../DWXBoxHIDDriver/DWXBoxHIDDriverInterface.h;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		B2C2DB64048D4D5A00A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			name = DWXBoxHIDDriverInterface.m;
 			path = ../DWXBoxHIDDriver/DWXBoxHIDDriverInterface.m;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		B2C2DB65048D4D5A00A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			name = DWXBoxHIDPrefsLoader.h;
 			path = ../DWXBoxHIDDriver/DWXBoxHIDPrefsLoader.h;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		B2C2DB66048D4D5A00A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
 			name = DWXBoxHIDPrefsLoader.m;
 			path = ../DWXBoxHIDDriver/DWXBoxHIDPrefsLoader.m;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		B2C2DB67048D4D5A00A80002 = {
 			fileRef = B2C2DB63048D4D5A00A80002;
@@ -856,10 +950,12 @@
 			};
 		};
 		B2C2DB6B048D4D9A00A80002 = {
-			isa = PBXFrameworkReference;
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
 			name = IOKit.framework;
 			path = /System/Library/Frameworks/IOKit.framework;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		B2C2DB6C048D4D9A00A80002 = {
 			fileRef = B2C2DB6B048D4D9A00A80002;
@@ -869,15 +965,19 @@
 		};
 		B2C41A9004AE4D0700A80002 = {
 			isa = PBXFileReference;
+			lastKnownFileType = image.tiff;
 			name = pref64.tiff;
 			path = Resources/pref64.tiff;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		B2C41A9104AE4D0700A80002 = {
 			isa = PBXFileReference;
+			lastKnownFileType = image.icns;
 			name = xboxhid.icns;
 			path = Resources/xboxhid.icns;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		B2C41A9204AE4D0700A80002 = {
 			fileRef = B2C41A9004AE4D0700A80002;
@@ -900,9 +1000,11 @@
 		B2CAF12204AD17B000A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = text;
 			name = pubkey;
 			path = ../../private/pubkey;
 			refType = 2;
+			sourceTree = SOURCE_ROOT;
 		};
 		B2CAF12304AD17B000A80002 = {
 			fileRef = B2CAF12204AD17B000A80002;
@@ -913,9 +1015,11 @@
 		B2CAF13404AD191300A80002 = {
 			fileEncoding = 30;
 			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
 			name = Debug.h;
 			path = /Users/walisser/Documents/devel/projects/xboxhiddriver/Source/Registrar/Debug.h;
 			refType = 0;
+			sourceTree = "<absolute>";
 		};
 		B2CAF13504AD191300A80002 = {
 			fileRef = B2CAF13404AD191300A80002;
@@ -938,6 +1042,7 @@
 			isa = PBXGroup;
 			name = Registrar;
 			refType = 4;
+			sourceTree = "<group>";
 		};
 	};
 	rootObject = 089C1669FE841209C02AAC07;

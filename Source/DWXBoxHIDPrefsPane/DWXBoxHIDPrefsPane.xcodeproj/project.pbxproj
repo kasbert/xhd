@@ -1,0 +1,518 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B24EEE7C0A4D887200A488B8 /* DWXBoxHIDPrefsPane_Prefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCF630370AF2F00C91783 /* DWXBoxHIDPrefsPane_Prefix.h */; };
+		B24EEE7D0A4D887200A488B8 /* DWXBoxHIDPrefsPane.h in Headers */ = {isa = PBXBuildFile; fileRef = B2BC8C5C048678DB00A80002 /* DWXBoxHIDPrefsPane.h */; };
+		B24EEE7E0A4D887200A488B8 /* DWAxisPairView.h in Headers */ = {isa = PBXBuildFile; fileRef = B2C2DB48048C44AB00A80002 /* DWAxisPairView.h */; };
+		B24EEE7F0A4D887200A488B8 /* DWTriggerView.h in Headers */ = {isa = PBXBuildFile; fileRef = B2C2DB4C048C637100A80002 /* DWTriggerView.h */; };
+		B24EEE800A4D887200A488B8 /* DWDPadView.h in Headers */ = {isa = PBXBuildFile; fileRef = B2C2DB50048D187600A80002 /* DWDPadView.h */; };
+		B24EEE810A4D887200A488B8 /* DWButtonView.h in Headers */ = {isa = PBXBuildFile; fileRef = B2C2DB54048D18AF00A80002 /* DWButtonView.h */; };
+		B24EEE820A4D887200A488B8 /* DWXBoxHIDDriverInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = B2C2DB63048D4D5A00A80002 /* DWXBoxHIDDriverInterface.h */; };
+		B24EEE830A4D887200A488B8 /* DWXBoxHIDPrefsLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = B2C2DB65048D4D5A00A80002 /* DWXBoxHIDPrefsLoader.h */; };
+		B24EEE840A4D887200A488B8 /* DWXBoxHIDDriverKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = B22B985C048E734900A80002 /* DWXBoxHIDDriverKeys.h */; };
+		B24EEE850A4D887200A488B8 /* DWXBoxHIDNotifier.h in Headers */ = {isa = PBXBuildFile; fileRef = B22B9877048E9C3300A80002 /* DWXBoxHIDNotifier.h */; };
+		B24EEE860A4D887200A488B8 /* DWActionableTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B2098B30049252CA00A80002 /* DWActionableTextField.h */; };
+		B24EEE870A4D887200A488B8 /* DWHIDUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = B21A2DBD04929C6100A80002 /* DWHIDUtilities.h */; };
+		B24EEE8E0A4D887200A488B8 /* PrefsPane.nib in Resources */ = {isa = PBXBuildFile; fileRef = B2BC8C60048679EE00A80002 /* PrefsPane.nib */; };
+		B24EEE8F0A4D887200A488B8 /* controller64.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2C2DB5A048D48B900A80002 /* controller64.tiff */; };
+		B24EEE900A4D887200A488B8 /* remote64.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2C2DB5C048D48C000A80002 /* remote64.tiff */; };
+		B24EEE910A4D887200A488B8 /* pubkey in Resources */ = {isa = PBXBuildFile; fileRef = B2CAF12204AD17B000A80002 /* pubkey */; };
+		B24EEE920A4D887200A488B8 /* pref64.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2C41A9004AE4D0700A80002 /* pref64.tiff */; };
+		B24EEE930A4D887200A488B8 /* xboxhid.icns in Resources */ = {isa = PBXBuildFile; fileRef = B2C41A9104AE4D0700A80002 /* xboxhid.icns */; };
+		B24EEE940A4D887200A488B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
+		B24EEE960A4D887200A488B8 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FB77B6FE84183AC02AAC07 /* main.c */; settings = {ATTRIBUTES = (); }; };
+		B24EEE970A4D887200A488B8 /* DWXBoxHIDPrefsPane.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BC8C5D048678DB00A80002 /* DWXBoxHIDPrefsPane.m */; };
+		B24EEE980A4D887200A488B8 /* DWAxisPairView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C2DB49048C44AB00A80002 /* DWAxisPairView.m */; };
+		B24EEE990A4D887200A488B8 /* DWTriggerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C2DB4D048C637100A80002 /* DWTriggerView.m */; };
+		B24EEE9A0A4D887200A488B8 /* DWDPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C2DB51048D187600A80002 /* DWDPadView.m */; };
+		B24EEE9B0A4D887200A488B8 /* DWButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C2DB55048D18AF00A80002 /* DWButtonView.m */; };
+		B24EEE9C0A4D887200A488B8 /* DWXBoxHIDDriverInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C2DB64048D4D5A00A80002 /* DWXBoxHIDDriverInterface.m */; };
+		B24EEE9D0A4D887200A488B8 /* DWXBoxHIDPrefsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C2DB66048D4D5A00A80002 /* DWXBoxHIDPrefsLoader.m */; };
+		B24EEE9E0A4D887200A488B8 /* DWXBoxHIDNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = B22B9878048E9C3300A80002 /* DWXBoxHIDNotifier.m */; };
+		B24EEE9F0A4D887200A488B8 /* DWActionableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2098B31049252CA00A80002 /* DWActionableTextField.m */; };
+		B24EEEA00A4D887200A488B8 /* DWHIDUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B21A2DBE04929C6100A80002 /* DWHIDUtilities.m */; };
+		B24EEEA60A4D887200A488B8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		B24EEEA70A4D887200A488B8 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2BC8C540486723300A80002 /* PreferencePanes.framework */; };
+		B24EEEA80A4D887200A488B8 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C2DB6B048D4D9A00A80002 /* IOKit.framework */; };
+		B24EEEA90A4D887200A488B8 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B2013CEC04AB418800A80002 /* libcrypto.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		08FB77B6FE84183AC02AAC07 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		32DBCF630370AF2F00C91783 /* DWXBoxHIDPrefsPane_Prefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWXBoxHIDPrefsPane_Prefix.h; sourceTree = "<group>"; };
+		B2013CEC04AB418800A80002 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = /usr/lib/libcrypto.dylib; sourceTree = "<absolute>"; };
+		B2098B30049252CA00A80002 /* DWActionableTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWActionableTextField.h; sourceTree = "<group>"; };
+		B2098B31049252CA00A80002 /* DWActionableTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWActionableTextField.m; sourceTree = "<group>"; };
+		B21A2DBD04929C6100A80002 /* DWHIDUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWHIDUtilities.h; sourceTree = "<group>"; };
+		B21A2DBE04929C6100A80002 /* DWHIDUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWHIDUtilities.m; sourceTree = "<group>"; };
+		B22B985C048E734900A80002 /* DWXBoxHIDDriverKeys.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = DWXBoxHIDDriverKeys.h; path = ../DWXBoxHIDDriver/DWXBoxHIDDriverKeys.h; sourceTree = SOURCE_ROOT; };
+		B22B9877048E9C3300A80002 /* DWXBoxHIDNotifier.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = DWXBoxHIDNotifier.h; sourceTree = SOURCE_ROOT; };
+		B22B9878048E9C3300A80002 /* DWXBoxHIDNotifier.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = DWXBoxHIDNotifier.m; sourceTree = SOURCE_ROOT; };
+		B24EEEB00A4D887200A488B8 /* Info-DWXBoxHIDPrefsPane__Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info-DWXBoxHIDPrefsPane__Upgraded_.plist"; sourceTree = "<group>"; };
+		B24EEEB10A4D887200A488B8 /* XboxHIDPrefsPane.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XboxHIDPrefsPane.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2BC8C540486723300A80002 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
+		B2BC8C5C048678DB00A80002 /* DWXBoxHIDPrefsPane.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = DWXBoxHIDPrefsPane.h; sourceTree = SOURCE_ROOT; };
+		B2BC8C5D048678DB00A80002 /* DWXBoxHIDPrefsPane.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = DWXBoxHIDPrefsPane.m; sourceTree = SOURCE_ROOT; };
+		B2BC8C61048679EE00A80002 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PrefsPane.nib; sourceTree = "<group>"; };
+		B2C2DB48048C44AB00A80002 /* DWAxisPairView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWAxisPairView.h; sourceTree = "<group>"; };
+		B2C2DB49048C44AB00A80002 /* DWAxisPairView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWAxisPairView.m; sourceTree = "<group>"; };
+		B2C2DB4C048C637100A80002 /* DWTriggerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWTriggerView.h; sourceTree = "<group>"; };
+		B2C2DB4D048C637100A80002 /* DWTriggerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWTriggerView.m; sourceTree = "<group>"; };
+		B2C2DB50048D187600A80002 /* DWDPadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWDPadView.h; sourceTree = "<group>"; };
+		B2C2DB51048D187600A80002 /* DWDPadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWDPadView.m; sourceTree = "<group>"; };
+		B2C2DB54048D18AF00A80002 /* DWButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWButtonView.h; sourceTree = "<group>"; };
+		B2C2DB55048D18AF00A80002 /* DWButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWButtonView.m; sourceTree = "<group>"; };
+		B2C2DB5A048D48B900A80002 /* controller64.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = controller64.tiff; path = Resources/controller64.tiff; sourceTree = "<group>"; };
+		B2C2DB5C048D48C000A80002 /* remote64.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = remote64.tiff; path = Resources/remote64.tiff; sourceTree = "<group>"; };
+		B2C2DB63048D4D5A00A80002 /* DWXBoxHIDDriverInterface.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = DWXBoxHIDDriverInterface.h; path = ../DWXBoxHIDDriver/DWXBoxHIDDriverInterface.h; sourceTree = SOURCE_ROOT; };
+		B2C2DB64048D4D5A00A80002 /* DWXBoxHIDDriverInterface.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = DWXBoxHIDDriverInterface.m; path = ../DWXBoxHIDDriver/DWXBoxHIDDriverInterface.m; sourceTree = SOURCE_ROOT; };
+		B2C2DB65048D4D5A00A80002 /* DWXBoxHIDPrefsLoader.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = DWXBoxHIDPrefsLoader.h; path = ../DWXBoxHIDDriver/DWXBoxHIDPrefsLoader.h; sourceTree = SOURCE_ROOT; };
+		B2C2DB66048D4D5A00A80002 /* DWXBoxHIDPrefsLoader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = DWXBoxHIDPrefsLoader.m; path = ../DWXBoxHIDDriver/DWXBoxHIDPrefsLoader.m; sourceTree = SOURCE_ROOT; };
+		B2C2DB6B048D4D9A00A80002 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		B2C41A9004AE4D0700A80002 /* pref64.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = pref64.tiff; path = Resources/pref64.tiff; sourceTree = SOURCE_ROOT; };
+		B2C41A9104AE4D0700A80002 /* xboxhid.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = xboxhid.icns; path = Resources/xboxhid.icns; sourceTree = SOURCE_ROOT; };
+		B2CAF12204AD17B000A80002 /* pubkey */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = pubkey; path = ../../private/pubkey; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B24EEEA50A4D887200A488B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B24EEEA60A4D887200A488B8 /* Cocoa.framework in Frameworks */,
+				B24EEEA70A4D887200A488B8 /* PreferencePanes.framework in Frameworks */,
+				B24EEEA80A4D887200A488B8 /* IOKit.framework in Frameworks */,
+				B24EEEA90A4D887200A488B8 /* libcrypto.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* DWXBoxHIDPrefsPane */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77AFFE84173DC02AAC07 /* Classes */,
+				B2C2DB62048D4D2700A80002 /* External Sources */,
+				32C88E010371C26100C91783 /* Other Sources */,
+				089C167CFE841241C02AAC07 /* Resources */,
+				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
+				19C28FB8FE9D52D311CA2CBB /* Products */,
+				B24EEEB00A4D887200A488B8 /* Info-DWXBoxHIDPrefsPane__Upgraded_.plist */,
+			);
+			name = DWXBoxHIDPrefsPane;
+			sourceTree = "<group>";
+		};
+		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
+				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
+				B2013CEC04AB418800A80002 /* libcrypto.dylib */,
+			);
+			name = "Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		089C167CFE841241C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B2CAF12204AD17B000A80002 /* pubkey */,
+				B2C2DB5A048D48B900A80002 /* controller64.tiff */,
+				B2C2DB5C048D48C000A80002 /* remote64.tiff */,
+				B2C41A9004AE4D0700A80002 /* pref64.tiff */,
+				B2C41A9104AE4D0700A80002 /* xboxhid.icns */,
+				B2BC8C60048679EE00A80002 /* PrefsPane.nib */,
+				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		08FB77AFFE84173DC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B2BC8C5C048678DB00A80002 /* DWXBoxHIDPrefsPane.h */,
+				B2BC8C5D048678DB00A80002 /* DWXBoxHIDPrefsPane.m */,
+				B2C2DB48048C44AB00A80002 /* DWAxisPairView.h */,
+				B2C2DB49048C44AB00A80002 /* DWAxisPairView.m */,
+				B2C2DB4C048C637100A80002 /* DWTriggerView.h */,
+				B2C2DB4D048C637100A80002 /* DWTriggerView.m */,
+				B2C2DB50048D187600A80002 /* DWDPadView.h */,
+				B2C2DB51048D187600A80002 /* DWDPadView.m */,
+				B2C2DB54048D18AF00A80002 /* DWButtonView.h */,
+				B2C2DB55048D18AF00A80002 /* DWButtonView.m */,
+				B22B9877048E9C3300A80002 /* DWXBoxHIDNotifier.h */,
+				B22B9878048E9C3300A80002 /* DWXBoxHIDNotifier.m */,
+				B2098B30049252CA00A80002 /* DWActionableTextField.h */,
+				B2098B31049252CA00A80002 /* DWActionableTextField.m */,
+				B21A2DBD04929C6100A80002 /* DWHIDUtilities.h */,
+				B21A2DBE04929C6100A80002 /* DWHIDUtilities.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
+				B2BC8C540486723300A80002 /* PreferencePanes.framework */,
+				B2C2DB6B048D4D9A00A80002 /* IOKit.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7AEFEA557BF11CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				089C1672FE841209C02AAC07 /* Foundation.framework */,
+				089C167FFE841241C02AAC07 /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FB8FE9D52D311CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B24EEEB10A4D887200A488B8 /* XboxHIDPrefsPane.prefPane */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		32C88E010371C26100C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32DBCF630370AF2F00C91783 /* DWXBoxHIDPrefsPane_Prefix.h */,
+				08FB77B6FE84183AC02AAC07 /* main.c */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		B2C2DB62048D4D2700A80002 /* External Sources */ = {
+			isa = PBXGroup;
+			children = (
+				B22B985C048E734900A80002 /* DWXBoxHIDDriverKeys.h */,
+				B2C2DB63048D4D5A00A80002 /* DWXBoxHIDDriverInterface.h */,
+				B2C2DB64048D4D5A00A80002 /* DWXBoxHIDDriverInterface.m */,
+				B2C2DB65048D4D5A00A80002 /* DWXBoxHIDPrefsLoader.h */,
+				B2C2DB66048D4D5A00A80002 /* DWXBoxHIDPrefsLoader.m */,
+			);
+			name = "External Sources";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		B24EEE7B0A4D887200A488B8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B24EEE7C0A4D887200A488B8 /* DWXBoxHIDPrefsPane_Prefix.h in Headers */,
+				B24EEE7D0A4D887200A488B8 /* DWXBoxHIDPrefsPane.h in Headers */,
+				B24EEE7E0A4D887200A488B8 /* DWAxisPairView.h in Headers */,
+				B24EEE7F0A4D887200A488B8 /* DWTriggerView.h in Headers */,
+				B24EEE800A4D887200A488B8 /* DWDPadView.h in Headers */,
+				B24EEE810A4D887200A488B8 /* DWButtonView.h in Headers */,
+				B24EEE820A4D887200A488B8 /* DWXBoxHIDDriverInterface.h in Headers */,
+				B24EEE830A4D887200A488B8 /* DWXBoxHIDPrefsLoader.h in Headers */,
+				B24EEE840A4D887200A488B8 /* DWXBoxHIDDriverKeys.h in Headers */,
+				B24EEE850A4D887200A488B8 /* DWXBoxHIDNotifier.h in Headers */,
+				B24EEE860A4D887200A488B8 /* DWActionableTextField.h in Headers */,
+				B24EEE870A4D887200A488B8 /* DWHIDUtilities.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		B24EEE7A0A4D887200A488B8 /* DWXBoxHIDPrefsPane (Upgraded) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B24EEEAC0A4D887200A488B8 /* Build configuration list for PBXNativeTarget "DWXBoxHIDPrefsPane (Upgraded)" */;
+			buildPhases = (
+				B24EEE7B0A4D887200A488B8 /* Headers */,
+				B24EEE8D0A4D887200A488B8 /* Resources */,
+				B24EEE950A4D887200A488B8 /* Sources */,
+				B24EEEA50A4D887200A488B8 /* Frameworks */,
+				B24EEEAA0A4D887200A488B8 /* Rez */,
+				B24EEEAB0A4D887200A488B8 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DWXBoxHIDPrefsPane (Upgraded)";
+			productInstallPath = "$(HOME)/Library/PreferencePanes";
+			productName = DWXBoxHIDPrefsPane;
+			productReference = B24EEEB10A4D887200A488B8 /* XboxHIDPrefsPane.prefPane */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = B24EEEB20A4D887200A488B8 /* Build configuration list for PBXProject "DWXBoxHIDPrefsPane" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 089C166AFE841209C02AAC07 /* DWXBoxHIDPrefsPane */;
+			projectDirPath = "";
+			targets = (
+				B24EEE7A0A4D887200A488B8 /* DWXBoxHIDPrefsPane (Upgraded) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B24EEE8D0A4D887200A488B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B24EEE8E0A4D887200A488B8 /* PrefsPane.nib in Resources */,
+				B24EEE8F0A4D887200A488B8 /* controller64.tiff in Resources */,
+				B24EEE900A4D887200A488B8 /* remote64.tiff in Resources */,
+				B24EEE910A4D887200A488B8 /* pubkey in Resources */,
+				B24EEE920A4D887200A488B8 /* pref64.tiff in Resources */,
+				B24EEE930A4D887200A488B8 /* xboxhid.icns in Resources */,
+				B24EEE940A4D887200A488B8 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		B24EEEAA0A4D887200A488B8 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B24EEEAB0A4D887200A488B8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Developer/Tools/CpMac -r build/$BUILD_STYLE/$PRODUCT_NAME.$WRAPPER_EXTENSION $HOME/Library/PreferencePanes/";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B24EEE950A4D887200A488B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B24EEE960A4D887200A488B8 /* main.c in Sources */,
+				B24EEE970A4D887200A488B8 /* DWXBoxHIDPrefsPane.m in Sources */,
+				B24EEE980A4D887200A488B8 /* DWAxisPairView.m in Sources */,
+				B24EEE990A4D887200A488B8 /* DWTriggerView.m in Sources */,
+				B24EEE9A0A4D887200A488B8 /* DWDPadView.m in Sources */,
+				B24EEE9B0A4D887200A488B8 /* DWButtonView.m in Sources */,
+				B24EEE9C0A4D887200A488B8 /* DWXBoxHIDDriverInterface.m in Sources */,
+				B24EEE9D0A4D887200A488B8 /* DWXBoxHIDPrefsLoader.m in Sources */,
+				B24EEE9E0A4D887200A488B8 /* DWXBoxHIDNotifier.m in Sources */,
+				B24EEE9F0A4D887200A488B8 /* DWActionableTextField.m in Sources */,
+				B24EEEA00A4D887200A488B8 /* DWHIDUtilities.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C167DFE841241C02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C167EFE841241C02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		B2BC8C60048679EE00A80002 /* PrefsPane.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B2BC8C61048679EE00A80002 /* English */,
+			);
+			name = PrefsPane.nib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B24EEEAD0A4D887200A488B8 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = DWXBoxHIDPrefsPane_Prefix.h;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Info-DWXBoxHIDPrefsPane__Upgraded_.plist";
+				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = XboxHIDPrefsPane;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = prefPane;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		B24EEEAE0A4D887200A488B8 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = DWXBoxHIDPrefsPane_Prefix.h;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Info-DWXBoxHIDPrefsPane__Upgraded_.plist";
+				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = XboxHIDPrefsPane;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = prefPane;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		B24EEEAF0A4D887200A488B8 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = DWXBoxHIDPrefsPane_Prefix.h;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "Info-DWXBoxHIDPrefsPane__Upgraded_.plist";
+				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = XboxHIDPrefsPane;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = prefPane;
+			};
+			name = Default;
+		};
+		B24EEEB30A4D887200A488B8 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_VERSION_i386 = 4.0;
+				GCC_VERSION_ppc = 3.3;
+				HEADER_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
+				MACOSX_DEPLOYMENT_TARGET_ppc = 10.2;
+				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT_ppc = /Developer/SDKs/MacOSX10.2.8.sdk;
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/../Registrar\"";
+			};
+			name = Development;
+		};
+		B24EEEB40A4D887200A488B8 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_VERSION_i386 = 4.0;
+				GCC_VERSION_ppc = 3.3;
+				HEADER_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
+				MACOSX_DEPLOYMENT_TARGET_ppc = 10.2;
+				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT_ppc = /Developer/SDKs/MacOSX10.2.8.sdk;
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/../Registrar\"";
+			};
+			name = Deployment;
+		};
+		B24EEEB50A4D887200A488B8 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_VERSION_i386 = 4.0;
+				GCC_VERSION_ppc = 3.3;
+				HEADER_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
+				MACOSX_DEPLOYMENT_TARGET_ppc = 10.2;
+				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT_ppc = /Developer/SDKs/MacOSX10.2.8.sdk;
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/../Registrar\"";
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B24EEEAC0A4D887200A488B8 /* Build configuration list for PBXNativeTarget "DWXBoxHIDPrefsPane (Upgraded)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B24EEEAD0A4D887200A488B8 /* Development */,
+				B24EEEAE0A4D887200A488B8 /* Deployment */,
+				B24EEEAF0A4D887200A488B8 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		B24EEEB20A4D887200A488B8 /* Build configuration list for PBXProject "DWXBoxHIDPrefsPane" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B24EEEB30A4D887200A488B8 /* Development */,
+				B24EEEB40A4D887200A488B8 /* Deployment */,
+				B24EEEB50A4D887200A488B8 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}

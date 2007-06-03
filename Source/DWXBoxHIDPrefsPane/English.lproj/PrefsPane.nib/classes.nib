@@ -13,7 +13,9 @@
                 endModalSessionCancel = id; 
                 endModalSessionOK = id; 
                 loadConfiguration = id; 
+                locateDevices = id; 
                 newConfiguration = id; 
+                pickDevice = id; 
                 selectDevice = id; 
             }; 
             CLASS = DWXBoxHIDPrefsPane; 
@@ -32,6 +34,10 @@
                 "_demoMessageText" = id; 
                 "_demoMessageWindow" = id; 
                 "_devicePopUpButton" = id; 
+                "_deviceProductText" = id; 
+                "_deviceTableView" = id; 
+                "_deviceTypeComboBox" = id; 
+                "_deviceVendorText" = id; 
                 "_enableAnalogButtons" = id; 
                 "_enterCodeWindow" = id; 
                 "_invalidCodeWindow" = id; 
@@ -43,6 +49,9 @@
                 "_leftTriggerDeadzoneField" = id; 
                 "_leftTriggerUsage" = id; 
                 "_leftTriggerView" = id; 
+                "_patcherIntroWindow" = id; 
+                "_patcherNoDevicesWindow" = id; 
+                "_patcherUIWindow" = id; 
                 "_registrationCodeTextField" = id; 
                 "_rightStickInvertX" = id; 
                 "_rightStickInvertY" = id; 
@@ -53,6 +62,7 @@
                 "_rightTriggerView" = id; 
                 "_tabView" = id; 
                 "_thanksWindow" = id; 
+                "_versionText" = id; 
             }; 
             SUPERCLASS = NSPreferencePane; 
         }, 
