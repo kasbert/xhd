@@ -102,7 +102,8 @@ typedef enum {
 } XBoxDeviceType;
 */
 
-// remote control keys (index into ButtonMapping table)
+// remote control keys (index into ButtonMapping table which is generated
+// and stored in the driver's property list)
 typedef enum {
 
     kRemoteDisplay = 0,
@@ -135,6 +136,8 @@ typedef enum {
     kNumRemoteButtons
 } XBoxRemoteKey;
 
+// this structure describes the (fabricated) remote report
+// that is passed up to the hid layer
 typedef struct {
 
     // note: fields within byte are in reverse order
@@ -180,6 +183,7 @@ typedef struct {
     
 } XBRemoteReport;
 
+// this describes the actual hid report that we have to parse
 typedef struct
 {
     UInt8 r1, r2;
@@ -191,7 +195,7 @@ typedef struct
 // this checks that the structures are of the same size
 typedef int _sizeCheck[ (sizeof(XBRemoteReport) == sizeof(XBActualRemoteReport)) * 2 - 1];
 
-// this structure represents the gampad's raw report fields
+// this structure represents the gampad's raw report
 typedef struct {
 
     UInt8

@@ -77,7 +77,19 @@ The Original Code and all software distributed under the License are distributed
                     - setProperties( OSObject * properties );
                     - setDefaultOptions();
                     - setupDevice();
-                   
+        
+        10-13-04 Version 1.3 Changes
+                    In this version I'm trying to further improve compatibility with 3rd-party
+                    controllers. It turns out that the generic identification routine (findGenericDevice)
+                    is not generic enough. Probably the only constant between 3rd-party controllers
+                    is that they will always have the same interface class/subclass (88/66) and two 
+                    interrupt endpoints (one for output/joysticks, one for input/rumble motors).
+                    
+                    ¥ Now if findKnownDevice() and findGenericDevice() fail we assume a gamepad is connected.
+                    - This could be bad if we assume wrong; at worst what happens is we read a report that is either
+                      to small (hangs driver/application) or too large (incomplete data passed to app). However,
+                      it seems to me that the majority of Xbox devices conform to the original controller's report
+                      descriptor (for the obvious purpose of being compatible with all xbox games).
  */
  
 /*
@@ -97,7 +109,7 @@ The Original Code and all software distributed under the License are distributed
 #include <IOKit/usb/IOUSBInterface.h>
 #include <IOKit/usb/IOUSBPipe.h>
 
-#define DEBUG_LEVEL 0 // disable debugging
+#define DEBUG_LEVEL 7 // 0=disable all logging, 7=full logging
 #include <IOKit/usb/IOUSBLog.h>
 
 #include "DWXBoxHIDDriver.h"
@@ -732,8 +744,9 @@ DWXBoxHIDDriver::setupDevice()
 bool
 DWXBoxHIDDriver::manipulateReport(IOBufferMemoryDescriptor *report)
 {
-    // return true if report should be sent to HID layer
     // change the report before it's sent to the HID layer
+    // return true if report should be sent to HID layer,
+    // so that we can ignore certain reports
     if (_xbDeviceType->isEqualTo(kDeviceTypePadKey) &&
         report->getLength() == sizeof(XBPadReport)) {
     
@@ -801,6 +814,7 @@ DWXBoxHIDDriver::manipulateReport(IOBufferMemoryDescriptor *report)
             if (threshold < 255) {
             
                 // use this system of equations to scale values from 1-255
+                // also note the divide-by-zero check caught above
                 // 1 = a(threshold) + b
                 // 255 = a(255) + b
 
@@ -969,6 +983,12 @@ bool DWXBoxHIDDriver::isKnownDevice(IOService *provider)
 
 bool DWXBoxHIDDriver::findGenericDevice(IOService *provider)
 {
+    // This attempts to identify a supported "generic" device by walking the device's property
+    // tree and comparing it to a known standard (Microsoft)
+    
+    // Unfortunately, this doesn't always work because some devices have slightly different specs
+    // than the Microsoft controllers
+    
     IOUSBInterface 		*interface   = 0;
     IOUSBDevice 		*device      = 0;
     OSDictionary 		*deviceDataDict = 0;        // root dictionary for all device types
@@ -1102,7 +1122,7 @@ bool DWXBoxHIDDriver::findGenericDevice(IOService *provider)
                                                                 else {
                                                             
                                                                     USBLog(6, "%s[%p]::findGenericDevice - endpoint %d rejected mps=%d int=%d", 
-                                                                        k, genericMaxPacketSize, genericPollingInterval);
+                                                                        getName(), this, k, genericMaxPacketSize, genericPollingInterval);
                                                                 }
                                                             }
                                                         }
@@ -1178,15 +1198,23 @@ IOService* DWXBoxHIDDriver::probe(IOService *provider, SInt32 *score)
 
         // there might be a better driver, so don't increase the score
         USBLog(3,  "%s[%p]::probe found generic device", getName(), this);
+        *score += 1000;
     }
     else {
    
         // device is unknown *and* doesn't match known generic properties,
-        // so we can't support it
-        USBLog(3,  "%s[%p]::probe didn't find supported device", getName(), this);
+        // we can assume it is a controller (usually!) If we're wrong
+        // the application using HID might hang, or perhaps the kernel
+        // will crash. On the upside I'll have less complaints about
+        // controllers not working because their vendor/product IDs
+        // are not compiled into the driver.
+        USBLog(3,  "%s[%p]::probe didn't find supported device, taking a risk here", getName(), this);
 
-        *score = 0;
-        return 0;
+        _xbDeviceType   = OSString::withCString("Pad");
+        _xbDeviceVendor = OSString::withCString("Unknown");
+        _xbDeviceName   = OSString::withCString("Generic Controller");
+        
+        *score += 100;
     }
     
     return this;
@@ -1224,7 +1252,7 @@ DWXBoxHIDDriver::getReport( IOMemoryDescriptor * report,
     //
     usbReportType = HIDMgr2USBReportType(reportType);
     
-    USBLog(6, "%s[%p]::getReport (type=%d len=%d)", getName(), this,
+    USBLog(6, "%s[%p]::getReport (type=%d len=%u)", getName(), this,
         usbReportType, report->getLength()); 
     
     if (kUSBIn == usbReportType || kUSBNone == usbReportType) {
@@ -1235,7 +1263,7 @@ DWXBoxHIDDriver::getReport( IOMemoryDescriptor * report,
     }
     else {
     
-        USBLog(3, "%s[%p]::getReport (type=%d len=%d): error operation unsupported", getName(), this,
+        USBLog(3, "%s[%p]::getReport (type=%d len=%u): error operation unsupported", getName(), this,
             usbReportType, report->getLength()); 
         ret = kIOReturnError;
     }
@@ -1850,7 +1878,7 @@ DWXBoxHIDDriver::didTerminate( IOService * provider, IOOptionBits options, bool 
     // this method comes at the end of the termination sequence. Hopefully, all of our outstanding IO is complete
     // in which case we can just close our provider and IOKit will take care of the rest. Otherwise, we need to 
     // hold on to the device and IOKit will terminate us when we close it later
-    USBLog(3, "%s[%p]::didTerminate isInactive = %d, outstandingIO = %d", getName(), this, isInactive(), _outstandingIO);
+    USBLog(3, "%s[%p]::didTerminate isInactive = %d, outstandingIO = %u", getName(), this, isInactive(), _outstandingIO);
     if (!_outstandingIO)
         _interface->close(this);
     else
@@ -1948,7 +1976,7 @@ DWXBoxHIDDriver::start(IOService *provider)
             break;
         }
 
-        USBError(1, "%s[%p]::start -  USB HID Device @ %d (0x%x)", getName(), this, _device->GetAddress(), strtol(_device->getLocation(), (char **)NULL, 16));
+        USBError(1, "%s[%p]::start -  USB HID Device @ %d (0x%x)", getName(), this, _device->GetAddress(), strtoul(_device->getLocation(), (char **)NULL, 16));
         
         DecrementOutstandingIO();       // release the hold we put on at the beginning
 
@@ -2310,7 +2338,7 @@ DWXBoxHIDDriver::ChangeOutstandingIO(OSObject *target, void *param1, void *param
     case -1:
         if (!--me->_outstandingIO && me->_needToClose)
         {
-            USBLog(3, "%s[%p]::ChangeOutstandingIO isInactive = %d, outstandingIO = %d - closing device", 
+            USBLog(3, "%s[%p]::ChangeOutstandingIO isInactive = %d, outstandingIO = %u - closing device", 
                    me->getName(), me, me->isInactive(), me->_outstandingIO);
             me->_interface->close(me);
         }
@@ -2330,7 +2358,7 @@ DWXBoxHIDDriver::DecrementOutstandingIO(void)
     {
         if (!--_outstandingIO && _needToClose)
         {
-            USBLog(3, "%s[%p]::DecrementOutstandingIO isInactive = %d, outstandingIO = %d - closing device", 
+            USBLog(3, "%s[%p]::DecrementOutstandingIO isInactive = %d, outstandingIO = %u - closing device", 
                    getName(), this, isInactive(), _outstandingIO);
             _interface->close(this);
         }
