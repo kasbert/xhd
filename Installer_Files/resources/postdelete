@@ -5,7 +5,16 @@ umask 022
 
 echo "User is \"$USER\""
 
+PKGROOT="$1/Contents/Resources"
+
+# previous versions placed the prefpane in a different place so remove
+# from both locations
+
 rm -rf ~/Library/PreferencePanes/XboxHIDPrefsPane.prefPane
+rm -rf /Library/PreferencePanes/XboxHIDPrefsPane.prefPane
 rm -rf /System/Library/Extensions/DWXboxHIDDriver.kext
 
-# todo: remove login item
+# remove login item
+sudo -u $USER "$PKGROOT/installLoginItem" -remove $USER ~/Library/PreferencePanes/XboxHIDPrefsPane.prefPane/Contents/Resources/XboxHIDDaemonLauncher.app
+
+sudo -u $USER "$PKGROOT/installLoginItem" -remove $USER /Library/PreferencePanes/XboxHIDPrefsPane.prefPane/Contents/Resources/XboxHIDDaemonLauncher.app
