@@ -25,16 +25,17 @@
 <h2>About</h2>
 <p>This software enables the Xbox USB gamepad, DVD remote, and other Xbox devices on Mac OS X. It installs a HID (Human Interface Device) kernel extension and works at a low-level so any game that supports joysticks can use it. Games that do not support joysticks can use Xbox devices through additional software such as <a href="http://www.carvware.com/gamepadcompanion.html">GamePad Companion</a>.
 
-<p>You can use the Xbox HID Driver as long as you want. However, the demo version will not allow you to customize the controllers after 30 days. You can register online for just $5 to remove the demo time limit.
+<p>You can use the Xbox HID Driver as long as you want, it is now freeware and totally unlimited. The full source code is accessible via CVS.
 
-<p>The source code to the kernel extension component is included, and is subject to the <a href="http://www.opensource.apple.com/apsl/">Apple Public Source License (APSL)</a>. The driver can be extended to support additional Xbox devices, including wheels, IR receivers, headsets, and memory units. The full source code for other components may be released sometime in the future.
+<p>The source code to the kernel extension component is included, and is subject to the <a href="http://www.opensource.apple.com/apsl/">Apple Public Source License (APSL)</a>. The driver can be extended to support additional Xbox devices, including wheels, IR receivers, headsets, and memory units. The full source code for other components is licensed under the GPL.
 
+<p>It is now possible to use the Xbox controller in Halo! Halo version 1.5 supports gamepads!
+
+<p>I have created an Application Enhancer module (aka haxie) that taps into Halo Mac Edition to provide limited joystick support, I call it "Game Pad Hack". <i>Update: this is no longer needed in version 1.5 of Halo</i>. I probably will not be continuing development of this haxie but the full source code is available for anyone who would like to take it further. Click <a href="GPH-0.3.sit">here</a> to download Game Pad Hack (requires the Xbox HID Driver).
 <p>
-<h2>What's New in Version 1.2</h2>
+<h2>What's New in Version 1.3.4</h2>
 <ul>
-<li>Added preference pane to configure joystick behavior.</li>
-<li>Added support for multiple devices (each may have its own preferences)</li>
-<li>Added background application to load saved preferences when plugging in a device.</li>
+<li>Universal Binary, unlimited freeware version</li>
 </ul>
 
 <h2>Requirements</h2>
@@ -48,8 +49,11 @@
 <h2>Download</h2>
 <p>Before you download, please note: this driver requires <b>Mac OS X 10.2.6 or later</b>, which was recently released, so make sure to upgrade. The download contains a detailed ReadMe with information about known bugs and limitations, which you should consult first before emailing me.
 
-<p><a href="XboxHIDDriver.sit">Click here to download the demo.</a>
-
+<p><ul><li><a href="xhd_1_3_3.dmg">Download version 1.3.3</a></li>
+       <li><a href="XboxHIDDriver.sit">Download version 1.2 (Unsupported)</a></li>
+       <li><a href="GPH-0.3.sit">Download Game Pad Hack version 0.3 for Halo Support (Unsupported - Not needed for Halo 1.5)</a></li>
+   </ul>
+   
 <a name=help></a>
 <h2>Getting Help</h2>
 
@@ -61,8 +65,25 @@
 
 <p>There is also a <a href="http://www.insidemacgames.com/forum/viewtopic.php?t=9513&postdays=0&postorder=asc&start=0">forum</a> at <a href="www.insidemacgames.com">Inside Mac Games</a>.
 
+
+
 <h2>Getting a USB Adapter</h2>
-<p><a  href="http://www.lik-sang.com"><image src="lsi_button88x33_1.gif" border="0"></image><a> sells <a href="http://www.lik-sang.com/info.php?category=163&products_id=2701&likref=macHID">Xbox USB adapters</a> and controllers.
+<p>I used to recommend <a  href="http://www.lik-sang.com">Lik-Sang</a> for this as they donated some hardware to test on. It seems they are out of business now. I would recommend you search google. It is also possible to build your own adapter with some basic soldering skills and an old printer cable. Again, search google, lots of good howtos on this can be found.
+
+<h2>Related Software</h2>
+
+This software may help you get your controller working with games that do not support HID input.
+
+<p><a href="http://www.orderedbytes.com">ControllerMate</a> is a programmable utility that can be used to emulate a keyboard or mouse with your Xbox controller.
+
+<p><a href="http://www.carvware.com/gamepadcompanion.html">Gamepad Companion</a> is a similiar utility for mouse/keyboard emulation.
+
+<p><a href="http://www.zsculpt.com/website/appsutils/hidwizard">HID Wizard</a> is a free utility to map HID joysticks onto the keyboard/mouse.
+
+<p><a href="http://alphaomega.software.free.fr/joystickandgamepadtester/Joystick%20And%20Gamepad%20Tester.html">Joystick and Gamepad Tester</a> provides you with some low-level information on your gamepad.
+
+<p>There is another project supporing the <a href="http://tattiebogle.net/index.php/ProjectRoot/Xbox360Controller/OsxDriver
+">Xbox 360 controller here</a>, it also supports force feedback. It is not clear if this also supports the original Xbox controllers.
 
 <h2>Donations</h2>
 <p>Donations will be used to purchase additional Xbox devices and gadgets, and  will motivate future updates and enhancements (calibration w/dead zones, rapid-fire buttons, invertable axes, 3rd-party controllers...).
@@ -70,7 +91,7 @@
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_xclick">
 <input type="hidden" name="business" value="walisser@mac.com">
-<input type="hidden" name="item_name" value="Xbox HID Driver">
+<input type="hidden" name="item_name" value="Xbox HID Driver Donation">
 <input type="hidden" name="item_number" value="1">
 <input type="hidden" name="no_note" value="1">
 <input type="hidden" name="currency_code" value="USD">
