@@ -255,18 +255,11 @@
 						<dict>
 							<key>PBXSmartGroupTreeModuleOutlineStateExpansionKey</key>
 							<array>
-								<string>000000000000000001490510</string>
-								<string>00000000000000000159C3E0</string>
 								<string>1C37FBAC04509CD000000102</string>
 								<string>1C37FABC05509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
-							<array>
-								<array>
-									<integer>9</integer>
-									<integer>0</integer>
-								</array>
-							</array>
+							<array/>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
 							<string>{{0, 0}, {186, 408}}</string>
 						</dict>
@@ -368,9 +361,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>B2109AF00C1300FA000EBE2E</string>
+				<string>B2109B190C130C72000EBE2E</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>B2109AF10C1300FA000EBE2E</string>
+				<string>B2109B1A0C130C72000EBE2E</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -504,7 +497,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>B2C292250A2A2F46007514D4</string>
 		<string>/Volumes/Big Momma/xboxhiddriver/Source/DWXBoxHIDDriver/DWXBoxHIDDriver.xcodeproj</string>
 	</array>
 	<key>WindowString</key>

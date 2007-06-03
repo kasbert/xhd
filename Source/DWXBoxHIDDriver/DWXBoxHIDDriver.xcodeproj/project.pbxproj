@@ -368,7 +368,7 @@
 		B28D2DA30489B7A900A80002 /* DWXBoxHIDPrefsLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWXBoxHIDPrefsLoader.m; sourceTree = "<group>"; };
 		B2C292370A2A2F8F007514D4 /* Info-DWXBoxHIDDriver__Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info-DWXBoxHIDDriver__Upgraded_.plist"; sourceTree = "<group>"; };
 		B2C292380A2A2F8F007514D4 /* DWXboxHIDDriver.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DWXboxHIDDriver.kext; sourceTree = BUILT_PRODUCTS_DIR; };
-		B2C292490A2A2F8F007514D4 /* testdrivercontrol */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.executable"; path = testdrivercontrol; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2C292490A2A2F8F007514D4 /* testdrivercontrol */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = testdrivercontrol; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C41A7804AE4B3A00A80002 /* xboxhidkext.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = xboxhidkext.icns; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
