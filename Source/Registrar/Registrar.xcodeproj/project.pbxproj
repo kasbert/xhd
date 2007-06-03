@@ -1,0 +1,442 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B204495404AA137E00A80002 /* testcrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* testcrypto.m */; };
+		B204495504AA137F00A80002 /* RSACrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = B204494404A9F28700A80002 /* RSACrypto.h */; };
+		B204495604AA137F00A80002 /* RSACrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = B204494504A9F28700A80002 /* RSACrypto.m */; };
+		B204495704AA138000A80002 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
+		B204495804AA138100A80002 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B204494B04AA0EE900A80002 /* libcrypto.dylib */; };
+		B204495F04AA3CCD00A80002 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = B204495C04AA309900A80002 /* Base64.m */; };
+		B204496004AA3CCD00A80002 /* Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = B204495B04AA309900A80002 /* Base64.h */; };
+		B29CDCC804ABB77A00A80002 /* MD5.h in Headers */ = {isa = PBXBuildFile; fileRef = B29CDCC604ABB77A00A80002 /* MD5.h */; };
+		B29CDCC904ABB77A00A80002 /* MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = B29CDCC704ABB77A00A80002 /* MD5.m */; };
+		B2C58A1704AA640D00A80002 /* Registrar_Prefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 32A70AAB03705E1F00C91783 /* Registrar_Prefix.h */; };
+		B2C58A2D04AA94EB00A80002 /* RSACrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = B204494404A9F28700A80002 /* RSACrypto.h */; };
+		B2C58A2E04AA94EC00A80002 /* RSACrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = B204494504A9F28700A80002 /* RSACrypto.m */; };
+		B2C58A2F04AA94EC00A80002 /* Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = B204495B04AA309900A80002 /* Base64.h */; };
+		B2C58A3004AA94ED00A80002 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = B204495C04AA309900A80002 /* Base64.m */; };
+		B2C58A3104AA94EF00A80002 /* registerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C58A2B04AA94E800A80002 /* registerTool.m */; };
+		B2C58A3204AA94F100A80002 /* Registrar.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C58A1904AA646700A80002 /* Registrar.m */; };
+		B2C58A3304AA94F200A80002 /* Registrar.h in Headers */ = {isa = PBXBuildFile; fileRef = B2C58A1804AA646700A80002 /* Registrar.h */; };
+		B2C58A3404AA94F800A80002 /* Registrar_Prefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 32A70AAB03705E1F00C91783 /* Registrar_Prefix.h */; };
+		B2C58A3504AA954500A80002 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
+		B2C58A3604AA954600A80002 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B204494B04AA0EE900A80002 /* libcrypto.dylib */; };
+		B2CAF12604AD18B000A80002 /* Debug.h in Headers */ = {isa = PBXBuildFile; fileRef = B2CAF12504AD18B000A80002 /* Debug.h */; };
+		B2CAF12704AD18B000A80002 /* Debug.h in Headers */ = {isa = PBXBuildFile; fileRef = B2CAF12504AD18B000A80002 /* Debug.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		08FB7796FE84155DC02AAC07 /* testcrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testcrypto.m; sourceTree = "<group>"; };
+		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		32A70AAB03705E1F00C91783 /* Registrar_Prefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Registrar_Prefix.h; sourceTree = "<group>"; };
+		B204494404A9F28700A80002 /* RSACrypto.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = RSACrypto.h; sourceTree = SOURCE_ROOT; };
+		B204494504A9F28700A80002 /* RSACrypto.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = RSACrypto.m; sourceTree = SOURCE_ROOT; };
+		B204494B04AA0EE900A80002 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = /usr/lib/libcrypto.dylib; sourceTree = "<absolute>"; };
+		B204495204AA137800A80002 /* testcrypto */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = testcrypto; sourceTree = BUILT_PRODUCTS_DIR; };
+		B204495B04AA309900A80002 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		B204495C04AA309900A80002 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		B29CDCC604ABB77A00A80002 /* MD5.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MD5.h; sourceTree = "<group>"; };
+		B29CDCC704ABB77A00A80002 /* MD5.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MD5.m; sourceTree = "<group>"; };
+		B2C58A1804AA646700A80002 /* Registrar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Registrar.h; sourceTree = "<group>"; };
+		B2C58A1904AA646700A80002 /* Registrar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Registrar.m; sourceTree = "<group>"; };
+		B2C58A2904AA94C900A80002 /* registerTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = registerTool; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2C58A2B04AA94E800A80002 /* registerTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = registerTool.m; sourceTree = "<group>"; };
+		B2CAF12504AD18B000A80002 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B204494F04AA137800A80002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B204495704AA138000A80002 /* Foundation.framework in Frameworks */,
+				B204495804AA138100A80002 /* libcrypto.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2C58A2604AA94C900A80002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2C58A3504AA954500A80002 /* Foundation.framework in Frameworks */,
+				B2C58A3604AA954600A80002 /* libcrypto.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* Registrar */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C6859EA2029092E104C91782 /* Documentation */,
+				08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = Registrar;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				32A70AAB03705E1F00C91783 /* Registrar_Prefix.h */,
+				08FB7796FE84155DC02AAC07 /* testcrypto.m */,
+				B2CAF12504AD18B000A80002 /* Debug.h */,
+				B2C58A1804AA646700A80002 /* Registrar.h */,
+				B2C58A1904AA646700A80002 /* Registrar.m */,
+				B2C58A2B04AA94E800A80002 /* registerTool.m */,
+				B204494404A9F28700A80002 /* RSACrypto.h */,
+				B204494504A9F28700A80002 /* RSACrypto.m */,
+				B204495B04AA309900A80002 /* Base64.h */,
+				B204495C04AA309900A80002 /* Base64.m */,
+				B29CDCC604ABB77A00A80002 /* MD5.h */,
+				B29CDCC704ABB77A00A80002 /* MD5.m */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				08FB779EFE84155DC02AAC07 /* Foundation.framework */,
+				B204494B04AA0EE900A80002 /* libcrypto.dylib */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B204495204AA137800A80002 /* testcrypto */,
+				B2C58A2904AA94C900A80002 /* registerTool */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6859EA2029092E104C91782 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		B204494D04AA137800A80002 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B204495504AA137F00A80002 /* RSACrypto.h in Headers */,
+				B204496004AA3CCD00A80002 /* Base64.h in Headers */,
+				B2C58A1704AA640D00A80002 /* Registrar_Prefix.h in Headers */,
+				B2CAF12704AD18B000A80002 /* Debug.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2C58A2404AA94C900A80002 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2C58A2D04AA94EB00A80002 /* RSACrypto.h in Headers */,
+				B2C58A2F04AA94EC00A80002 /* Base64.h in Headers */,
+				B2C58A3304AA94F200A80002 /* Registrar.h in Headers */,
+				B2C58A3404AA94F800A80002 /* Registrar_Prefix.h in Headers */,
+				B29CDCC804ABB77A00A80002 /* MD5.h in Headers */,
+				B2CAF12604AD18B000A80002 /* Debug.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = B236EF790ABDC90700153E2F /* Build configuration list for PBXProject "Registrar" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* Registrar */;
+			projectDirPath = "";
+			targets = (
+				B204495104AA137800A80002 /* testcrypto */,
+				B2C58A2804AA94C900A80002 /* registerTool */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXRezBuildPhase section */
+		B204495004AA137800A80002 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2C58A2704AA94C900A80002 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B204494E04AA137800A80002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B204495404AA137E00A80002 /* testcrypto.m in Sources */,
+				B204495604AA137F00A80002 /* RSACrypto.m in Sources */,
+				B204495F04AA3CCD00A80002 /* Base64.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2C58A2504AA94C900A80002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2C58A2E04AA94EC00A80002 /* RSACrypto.m in Sources */,
+				B2C58A3004AA94ED00A80002 /* Base64.m in Sources */,
+				B2C58A3104AA94EF00A80002 /* registerTool.m in Sources */,
+				B2C58A3204AA94F100A80002 /* Registrar.m in Sources */,
+				B29CDCC904ABB77A00A80002 /* MD5.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXToolTarget section */
+		B204495104AA137800A80002 /* testcrypto */ = {
+			isa = PBXToolTarget;
+			buildConfigurationList = B236EF710ABDC90700153E2F /* Build configuration list for PBXToolTarget "testcrypto" */;
+			buildPhases = (
+				B204494D04AA137800A80002 /* Headers */,
+				B204494E04AA137800A80002 /* Sources */,
+				B204494F04AA137800A80002 /* Frameworks */,
+				B204495004AA137800A80002 /* Rez */,
+			);
+			dependencies = (
+			);
+			name = testcrypto;
+			productInstallPath = /usr/local/bin;
+			productName = testcrypto;
+			productReference = B204495204AA137800A80002 /* testcrypto */;
+		};
+		B2C58A2804AA94C900A80002 /* registerTool */ = {
+			isa = PBXToolTarget;
+			buildConfigurationList = B236EF750ABDC90700153E2F /* Build configuration list for PBXToolTarget "registerTool" */;
+			buildPhases = (
+				B2C58A2404AA94C900A80002 /* Headers */,
+				B2C58A2504AA94C900A80002 /* Sources */,
+				B2C58A2604AA94C900A80002 /* Frameworks */,
+				B2C58A2704AA94C900A80002 /* Rez */,
+			);
+			dependencies = (
+			);
+			name = registerTool;
+			productInstallPath = /usr/local/bin;
+			productName = registerTool;
+			productReference = B2C58A2904AA94C900A80002 /* registerTool */;
+		};
+/* End PBXToolTarget section */
+
+/* Begin XCBuildConfiguration section */
+		B236EF720ABDC90700153E2F /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRECOMPILE_PREFIX_HEADER = YES;
+				PREFIX_HEADER = Registrar_Prefix.h;
+				PRODUCT_NAME = testcrypto;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		B236EF730ABDC90700153E2F /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRECOMPILE_PREFIX_HEADER = YES;
+				PREFIX_HEADER = Registrar_Prefix.h;
+				PRODUCT_NAME = testcrypto;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		B236EF740ABDC90700153E2F /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRECOMPILE_PREFIX_HEADER = YES;
+				PREFIX_HEADER = Registrar_Prefix.h;
+				PRODUCT_NAME = testcrypto;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Default;
+		};
+		B236EF760ABDC90700153E2F /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRECOMPILE_PREFIX_HEADER = YES;
+				PREFIX_HEADER = Registrar_Prefix.h;
+				PRODUCT_NAME = registerTool;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		B236EF770ABDC90700153E2F /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRECOMPILE_PREFIX_HEADER = YES;
+				PREFIX_HEADER = Registrar_Prefix.h;
+				PRODUCT_NAME = registerTool;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		B236EF780ABDC90700153E2F /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRECOMPILE_PREFIX_HEADER = YES;
+				PREFIX_HEADER = Registrar_Prefix.h;
+				PRODUCT_NAME = registerTool;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Default;
+		};
+		B236EF7A0ABDC90700153E2F /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG = 1;
+			};
+			name = Development;
+		};
+		B236EF7B0ABDC90700153E2F /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG = 1;
+			};
+			name = Deployment;
+		};
+		B236EF7C0ABDC90700153E2F /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG = 1;
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B236EF710ABDC90700153E2F /* Build configuration list for PBXToolTarget "testcrypto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B236EF720ABDC90700153E2F /* Development */,
+				B236EF730ABDC90700153E2F /* Deployment */,
+				B236EF740ABDC90700153E2F /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		B236EF750ABDC90700153E2F /* Build configuration list for PBXToolTarget "registerTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B236EF760ABDC90700153E2F /* Development */,
+				B236EF770ABDC90700153E2F /* Deployment */,
+				B236EF780ABDC90700153E2F /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		B236EF790ABDC90700153E2F /* Build configuration list for PBXProject "Registrar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B236EF7A0ABDC90700153E2F /* Development */,
+				B236EF7B0ABDC90700153E2F /* Deployment */,
+				B236EF7C0ABDC90700153E2F /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

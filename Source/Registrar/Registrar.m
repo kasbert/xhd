@@ -1,3 +1,22 @@
+/*
+    This file is part of the Xbox HID Driver, Copyright (c) 2007 Darrell Walisser
+    walisser@mac.com http://sourceforge.net/projects/xhd
+
+    The Xbox HID Driver is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    The Xbox HID Driver is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Xbox HID Driver; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+
 //
 //  Registrar.m
 //  Registrar
@@ -42,11 +61,22 @@
 #pragma pack(1)
 typedef struct
 {
-    char name[32];            //  person's name + random data filler
-    NSTimeInterval interval;  //  date code was created
+    char name[32];                   //  person's name + random data filler
+    
+	union {
+		NSTimeInterval timeDoubleValue;  //  date code was created
+		unsigned int timeInts[2];
+	};
+	
     char random[12];          //  more random data
     
 } RegistrationStruct;
+
+#ifdef __LITTLE_ENDIAN__
+#define swap32(x) ((x << 24) | ((x << 8) & 0x00FF0000) | ((x >> 8) & 0x0000FF00) | (x >> 24))
+#else
+#define swap32(x) (x)
+#endif
 
 typedef int checkSize[ (sizeof(RegistrationStruct) == 52) * 2 - 1 ];
 
@@ -91,8 +121,12 @@ typedef int checkSize[ (sizeof(RegistrationStruct) == 52) * 2 - 1 ];
 + (RegistrationError)checkRegistration:(NSString*)registrationString 
     withPublicKeyFile:(NSString*)keyFile inOutRegistrationHash:(NSString**)hashPtr;
 {
-    
-    // first convert registration code to raw data
+    #ifdef __LITTLE_ENDIAN__
+    DEBUG( NSLog(@"Intel architecture detected"); )
+	#endif
+	
+	
+	// first convert registration code to raw data
     void *rawCode;
     int   rawSize;
     
@@ -168,7 +202,22 @@ typedef int checkSize[ (sizeof(RegistrationStruct) == 52) * 2 - 1 ];
     
     // do date checks
     RegistrationStruct *reg = (RegistrationStruct*)decryptedCode;
-    NSDate *regDate = [ NSDate dateWithTimeIntervalSince1970:reg->interval ];
+	
+	// byteswap interval on intel
+	#ifdef __LITTLE_ENDIAN__
+	reg->timeInts[0] = swap32(reg->timeInts[0]);
+	reg->timeInts[1] = swap32(reg->timeInts[1]);
+	unsigned int tmp = reg->timeInts[0];
+	reg->timeInts[0] = reg->timeInts[1];
+	reg->timeInts[1] = tmp;
+	#endif
+	
+	//CFSwappedFloat64 swapped;
+	//memcpy(&reg->timeDoubleValue, &swapped, sizeof(double));
+	//reg->timeDoubleValue = CFConvertFloat64SwappedToHost(swapped);
+	
+	
+    NSDate *regDate = [ NSDate dateWithTimeIntervalSince1970:reg->timeDoubleValue ];
     
     // debug: print out name and generation date
     DEBUG( NSDateFormatter *fmt = [ [ NSDateFormatter alloc ] initWithDateFormat:@"%m/%d/%y %H:%M:%S" allowNaturalLanguage:NO ]; )
@@ -194,7 +243,6 @@ typedef int checkSize[ (sizeof(RegistrationStruct) == 52) * 2 - 1 ];
     //DEBUG( NSLog (@"Hash created: %@", *hashPtr); )
     
     //free (encodedHash);
-    printf("foo\n");
     
     return kRegistrationNoError;
 }
@@ -211,7 +259,12 @@ typedef int checkSize[ (sizeof(RegistrationStruct) == 52) * 2 - 1 ];
 {
     RegistrationStruct reg;
     
-    reg.interval = [ [ NSDate date ] timeIntervalSince1970 ];
+	#ifdef __LITTLE_ENDIAN__
+	NSLog(@"Cannot create key on Intel architecture (yet)");
+	return NO;
+	#endif
+	
+    reg.timeDoubleValue = [ [ NSDate date ] timeIntervalSince1970 ];
     
     const char *name = [ registrationName cString ];
     int i;
