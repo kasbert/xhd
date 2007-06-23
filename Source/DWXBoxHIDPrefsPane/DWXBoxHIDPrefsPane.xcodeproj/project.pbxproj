@@ -22,7 +22,6 @@
 		B24EEE8E0A4D887200A488B8 /* PrefsPane.nib in Resources */ = {isa = PBXBuildFile; fileRef = B2BC8C60048679EE00A80002 /* PrefsPane.nib */; };
 		B24EEE8F0A4D887200A488B8 /* controller64.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2C2DB5A048D48B900A80002 /* controller64.tiff */; };
 		B24EEE900A4D887200A488B8 /* remote64.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2C2DB5C048D48C000A80002 /* remote64.tiff */; };
-		B24EEE910A4D887200A488B8 /* pubkey in Resources */ = {isa = PBXBuildFile; fileRef = B2CAF12204AD17B000A80002 /* pubkey */; };
 		B24EEE920A4D887200A488B8 /* pref64.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2C41A9004AE4D0700A80002 /* pref64.tiff */; };
 		B24EEE930A4D887200A488B8 /* xboxhid.icns in Resources */ = {isa = PBXBuildFile; fileRef = B2C41A9104AE4D0700A80002 /* xboxhid.icns */; };
 		B24EEE940A4D887200A488B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
@@ -277,7 +276,6 @@
 				B24EEE8E0A4D887200A488B8 /* PrefsPane.nib in Resources */,
 				B24EEE8F0A4D887200A488B8 /* controller64.tiff in Resources */,
 				B24EEE900A4D887200A488B8 /* remote64.tiff in Resources */,
-				B24EEE910A4D887200A488B8 /* pubkey in Resources */,
 				B24EEE920A4D887200A488B8 /* pref64.tiff in Resources */,
 				B24EEE930A4D887200A488B8 /* xboxhid.icns in Resources */,
 				B24EEE940A4D887200A488B8 /* InfoPlist.strings in Resources */,
@@ -376,7 +374,7 @@
 					"-Wno-unknown-pragmas",
 				);
 				WRAPPER_EXTENSION = prefPane;
-				ZERO_LINK = YES;
+				ZERO_LINK = NO;
 			};
 			name = Development;
 		};
@@ -432,6 +430,7 @@
 					"-Wno-unknown-pragmas",
 				);
 				WRAPPER_EXTENSION = prefPane;
+				ZERO_LINK = NO;
 			};
 			name = Default;
 		};

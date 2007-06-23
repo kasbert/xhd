@@ -59,7 +59,7 @@
 		B21CAEFF049E3BEB00A80002 /* installLoginItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = installLoginItem.m; sourceTree = "<group>"; };
 		B24EEE180A4D848700A488B8 /* XboxHIDDaemon */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.executable"; path = XboxHIDDaemon; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24EEE330A4D849C00A488B8 /* Info-DWXBoxHIDDaemonLauncher__Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info-DWXBoxHIDDaemonLauncher__Upgraded_.plist"; sourceTree = "<group>"; };
-		B24EEE340A4D849C00A488B8 /* XboxHIDDaemonLauncher.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = XboxHIDDaemonLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B24EEE340A4D849C00A488B8 /* XboxHIDDaemonLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XboxHIDDaemonLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24EEE490A4D84A900A488B8 /* installLoginItem */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = installLoginItem; sourceTree = BUILT_PRODUCTS_DIR; };
 		B28D2D6B04892F7500A80002 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		B2C41AA304AE587A00A80002 /* xboxhid.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = xboxhid.icns; sourceTree = SOURCE_ROOT; };
@@ -365,7 +365,7 @@
 					"-Wno-four-char-constants",
 					"-Wno-unknown-pragmas",
 				);
-				ZERO_LINK = YES;
+				ZERO_LINK = NO;
 			};
 			name = Development;
 		};
@@ -417,6 +417,7 @@
 					"-Wno-four-char-constants",
 					"-Wno-unknown-pragmas",
 				);
+				ZERO_LINK = NO;
 			};
 			name = Default;
 		};
@@ -441,7 +442,7 @@
 					"-Wno-unknown-pragmas",
 				);
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = YES;
+				ZERO_LINK = NO;
 			};
 			name = Development;
 		};
@@ -485,6 +486,7 @@
 					"-Wno-unknown-pragmas",
 				);
 				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
 			};
 			name = Default;
 		};
@@ -561,7 +563,7 @@
 					"-Wno-four-char-constants",
 					"-Wno-unknown-pragmas",
 				);
-				ZERO_LINK = YES;
+				ZERO_LINK = NO;
 			};
 			name = Development;
 		};
@@ -601,6 +603,7 @@
 					"-Wno-four-char-constants",
 					"-Wno-unknown-pragmas",
 				);
+				ZERO_LINK = NO;
 			};
 			name = Default;
 		};
