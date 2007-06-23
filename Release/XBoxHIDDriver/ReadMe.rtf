@@ -1,4 +1,4 @@
-{\rtf1\mac\ansicpg10000\cocoartf102
+{\rtf1\mac\ansicpg10000\cocoartf824\cocoasubrtf420
 {\fonttbl\f0\fmodern\fcharset77 Courier;\f1\fmodern\fcharset77 Courier-Bold;\f2\fmodern\fcharset77 Courier-BoldOblique;
 \f3\fmodern\fcharset77 Courier-Oblique;}
 {\colortbl;\red255\green255\blue255;}
@@ -8,9 +8,9 @@
 \f0\fs34 \cf0 XBox HID Driver for Mac OS X\
 
 \fs22 \
-Release 1.0.0. May 18, 2003\
+Release 1.3.4 June 12, 2007\
 Created by Darrell Walisser\
-http://homepage.mac.com/walisser/xboxhiddriver\
+http://xhd.sf.net\
 walisser@mac.com\
 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
@@ -31,16 +31,22 @@ XBox Controller with USB adapter (
 \f1\b Installation and Removal
 \f0\b0 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
-\cf0 To install, just open the "XBoxHIDDriver.pkg" package and follow the instructions. You'll have to reboot for the new driver to be loaded. Or, if you are feeling adventurous, you can avoid rebooting by loading it by hand (I've done this countless times during development without problems, so I think it's pretty safe):\
+\cf0 To install, just open the "XBoxHIDDriver.pkg" package and follow the instructions. Restart should not be required, although it can't hurt.\
 \
-> sudo kextload /System/Library/Extensions/DWXBoxHIDDriver.kext\
+Removal is trickier, from the console you can do:\
+\
+sudo rm -rf /Library/PreferencePanes/XboxHIDPrefsPane.prefPane\
+sudo rm -rf /System/Library/Extensions/DWXboxHIDDriver.kext\
+\
+Now open login items and delete the item for the launcher.\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
 
 \f1\b \cf0 \
+\
 Known Bugs and Limitations\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
 
-\f0\b0 \cf0 I hacked this driver together in just under a week with no prior HID, USB, or device driver knowledge, so there may be bugs. If you find something that's clearly wrong, let me know so at least I can keep track of these things.\
+\f0\b0 \cf0 The main "bug" is that the controller doesn't work in the game you want or the 3rd-party controller you have doesn't work at all. There are ways around these problems which are documented in the website FAQ.\
 \
 - 
 \f2\i\b It doesn't work with Classic
@@ -66,7 +72,7 @@ I could probably easily fix this, but unless there are serious complaints this p
 \
 * If you have another device that is 
 \f1\b NOT 
-\f0\b0 a gamepad, it probably won't work at all. If I get enough donations, I might feel compelled to buy a wheel or write support for the remote control and other devices. But hey, the source is provided so feel free to go at it if you are so inclined.\
+\f0\b0 a gamepad, it probably won't work at all. If I get enough donations, I might feel compelled to buy a wheel or write support for other devices. But hey, the source is provided so feel free to go at it if you are so inclined.\
 \
 - 
 \f2\i\b Force feedback is untested and may not work. 
@@ -80,14 +86,7 @@ I could probably easily fix this, but unless there are serious complaints this p
 \f1\b About the Source Code\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
 
-\f0\b0 \cf0 The source code falls under the Apple Public Source License, be sure to read it and agree with its terms before modifying the source.\
-\
-With the code, I'm also including the project file, original Apple source code, and the descriptor tool (Windows). The descriptor tool can be used to create a new HID report descriptor to support, say, a wheel or the DVD IR receiver. There is also a 
-\f3\i UserLandTest
-\f2\b  
-\f0\i0\b0 project that shows how to read the controller values without using HIDManager or a kext. This will be useful for figuring out the descriptor format required for an unsupported (non-gamepad) device.\
-\
-In the source code itself, you'll find various notes about the implementation.\
+\f0\b0 \cf0 To get the source code go to the sourceforge project page http://sourceforge.net/projects/xhd\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
 
@@ -109,7 +108,7 @@ https://www.paypal.com/xclick/business=walisser%40mac.com&item_name=XBox+HID+Dri
 \
 - 
 \f2\i\b Hack the Source
-\f0\i0\b0  - especially try to find a good way to remove all hardcoded tables and static data, and place that in the property list where it belongs.\
+\f0\i0\b0  - especially try to build a utility to automatically add 3rd-party stuff to the driver property list!\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
 

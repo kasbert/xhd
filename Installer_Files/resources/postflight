@@ -42,3 +42,10 @@ chmod 755 Library/PreferencePanes/XboxHIDPrefsPane.prefPane/Contents/Resources/X
 chown -R root:wheel /System/Library/Extensions/DWXboxHIDDriver.kext
 find /System/Library/Extensions/DWXboxHIDDriver.kext -type d -exec chmod 755 "{}" ";"
 find /System/Library/Extensions/DWXboxHIDDriver.kext -type f -exec chmod 644 "{}" ";"
+
+echo "Load kernel extension"
+sudo /sbin/kextload /System/Library/Extensions/DWXboxHIDDriver.kext
+
+echo "Start prefs daemon"
+sudo -u $USER open /Library/PreferencePanes/XboxHIDPrefsPane.prefPane/Contents/Resources/XboxHIDDaemonLauncher.app
+
