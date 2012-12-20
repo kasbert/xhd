@@ -23,6 +23,8 @@
 //  Created by Darrell Walisser on Sun Jun 01 2003.
 //  Copyright (c) 2003 __MyCompanyName__. All rights reserved.
 //
+//  v2.0.0 Modified 12/18/2012 to support Standard 32/64-bit architecture. Compiled with Mac OS X 10.6 SDK.
+//
 
 #import "DWXBoxHIDPrefsLoader.h"
 
@@ -197,7 +199,7 @@
                 setObject:configName forKey:[ device identifier ] ];
                 
             [ DWXBoxHIDPrefsLoader setDefaults:defaults ];
-        
+
             // broadcast a message to other applications that the device's configuration has changed
             [ [ NSDistributedNotificationCenter defaultCenter ]
                 postNotificationName:kDWXBoxHIDDeviceConfigurationDidChangeNotification 
@@ -261,5 +263,6 @@
     
     return NO;
 }
+
 
 @end

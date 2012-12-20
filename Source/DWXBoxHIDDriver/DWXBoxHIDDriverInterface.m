@@ -23,6 +23,8 @@
 //  Created by Darrell Walisser on Thu May 29 2003.
 //  Copyright (c) 2003 __MyCompanyName__. All rights reserved.
 //
+//  v2.0.0 Modified 12/18/2012 to support Standard 32/64-bit architecture. Compiled with Mac OS X 10.6 SDK.
+//
 
 #import "DWXBoxHIDDriverInterface.h"
 #import <IOKit/hid/IOHIDKeys.h>
@@ -87,7 +89,7 @@
 
 - (NSMutableDictionary*)elementWithCookieRec:(int)cookie elements:(NSArray*)elements
 {
-    int i, count;
+    NSUInteger i, count;
     
     for (i = 0, count = [ elements count ]; i < count; i++) {
     
@@ -151,10 +153,10 @@
 + (NSArray*)interfaces
 {
     IOReturn 				result = kIOReturnSuccess;
-	mach_port_t 			masterPort = NULL;
-	io_iterator_t 			objectIterator = NULL;
-	CFMutableDictionaryRef 	matchDictionary = NULL;
-	io_object_t 			driver = NULL;
+	mach_port_t 			masterPort = 0;
+	io_iterator_t 			objectIterator = 0;
+	CFMutableDictionaryRef 	matchDictionary = 0;
+	io_object_t 			driver = 0;
 	NSMutableArray          *interfaceList = nil;
     
 	result = IOMasterPort (bootstrap_port, &masterPort);
@@ -166,7 +168,7 @@
 
 	/* Set up a matching dictionary to search I/O Registry by class name for all HID class devices. */
 	matchDictionary = IOServiceMatching ("DWXBoxHIDDriver");
-	if ((matchDictionary == NULL))
+	if (matchDictionary == NULL)
 	{
 		NSLog(@"Failed to get CFMutableDictionaryRef via IOServiceMatching.");
 		return nil;
@@ -180,7 +182,7 @@
 		return nil;
 	}
     
-	if (NULL == objectIterator) /* there are no joysticks */
+	if (0 == objectIterator) /* there are no joysticks */
 	{
 		return nil;
 	}
@@ -336,6 +338,7 @@
 {
     [ self setOptionWithKey:NSSTR(kOptionInvertYAxisKey) andValue:BOOLtoID(inverts) ];
     [ self getDeviceProperties ];
+    
 }
 
 - (BOOL)invertsXAxis
