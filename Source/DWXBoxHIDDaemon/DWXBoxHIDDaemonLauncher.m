@@ -36,8 +36,8 @@
  
     NSString *command = [ NSString stringWithFormat:@"\"%@/%@\" &", resourcePath, daemon, nil ];
     
-    int status = system([ command cString ]);
-    
+    int status = system([ command UTF8String ]);  // v2.0.0 Changed cString to UTF8String
+
     if (status)
         NSLog (@"Error starting XboxHIDDaemon: %d", status);
     

@@ -19,8 +19,8 @@
 
 #import <Foundation/Foundation.h>
 #import <IOKit/IOKitLib.h>
-#import "DWXBoxHIDDriverInterface.h"
-#import "DWXBoxHIDPrefsLoader.h"
+#import "../DWXBoxHIDDriver/DWXBoxHIDDriverInterface.h"
+#import "../DWXBoxHIDDriver/DWXBoxHIDPrefsLoader.h"
 #include <signal.h>
 
 /*
@@ -39,7 +39,7 @@ static void driversDidLoad(void *refcon, io_iterator_t iterator)
 {
     io_object_t driver;
 
-    while (driver = IOIteratorNext(iterator)) {
+    while ((driver = IOIteratorNext(iterator))) {  // v2.0.0 Added extra set of parenthesis
     
         NSAutoreleasePool *pool = [ [ NSAutoreleasePool alloc ] init ];
         
@@ -61,7 +61,7 @@ static void driversDidLoad(void *refcon, io_iterator_t iterator)
 static void registerForDriverLoadedNotification()
 {
  	IOReturn 				kr = kIOReturnSuccess;
-	mach_port_t 			masterPort = NULL;
+	mach_port_t 			masterPort = 0;  // v2.0.0 changed NULL to 0
 	IONotificationPortRef   notificationPort = NULL;
     CFRunLoopSourceRef      runLoopSource = NULL;
     CFMutableDictionaryRef 	matchDictionary = NULL;

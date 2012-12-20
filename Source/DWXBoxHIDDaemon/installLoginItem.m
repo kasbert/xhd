@@ -23,107 +23,144 @@
 //  Created by Darrell Walisser on Mon Jun 16 2003.
 //  Copyright (c) 2003 __MyCompanyName__. All rights reserved.
 //
+//  Modified 12/18/2012 to support Standard 32/64-bit architecture. Compiled with Mac OS X 10.6 SDK.
+//
+//  New code from http://cocoatutorial.grapewave.com/tag/lssharedfilelist-h/
+//
+
 #import <Foundation/Foundation.h>
+#import <ApplicationServices/ApplicationServices.h>
 
 #define kLoginWindowDomain @"loginwindow"
 #define kLoginWindowItemsArrayKey @"AutoLaunchedApplicationDictionary"
 #define kLoginWindowHideKey @"Hide"
 #define kLoginWindowPathKey @"Path"
 
-static void installLoginItem(char *user, char *path, int hide)
+static void installLoginItem(NSString *path, int global, int hidden)
 {
-    id hideObj = hide ? (id)kCFBooleanTrue : (id)kCFBooleanFalse;
-    NSString *pathObj = [ NSString stringWithCString:path ];
+    NSString *appPath = path;
     
-    NSString *plistPath = [ NSString stringWithFormat:@"/Users/%s/Library/Preferences/%@.plist",
-        user, kLoginWindowDomain, nil ];
+	// This will retrieve the path for the application
+	CFURLRef url = (CFURLRef)[NSURL fileURLWithPath:appPath];
     
-    NSMutableDictionary *dict = [ NSMutableDictionary dictionaryWithContentsOfFile:plistPath ];
-    NSMutableArray *loginItems = [ dict objectForKey:kLoginWindowItemsArrayKey ];
+    // Handle hidden flag
+    NSDictionary *properties = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"com.apple.loginitem.HideOnLaunch"];
+    CFDictionaryRef hide = NULL;
+    if (hidden == 1) { hide = (CFDictionaryRef)properties; }
     
-    // remove any login items with the same path
-    int i = 0;
-    for (i = 0; i < [ loginItems count ]; i++) {
+	// Create a reference to the shared file list.
+    // If we want to add it all users, use
+    // kLSSharedFileListGlobalLoginItems instead of
+    //kLSSharedFileListSessionLoginItems
     
-        NSString *itemPath = [ [ loginItems objectAtIndex:i ] objectForKey:kLoginWindowPathKey ];
-        if ([ itemPath isEqualTo:pathObj ]) {
-        
-            [ loginItems removeObjectAtIndex:i ];
-            i = 0;
+    // Checks to see if installLoginItem is Session or Global
+    CFStringRef *KLSSharedFileList;
+    if (global == 1) {KLSSharedFileList = &kLSSharedFileListGlobalLoginItems;} else {KLSSharedFileList = &kLSSharedFileListSessionLoginItems;}
+    
+	LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, *KLSSharedFileList, NULL);
+	if (loginItems) {
+		//Insert an item to the list.
+		LSSharedFileListItemRef item = LSSharedFileListInsertItemURL(loginItems,
+                                                                     kLSSharedFileListItemLast, NULL, NULL,
+                                                                     url, hide, NULL);
+		if (item){
+			CFRelease(item);
         }
-    }
+	}
     
-    // add our login item
-    {
-        NSMutableDictionary *item = [ NSMutableDictionary dictionary ];
-        [ item setObject:hideObj forKey:kLoginWindowHideKey ];
-        [ item setObject:pathObj forKey:kLoginWindowPathKey ];
-    
-        [ loginItems addObject:item ];
-    }
-    
-    
-    [ dict writeToFile:plistPath atomically:YES ];
+	CFRelease(loginItems);
 }
 
-static void removeLoginItem(char *user, char *path)
+static void removeLoginItem(NSString *path, int global)
 {
-    NSString *pathObj = [ NSString stringWithCString:path ];
+    NSString *appPath = path;
     
-    NSString *plistPath = [ NSString stringWithFormat:@"/Users/%s/Library/Preferences/%@.plist",
-        user, kLoginWindowDomain, nil ];
+	// This will retrieve the path for the application
+	CFURLRef url = (CFURLRef)[NSURL fileURLWithPath:appPath];
     
-    NSMutableDictionary *dict = [ NSMutableDictionary dictionaryWithContentsOfFile:plistPath ];
-    NSMutableArray *loginItems = [ dict objectForKey:kLoginWindowItemsArrayKey ];
+	// Create a reference to the shared file list.
+    CFStringRef *KLSSharedFileList;
     
-    // remove any login items with the same path
-    int i = 0;
-    for (i = 0; i < [ loginItems count ]; i++) {
+    // Checks to see if installLoginItem is Session or Global    
+    if (global == 1) {KLSSharedFileList = &kLSSharedFileListGlobalLoginItems;}
+    else {KLSSharedFileList = &kLSSharedFileListSessionLoginItems;}
     
-        NSString *itemPath = [ [ loginItems objectAtIndex:i ] objectForKey:kLoginWindowPathKey ];
-        if ([ itemPath isEqualTo:pathObj ]) {
+	LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, *KLSSharedFileList, NULL);
+    
+	if (loginItems) {
+		UInt32 seedValue;
+		//Retrieve the list of Login Items and cast them to
+		// a NSArray so that it will be easier to iterate.
+		NSArray  *loginItemsArray = (NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
         
-            [ loginItems removeObjectAtIndex:i ];
-            i = 0;
+		for( int i = 0; i< [loginItemsArray count]; i++){
+			LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)[loginItemsArray objectAtIndex:i];
+			//Resolve the item with URL
+			if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &url, NULL) == noErr) {
+				NSString * urlPath = [(NSURL*)url path];
+				if ([urlPath compare:appPath] == NSOrderedSame){
+                //if ([urlPath hasPrefix:appPath]){
+					LSSharedFileListItemRemove(loginItems,itemRef);
+				}
+			}
+		}
+		[loginItemsArray release];
         }
-    }
+        
     
-    
-    [ dict writeToFile:plistPath atomically:YES ];
 }
-
 int main (int argc, char** argv)
 {
-    NSAutoreleasePool *pool = [ [ NSAutoreleasePool alloc ] init ];
-    
-    char *cmd = argv[1];
-    char *user = argv[2];
-    char *path = argv[3];
-    
-	if (strcmp(cmd, "-install") == 0)
-	{
-		int hide = atoi(argv[4]); 
-    
-	    NSLog(@"Install login item: user=\"%s\" path=\"%s\" hide=%d",
-			user, path, hide);
-			
-		installLoginItem(user, path, hide);
-	}
-	else
-	if (strcmp(cmd, "-remove") == 0)
-	{
-	    NSLog(@"Remove login item: user=\"%s\" path=\"%s\"",
-			user, path);
-			
-		removeLoginItem(user, path);
-	}
-	else
-	{
-		NSLog(@"Install login item: unknown command: %s", cmd);
-	}
-  
-    
-    [ pool release ];
-
-    return 0;
+    @autoreleasepool {
+        // one parameter is required
+        if ((argc<2) || (argc>5))
+        {
+            printf("Invalid number of aruments.\nUsage: (-install -g -h <dir>) or (-remove -g <dir>)\n");
+            exit(1);
+        }
+        
+        int global = 0;
+        int hidden = 0;
+        int install = 0;
+        int remove = 0;
+        
+        // convert path to NSString
+        NSString *path = NULL;
+        
+        // get values of arguments
+        for (int i=0; i<argc; i++)
+        {
+            
+            NSString *str = [NSString stringWithUTF8String:argv[i]];
+            //NSLog(@"argv[%d] = '%@'", i, str);
+            
+            if( ([str isEqualToString:@"-g"]) || ([str isEqualToString:@"-h"]) || ([str isEqualToString:@"-install"]) || ([str isEqualToString:@"-remove"]) ) {
+                
+                if ([str isEqualToString:@"-g"]) {global = 1;}
+                
+                if ([str isEqualToString:@"-h"]) {hidden = 1;}
+                
+                if ([str isEqualToString:@"-install"]) {install = 1;}
+                
+                if ([str isEqualToString:@"-remove"]) {remove = 1;}
+            }
+            else {path = str;}
+        }
+        
+        // Basic error checking
+        if ( (install+remove!=1) || (global+hidden+install+remove !=argc-2) || (!path) ||(remove+hidden==2) ){
+            printf("Invalid arguments.\nUsage: (-install -g -h <dir>) or (-remove -g <dir>)\nn");
+            exit(1);
+        }
+        
+        // call functions
+        if (install == 1) {installLoginItem(path, global, hidden);}
+        else {
+            if (remove == 1) {removeLoginItem(path, global);
+            }
+        }
+        
+        //NSLog(@"global = '%d', hidden = '%d', install = '%d', remove = '%d', path = '%@'", global, hidden, install, remove, path);
+        
+    } return 0;
 }
