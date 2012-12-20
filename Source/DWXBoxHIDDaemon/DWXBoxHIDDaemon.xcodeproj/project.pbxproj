@@ -1,0 +1,693 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		87D5891F1680805C00EDFFBB /* DWXBoxHIDDaemon_Prefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 32A70AAB03705E1F00C91783 /* DWXBoxHIDDaemon_Prefix.h */; };
+		87DBFD451678625500DDC30C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87DBFD441678621900DDC30C /* MainMenu.xib */; };
+		87DBFD4C167866D800DDC30C /* DWXBoxHIDDriverKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = 87DBFD4B167866D800DDC30C /* DWXBoxHIDDriverKeys.h */; };
+		87DBFD6116786BB400DDC30C /* XboxHIDDaemon in CopyFiles */ = {isa = PBXBuildFile; fileRef = B24EEE180A4D848700A488B8 /* XboxHIDDaemon */; };
+		87F8F2E61679211200EDF309 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87F8F2E51679211200EDF309 /* ApplicationServices.framework */; };
+		B2109B740C130E87000EBE2E /* DWXBoxHIDDriverInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = B2109B6F0C130E87000EBE2E /* DWXBoxHIDDriverInterface.h */; };
+		B2109B750C130E87000EBE2E /* DWXBoxHIDDriverInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = B2109B700C130E87000EBE2E /* DWXBoxHIDDriverInterface.m */; };
+		B2109B770C130E87000EBE2E /* DWXBoxHIDPrefsLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = B2109B720C130E87000EBE2E /* DWXBoxHIDPrefsLoader.h */; };
+		B2109B780C130E87000EBE2E /* DWXBoxHIDPrefsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = B2109B730C130E87000EBE2E /* DWXBoxHIDPrefsLoader.m */; };
+		B24EEE0C0A4D848700A488B8 /* daemon.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* daemon.m */; settings = {ATTRIBUTES = (); }; };
+		B24EEE100A4D848700A488B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
+		B24EEE110A4D848700A488B8 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B28D2D6B04892F7500A80002 /* IOKit.framework */; };
+		B24EEE230A4D849C00A488B8 /* DWXBoxHIDDaemonLauncher.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FCEA29049CEEA700A80002 /* DWXBoxHIDDaemonLauncher.h */; };
+		B24EEE260A4D849C00A488B8 /* xboxhid.icns in Resources */ = {isa = PBXBuildFile; fileRef = B2C41AA304AE587A00A80002 /* xboxhid.icns */; };
+		B24EEE280A4D849C00A488B8 /* DWXBoxHIDDaemonLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FCEA2A049CEEA700A80002 /* DWXBoxHIDDaemonLauncher.m */; };
+		B24EEE2A0A4D849C00A488B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
+		B24EEE2B0A4D849C00A488B8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FCEA34049CEF8E00A80002 /* Cocoa.framework */; };
+		B24EEE410A4D84A900A488B8 /* installLoginItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B21CAEFF049E3BEB00A80002 /* installLoginItem.m */; };
+		B24EEE430A4D84A900A488B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		87DBFD6216786BBB00DDC30C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B24EEE060A4D848700A488B8;
+			remoteInfo = DWXBoxHIDDaemon;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B24EEE130A4D848700A488B8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		B24EEEF60A4D8DE100A488B8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				87DBFD6116786BB400DDC30C /* XboxHIDDaemon in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		08FB7796FE84155DC02AAC07 /* daemon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = daemon.m; sourceTree = "<group>"; };
+		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		32A70AAB03705E1F00C91783 /* DWXBoxHIDDaemon_Prefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWXBoxHIDDaemon_Prefix.h; sourceTree = "<group>"; };
+		87DBFD441678621900DDC30C /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		87DBFD4B167866D800DDC30C /* DWXBoxHIDDriverKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DWXBoxHIDDriverKeys.h; path = ../DWXBoxHIDDriver/DWXBoxHIDDriverKeys.h; sourceTree = "<group>"; };
+		87DCB0DB167A8EA50031BA44 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		87DCB0EE167A9BF00031BA44 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		87DCB0F1167A9BF00031BA44 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		87DCB0F2167A9BF00031BA44 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		87DCB0F3167A9BF00031BA44 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		87DCB10C167A9BF00031BA44 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		87F8F2E51679211200EDF309 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		B2109B6F0C130E87000EBE2E /* DWXBoxHIDDriverInterface.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = DWXBoxHIDDriverInterface.h; path = ../DWXBoxHIDDriver/DWXBoxHIDDriverInterface.h; sourceTree = SOURCE_ROOT; };
+		B2109B700C130E87000EBE2E /* DWXBoxHIDDriverInterface.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = DWXBoxHIDDriverInterface.m; path = ../DWXBoxHIDDriver/DWXBoxHIDDriverInterface.m; sourceTree = SOURCE_ROOT; };
+		B2109B720C130E87000EBE2E /* DWXBoxHIDPrefsLoader.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = DWXBoxHIDPrefsLoader.h; path = ../DWXBoxHIDDriver/DWXBoxHIDPrefsLoader.h; sourceTree = SOURCE_ROOT; };
+		B2109B730C130E87000EBE2E /* DWXBoxHIDPrefsLoader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = DWXBoxHIDPrefsLoader.m; path = ../DWXBoxHIDDriver/DWXBoxHIDPrefsLoader.m; sourceTree = SOURCE_ROOT; };
+		B21CAEFF049E3BEB00A80002 /* installLoginItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = installLoginItem.m; sourceTree = "<group>"; };
+		B24EEE180A4D848700A488B8 /* XboxHIDDaemon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XboxHIDDaemon; sourceTree = BUILT_PRODUCTS_DIR; };
+		B24EEE330A4D849C00A488B8 /* Info-DWXBoxHIDDaemonLauncher__Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-DWXBoxHIDDaemonLauncher__Upgraded_.plist"; sourceTree = "<group>"; };
+		B24EEE340A4D849C00A488B8 /* XboxHIDDaemonLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XboxHIDDaemonLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B24EEE490A4D84A900A488B8 /* installLoginItem */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = installLoginItem; sourceTree = BUILT_PRODUCTS_DIR; };
+		B28D2D6B04892F7500A80002 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		B2C41AA304AE587A00A80002 /* xboxhid.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = xboxhid.icns; sourceTree = SOURCE_ROOT; };
+		B2FCEA29049CEEA700A80002 /* DWXBoxHIDDaemonLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWXBoxHIDDaemonLauncher.h; sourceTree = "<group>"; };
+		B2FCEA2A049CEEA700A80002 /* DWXBoxHIDDaemonLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWXBoxHIDDaemonLauncher.m; sourceTree = "<group>"; };
+		B2FCEA34049CEF8E00A80002 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B24EEE0F0A4D848700A488B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B24EEE100A4D848700A488B8 /* Foundation.framework in Frameworks */,
+				B24EEE110A4D848700A488B8 /* IOKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B24EEE290A4D849C00A488B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B24EEE2A0A4D849C00A488B8 /* Foundation.framework in Frameworks */,
+				B24EEE2B0A4D849C00A488B8 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B24EEE420A4D84A900A488B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87F8F2E61679211200EDF309 /* ApplicationServices.framework in Frameworks */,
+				B24EEE430A4D84A900A488B8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* DWXBoxHIDDaemon */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7795FE84155DC02AAC07 /* Source */,
+				B2FCEA2F049CEF2100A80002 /* Resources */,
+				08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */,
+				87DCB0DA167A8EA50031BA44 /* Frameworks */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = DWXBoxHIDDaemon;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				32A70AAB03705E1F00C91783 /* DWXBoxHIDDaemon_Prefix.h */,
+				08FB7796FE84155DC02AAC07 /* daemon.m */,
+				B21CAEFF049E3BEB00A80002 /* installLoginItem.m */,
+				B2FCEA29049CEEA700A80002 /* DWXBoxHIDDaemonLauncher.h */,
+				B2FCEA2A049CEEA700A80002 /* DWXBoxHIDDaemonLauncher.m */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				87F8F2E51679211200EDF309 /* ApplicationServices.framework */,
+				08FB779EFE84155DC02AAC07 /* Foundation.framework */,
+				B2FCEA34049CEF8E00A80002 /* Cocoa.framework */,
+				B28D2D6B04892F7500A80002 /* IOKit.framework */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B24EEE180A4D848700A488B8 /* XboxHIDDaemon */,
+				B24EEE340A4D849C00A488B8 /* XboxHIDDaemonLauncher.app */,
+				B24EEE490A4D84A900A488B8 /* installLoginItem */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		87DCB0DA167A8EA50031BA44 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				87DCB0DB167A8EA50031BA44 /* Foundation.framework */,
+				87DCB0EE167A9BF00031BA44 /* Cocoa.framework */,
+				87DCB10C167A9BF00031BA44 /* SenTestingKit.framework */,
+				87DCB0F0167A9BF00031BA44 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		87DCB0F0167A9BF00031BA44 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				87DCB0F1167A9BF00031BA44 /* AppKit.framework */,
+				87DCB0F2167A9BF00031BA44 /* CoreData.framework */,
+				87DCB0F3167A9BF00031BA44 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		B2FCEA2F049CEF2100A80002 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B24EEE330A4D849C00A488B8 /* Info-DWXBoxHIDDaemonLauncher__Upgraded_.plist */,
+				87DBFD4B167866D800DDC30C /* DWXBoxHIDDriverKeys.h */,
+				B2109B6F0C130E87000EBE2E /* DWXBoxHIDDriverInterface.h */,
+				B2109B700C130E87000EBE2E /* DWXBoxHIDDriverInterface.m */,
+				B2109B720C130E87000EBE2E /* DWXBoxHIDPrefsLoader.h */,
+				B2109B730C130E87000EBE2E /* DWXBoxHIDPrefsLoader.m */,
+				B2C41AA304AE587A00A80002 /* xboxhid.icns */,
+				87DBFD441678621900DDC30C /* MainMenu.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		B24EEE070A4D848700A488B8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87D5891F1680805C00EDFFBB /* DWXBoxHIDDaemon_Prefix.h in Headers */,
+				B2109B740C130E87000EBE2E /* DWXBoxHIDDriverInterface.h in Headers */,
+				B2109B770C130E87000EBE2E /* DWXBoxHIDPrefsLoader.h in Headers */,
+				87DBFD4C167866D800DDC30C /* DWXBoxHIDDriverKeys.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B24EEE220A4D849C00A488B8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B24EEE230A4D849C00A488B8 /* DWXBoxHIDDaemonLauncher.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B24EEE3F0A4D84A900A488B8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		B24EEE060A4D848700A488B8 /* DWXBoxHIDDaemon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B24EEE140A4D848700A488B8 /* Build configuration list for PBXNativeTarget "DWXBoxHIDDaemon" */;
+			buildPhases = (
+				B24EEE070A4D848700A488B8 /* Headers */,
+				B24EEE0B0A4D848700A488B8 /* Sources */,
+				B24EEE0F0A4D848700A488B8 /* Frameworks */,
+				B24EEE120A4D848700A488B8 /* Rez */,
+				B24EEE130A4D848700A488B8 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DWXBoxHIDDaemon;
+			productInstallPath = "$(HOME)/bin";
+			productName = DWXBoxHIDDaemon;
+			productReference = B24EEE180A4D848700A488B8 /* XboxHIDDaemon */;
+			productType = "com.apple.product-type.tool";
+		};
+		B24EEE1F0A4D849C00A488B8 /* DWXBoxHIDDaemonLauncher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B24EEE2F0A4D849C00A488B8 /* Build configuration list for PBXNativeTarget "DWXBoxHIDDaemonLauncher" */;
+			buildPhases = (
+				B24EEE220A4D849C00A488B8 /* Headers */,
+				B24EEE240A4D849C00A488B8 /* Resources */,
+				B24EEE270A4D849C00A488B8 /* Sources */,
+				B24EEE290A4D849C00A488B8 /* Frameworks */,
+				B24EEE2C0A4D849C00A488B8 /* Rez */,
+				B24EEEF60A4D8DE100A488B8 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				87DBFD6316786BBB00DDC30C /* PBXTargetDependency */,
+			);
+			name = DWXBoxHIDDaemonLauncher;
+			productInstallPath = "$(USER_APPS_DIR)";
+			productName = DWXBoxHIDDaemonLauncher;
+			productReference = B24EEE340A4D849C00A488B8 /* XboxHIDDaemonLauncher.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B24EEE3E0A4D84A900A488B8 /* installLoginItem */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B24EEE450A4D84A900A488B8 /* Build configuration list for PBXNativeTarget "installLoginItem" */;
+			buildPhases = (
+				B24EEE3F0A4D84A900A488B8 /* Headers */,
+				B24EEE400A4D84A900A488B8 /* Sources */,
+				B24EEE420A4D84A900A488B8 /* Frameworks */,
+				B24EEE440A4D84A900A488B8 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = installLoginItem;
+			productInstallPath = /usr/local/bin;
+			productName = installLoginItem;
+			productReference = B24EEE490A4D84A900A488B8 /* installLoginItem */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+			};
+			buildConfigurationList = B24EEE3A0A4D849C00A488B8 /* Build configuration list for PBXProject "DWXBoxHIDDaemon" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 08FB7794FE84155DC02AAC07 /* DWXBoxHIDDaemon */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B24EEE060A4D848700A488B8 /* DWXBoxHIDDaemon */,
+				B24EEE1F0A4D849C00A488B8 /* DWXBoxHIDDaemonLauncher */,
+				B24EEE3E0A4D84A900A488B8 /* installLoginItem */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B24EEE240A4D849C00A488B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B24EEE260A4D849C00A488B8 /* xboxhid.icns in Resources */,
+				87DBFD451678625500DDC30C /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		B24EEE120A4D848700A488B8 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B24EEE2C0A4D849C00A488B8 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B24EEE440A4D84A900A488B8 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B24EEE0B0A4D848700A488B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B24EEE0C0A4D848700A488B8 /* daemon.m in Sources */,
+				B2109B750C130E87000EBE2E /* DWXBoxHIDDriverInterface.m in Sources */,
+				B2109B780C130E87000EBE2E /* DWXBoxHIDPrefsLoader.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B24EEE270A4D849C00A488B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B24EEE280A4D849C00A488B8 /* DWXBoxHIDDaemonLauncher.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B24EEE400A4D84A900A488B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B24EEE410A4D84A900A488B8 /* installLoginItem.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		87DBFD6316786BBB00DDC30C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B24EEE060A4D848700A488B8 /* DWXBoxHIDDaemon */;
+			targetProxy = 87DBFD6216786BBB00DDC30C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B24EEE150A4D848700A488B8 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = DWXBoxHIDDaemon_Prefix.h;
+				HEADER_SEARCH_PATHS = "";
+				INSTALL_PATH = "$(HOME)/bin";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = XboxHIDDaemon;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = NO;
+			};
+			name = Development;
+		};
+		B24EEE160A4D848700A488B8 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = DWXBoxHIDDaemon_Prefix.h;
+				HEADER_SEARCH_PATHS = "";
+				INSTALL_PATH = "$(HOME)/bin";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = XboxHIDDaemon;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		B24EEE170A4D848700A488B8 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = DWXBoxHIDDaemon_Prefix.h;
+				HEADER_SEARCH_PATHS = "";
+				INSTALL_PATH = "$(HOME)/bin";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = XboxHIDDaemon;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = NO;
+			};
+			name = Default;
+		};
+		B24EEE300A4D849C00A488B8 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "Info-DWXBoxHIDDaemonLauncher__Upgraded_.plist";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = XboxHIDDaemonLauncher;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Development;
+		};
+		B24EEE310A4D849C00A488B8 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "Info-DWXBoxHIDDaemonLauncher__Upgraded_.plist";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = XboxHIDDaemonLauncher;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		B24EEE320A4D849C00A488B8 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "Info-DWXBoxHIDDaemonLauncher__Upgraded_.plist";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = XboxHIDDaemonLauncher;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Default;
+		};
+		B24EEE3B0A4D849C00A488B8 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				GCC_LINK_WITH_DYNAMIC_LIBRARIES = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				HEADER_SEARCH_PATHS = "";
+				SDKROOT = macosx10.6;
+				USER_HEADER_SEARCH_PATHS = ../DWXBoxHIDDriver;
+			};
+			name = Development;
+		};
+		B24EEE3C0A4D849C00A488B8 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				GCC_LINK_WITH_DYNAMIC_LIBRARIES = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				HEADER_SEARCH_PATHS = "";
+				SDKROOT = macosx10.6;
+				USER_HEADER_SEARCH_PATHS = ../DWXBoxHIDDriver;
+			};
+			name = Deployment;
+		};
+		B24EEE3D0A4D849C00A488B8 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				GCC_LINK_WITH_DYNAMIC_LIBRARIES = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				HEADER_SEARCH_PATHS = "";
+				SDKROOT = macosx10.6;
+				USER_HEADER_SEARCH_PATHS = ../DWXBoxHIDDriver;
+			};
+			name = Default;
+		};
+		B24EEE460A4D84A900A488B8 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = installLoginItem;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = NO;
+			};
+			name = Development;
+		};
+		B24EEE470A4D84A900A488B8 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = installLoginItem;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		B24EEE480A4D84A900A488B8 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = s;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = installLoginItem;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = NO;
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B24EEE140A4D848700A488B8 /* Build configuration list for PBXNativeTarget "DWXBoxHIDDaemon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B24EEE150A4D848700A488B8 /* Development */,
+				B24EEE160A4D848700A488B8 /* Deployment */,
+				B24EEE170A4D848700A488B8 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		B24EEE2F0A4D849C00A488B8 /* Build configuration list for PBXNativeTarget "DWXBoxHIDDaemonLauncher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B24EEE300A4D849C00A488B8 /* Development */,
+				B24EEE310A4D849C00A488B8 /* Deployment */,
+				B24EEE320A4D849C00A488B8 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		B24EEE3A0A4D849C00A488B8 /* Build configuration list for PBXProject "DWXBoxHIDDaemon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B24EEE3B0A4D849C00A488B8 /* Development */,
+				B24EEE3C0A4D849C00A488B8 /* Deployment */,
+				B24EEE3D0A4D849C00A488B8 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		B24EEE450A4D84A900A488B8 /* Build configuration list for PBXNativeTarget "installLoginItem" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B24EEE460A4D84A900A488B8 /* Development */,
+				B24EEE470A4D84A900A488B8 /* Deployment */,
+				B24EEE480A4D84A900A488B8 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
