@@ -23,6 +23,8 @@
 //  Created by Darrell Walisser on Thu May 29 2003.
 //  Copyright (c) 2003 __MyCompanyName__. All rights reserved.
 //
+//  v2.0.0 Modified 12/18/2012 to support Standard 32/64-bit architecture. Compiled with Mac OS X 10.6 SDK.
+//
 
 #import "DWXBoxHIDPrefsPane.h"
 #import "DWXBoxHIDDriverInterface.h"
@@ -53,7 +55,7 @@
     NSString *imagePath;
     
     imagePath = [ [ self bundle ] resourcePath ];
-    imagePath = [ imagePath stringByAppendingFormat:@"/%@.tiff", name, nil ];
+    imagePath = [ imagePath stringByAppendingFormat:@"/%@.tif", name, nil ];	//  v2.0.0 changed .tiff to .tif
     
     return [ [ [ NSImage alloc ] initWithContentsOfFile:imagePath ] autorelease ];
 }
@@ -263,7 +265,8 @@
 {
     int deadzone;
     
-    if ([ device mapsLeftTriggerToButton ]) {
+    // v2.0.0 Changed mapsLeftTriggerToButton to clampsLeftTriggerValues
+    if ([ device clampsLeftTriggerValues ]) {
         [ _leftTriggerUsage selectItemAtIndex:kTriggerButtonIndex ];
         [ _leftTriggerView setMax:1 ];
     }
@@ -276,7 +279,8 @@
     [ _leftTriggerDeadzone setIntValue:deadzone ];
     [ _leftTriggerDeadzoneField setIntValue:deadzone ];
     
-    if ([ device mapsRightTriggerToButton ]) {
+    // v2.0.0 Changed mapsRightTriggerToButton to clampsRightTriggerValues
+    if ([ device clampsRightTriggerValues ]) {
         [ _rightTriggerUsage selectItemAtIndex:kTriggerButtonIndex ];
         [ _rightTriggerView setMax:1 ];
     }
@@ -303,7 +307,7 @@
 {
     if (control == _leftTriggerUsage) {
     
-        int index = [ _leftTriggerUsage indexOfSelectedItem ];
+        NSInteger index = [ _leftTriggerUsage indexOfSelectedItem ];  // v2.0.0 Changed from int to NSInteger
         if (kTriggerButtonIndex == index) {
         
             [ device setMapsLeftTriggerToButton:YES ];
@@ -321,7 +325,7 @@
     else
     if (control == _rightTriggerUsage) {
     
-        int index = [ _rightTriggerUsage indexOfSelectedItem ];
+        NSInteger index = [ _rightTriggerUsage indexOfSelectedItem ];  // v2.0.0 Changed from int to NSInteger
         if (kTriggerButtonIndex == index) {
         
             [ device setMapsRightTriggerToButton:YES ];
@@ -378,7 +382,7 @@
 
 - (void)initOptionsInterface
 {
-    int deviceIndex;
+    NSInteger deviceIndex; // v2.0.0 Changed from int to NSInteger
     id  device;
     BOOL error = YES;
     
@@ -471,9 +475,9 @@
         case 19:
             [ _buttonView setValue:value forButton:5 ]; break;
         case 20:
-            [ _leftTriggerView setValue:value ]; break;
+            [ (DWTriggerView*) _leftTriggerView setValue:value ]; break;	//  v2.0.0 added (DWTrigerView*) to specify value
         case 21:            
-            [ _rightTriggerView setValue:value ]; break;
+            [ (DWTriggerView*) _rightTriggerView setValue:value ]; break;		//  v2.0.0 added (DWTrigerView*) to specify value
         case 22:
             [ _leftStickView setX:value ]; break;
         case 23:
@@ -608,7 +612,7 @@
 	[ _sheet close ];
 	if (returnCode)
 	{
-		if (0 < [ self scanForDevices ])
+         if (0 < [ self scanForDevices ])
 		{
 			_sheet = _patcherUIWindow;
 			[ NSApp beginSheet:_sheet 
@@ -647,10 +651,11 @@
 
 - (void)getVersion
 {
-	NSBundle* b = [ NSBundle bundleWithIdentifier:@"org.walisser.XBoxHIDDriver" ];
-	
-	NSString* version = [ [ b infoDictionary ] objectForKey:@"CFBundleShortVersionString" ];
-	
+	//NSBundle* b = [ NSBundle bundleWithIdentifier:@"org.walisser.XBoxHIDDriver" ];    // v2.0.0 value didn't always load
+    NSBundle* b = [ NSBundle bundleWithPath:@"/System/Library/Extensions/DWXBoxHIDDriver.kext" ];     // v2.0.0 using kext path instead
+	NSString* version = [ [ b infoDictionary ] objectForKey:@"CFBundleVersion" ];
+    //if (version == nil) {version = @"Version Unavailable";}    // v2.0.0 just in case the version isn't available
+	//NSLog(version);	// v2.0.0 log of version
 	[ _versionText setStringValue:version ];
 }
 
@@ -672,10 +677,10 @@
     
         while (1) {
         
-            NSRange range = [ str rangeOfString:[ NSString stringWithCString:escapies[i]] ];
+            NSRange range = [ str rangeOfString:[ NSString stringWithCString:escapies[i] encoding:NSUTF8StringEncoding] ];	//  v2.0.0 changed stringWithCString to NSUTF8StringEncoding
             if (range.length != 0) {
             
-                [ str replaceCharactersInRange:range withString: 
+                [ str replaceCharactersInRange:range withString:
                     [ NSString stringWithFormat:@"%%%.2X", escapies[i][0], nil ] ];
             }
             else {
@@ -745,6 +750,7 @@
 - (void)dealloc
 {
     [ _devices autorelease ];
+    [super dealloc];	//  v2.0.0 added [super dealloc]
 }
 
 - (void)willSelect
@@ -805,7 +811,7 @@
 - (IBAction)changePadOption:(id)sender
 {
     // if (sender == _leftTriggerUsage) ...
-    int deviceIndex = [ _devicePopUpButton indexOfSelectedItem ];
+    NSInteger deviceIndex = [ _devicePopUpButton indexOfSelectedItem ];  // v2.0.0 Changed from int to NSInteger
     id device = [ _devices objectAtIndex:deviceIndex ];
     if ([ [ device deviceType ] isEqualTo:NSSTR(kDeviceTypePadKey) ]) {
     

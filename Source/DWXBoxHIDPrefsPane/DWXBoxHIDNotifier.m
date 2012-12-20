@@ -44,7 +44,7 @@ static void primeNotifications(void *refcon, io_iterator_t iterator)
 {
     io_object_t object;
     
-    while (object = IOIteratorNext(iterator))
+    while ((object = IOIteratorNext(iterator))) //  v2.0.0 added extra set of ()
         ;
 }
 
@@ -53,7 +53,7 @@ static void driversMatched(void *refcon, io_iterator_t iterator)
     DWXBoxHIDNotifier *self = (DWXBoxHIDNotifier*)refcon;
     io_object_t object;
     
-    while (object = IOIteratorNext(iterator))
+    while ((object = IOIteratorNext(iterator))) //  v2.0.0 added extra set of ()
         ;
     
     [ self fireMatchedSelector ];
@@ -64,7 +64,7 @@ static void driversTerminated(void *refcon, io_iterator_t iterator)
     DWXBoxHIDNotifier *self = (DWXBoxHIDNotifier*)refcon;
     io_object_t object;
     
-    while (object = IOIteratorNext(iterator))
+    while ((object = IOIteratorNext(iterator))) //  v2.0.0 added extra set of ()
         ;
     
     [ self fireTerminatedSelector ];
@@ -73,7 +73,7 @@ static void driversTerminated(void *refcon, io_iterator_t iterator)
 - (BOOL)createRunLoopNotifications
 {
  	IOReturn 				kr = kIOReturnSuccess;
-	mach_port_t 			masterPort = NULL;
+	mach_port_t 			masterPort = 0; //  v2.0.0 changed NULL to 0
 	
     CFMutableDictionaryRef 	matchDictionary = NULL;
 	io_iterator_t           notificationIterator;

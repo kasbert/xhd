@@ -82,6 +82,7 @@
     
     if (_roundRectPath)
         [ _roundRectPath release ];
+    [super dealloc];    //  v2.0.0 added [super dealloc]
 }
 
 - (void)drawButtonValue:(float)value maxValue:(float)maxValue 
@@ -134,7 +135,7 @@
     [ textStorage addLayoutManager:layoutManager ];
     [ layoutManager release ];
     
-    int glyphIndex;
+    NSUInteger glyphIndex;  //  v2.0.0 changed int to NSUInteger
     NSRange glyphRange;
     NSRect usedRect;
 

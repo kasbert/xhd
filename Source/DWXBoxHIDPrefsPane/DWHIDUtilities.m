@@ -140,7 +140,7 @@ static recDevice *gpDeviceList = NULL;
 
 static void HIDReportErrorNum (char * strError, long numError)
 {
-	NSLog(@"HID Error: %s: %d", strError, numError);
+	NSLog(@"HID Error: %s: %ld", strError, numError);   //  v2.0.0 changed %d to %ld
 }
 
 static void HIDGetCollectionElements (CFMutableDictionaryRef deviceProperties, recDevice *pDevice);
@@ -608,11 +608,11 @@ static recDevice *HIDDisposeDevice (recDevice **ppDevice)
 int DWHID_JoystickInit()
 {
 	IOReturn result = kIOReturnSuccess;
-	mach_port_t masterPort = NULL;
-	io_iterator_t hidObjectIterator = NULL;
+	mach_port_t masterPort = 0; //  v2.0.0 changed NULL to 0
+	io_iterator_t hidObjectIterator = 0; //  v2.0.0 changed NULL to 0
 	CFMutableDictionaryRef hidMatchDictionary = NULL;
 	recDevice *device, *lastDevice;
-	io_object_t ioHIDDeviceObject = NULL;
+	io_object_t ioHIDDeviceObject = 0; //  v2.0.0 changed NULL to 0
     
 	SDL_numjoysticks = 0;
 	
@@ -660,7 +660,7 @@ int DWHID_JoystickInit()
 		HIDReportErrorNum("Joystick: Couldn't create a HID object iterator.", 0);
 		return -1;
 	}
-	if (NULL == hidObjectIterator) /* there are no joysticks */
+	if (0 == hidObjectIterator) /* there are no joysticks */    //  v2.0.0 changed NULL to 0
 	{
 		gpDeviceList = NULL;
 		SDL_numjoysticks = 0;

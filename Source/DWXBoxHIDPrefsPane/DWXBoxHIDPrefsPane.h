@@ -23,6 +23,8 @@
 //  Created by Darrell Walisser on Thu May 29 2003.
 //  Copyright (c) 2003 __MyCompanyName__. All rights reserved.
 //
+//  v2.0.0 Modified 12/18/2012 to support Standard 32/64-bit architecture. Compiled with Mac OS X 10.6 SDK.
+//
 
 #import <Cocoa/Cocoa.h>
 #import <PreferencePanes/PreferencePanes.h>
@@ -115,6 +117,6 @@
 - (IBAction)endModalSessionAlt:(id)sender;
 
 - (IBAction)locateDevices:(id)sender;
-- (IBAction)pickDevice:(id)sender;
+//- (IBAction)pickDevice:(id)sender;	//  v2.0.0 commented out unused action
 
 @end
