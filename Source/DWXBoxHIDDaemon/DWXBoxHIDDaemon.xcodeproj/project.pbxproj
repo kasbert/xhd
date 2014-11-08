@@ -6,6 +6,22 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		A8BE41EF1A0E0F6500CE7B45 /* All */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A8BE41F91A0E0F9300CE7B45 /* Build configuration list for PBXAggregateTarget "All" */;
+			buildPhases = (
+			);
+			dependencies = (
+				A8BE41F41A0E0F6D00CE7B45 /* PBXTargetDependency */,
+				A8BE41F61A0E0F6D00CE7B45 /* PBXTargetDependency */,
+				A8BE41F81A0E0F6D00CE7B45 /* PBXTargetDependency */,
+			);
+			name = All;
+			productName = All;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		87D5891F1680805C00EDFFBB /* DWXBoxHIDDaemon_Prefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 32A70AAB03705E1F00C91783 /* DWXBoxHIDDaemon_Prefix.h */; };
 		87DBFD451678625500DDC30C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87DBFD441678621900DDC30C /* MainMenu.xib */; };
@@ -35,6 +51,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = B24EEE060A4D848700A488B8;
 			remoteInfo = DWXBoxHIDDaemon;
+		};
+		A8BE41F31A0E0F6D00CE7B45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B24EEE060A4D848700A488B8 /* DWXBoxHIDDaemon */;
+			remoteInfo = DWXBoxHIDDaemon;
+		};
+		A8BE41F51A0E0F6D00CE7B45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B24EEE1F0A4D849C00A488B8 /* DWXBoxHIDDaemonLauncher */;
+			remoteInfo = DWXBoxHIDDaemonLauncher;
+		};
+		A8BE41F71A0E0F6D00CE7B45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B24EEE3E0A4D84A900A488B8 /* installLoginItem */;
+			remoteInfo = installLoginItem;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -313,6 +350,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				A8BE41EF1A0E0F6500CE7B45 /* All */,
 				B24EEE060A4D848700A488B8 /* DWXBoxHIDDaemon */,
 				B24EEE1F0A4D849C00A488B8 /* DWXBoxHIDDaemonLauncher */,
 				B24EEE3E0A4D84A900A488B8 /* installLoginItem */,
@@ -391,9 +429,52 @@
 			target = B24EEE060A4D848700A488B8 /* DWXBoxHIDDaemon */;
 			targetProxy = 87DBFD6216786BBB00DDC30C /* PBXContainerItemProxy */;
 		};
+		A8BE41F41A0E0F6D00CE7B45 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B24EEE060A4D848700A488B8 /* DWXBoxHIDDaemon */;
+			targetProxy = A8BE41F31A0E0F6D00CE7B45 /* PBXContainerItemProxy */;
+		};
+		A8BE41F61A0E0F6D00CE7B45 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B24EEE1F0A4D849C00A488B8 /* DWXBoxHIDDaemonLauncher */;
+			targetProxy = A8BE41F51A0E0F6D00CE7B45 /* PBXContainerItemProxy */;
+		};
+		A8BE41F81A0E0F6D00CE7B45 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B24EEE3E0A4D84A900A488B8 /* installLoginItem */;
+			targetProxy = A8BE41F71A0E0F6D00CE7B45 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		A8BE41F01A0E0F6500CE7B45 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = All;
+			};
+			name = Development;
+		};
+		A8BE41F11A0E0F6500CE7B45 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = All;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		A8BE41F21A0E0F6500CE7B45 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = All;
+			};
+			name = Default;
+		};
 		B24EEE150A4D848700A488B8 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -404,6 +485,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DWXBoxHIDDaemon_Prefix.h;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "";
 				INSTALL_PATH = "$(HOME)/bin";
 				LIBRARY_SEARCH_PATHS = "";
@@ -431,6 +513,7 @@
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DWXBoxHIDDaemon_Prefix.h;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "";
 				INSTALL_PATH = "$(HOME)/bin";
 				LIBRARY_SEARCH_PATHS = "";
@@ -455,6 +538,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DWXBoxHIDDaemon_Prefix.h;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "";
 				INSTALL_PATH = "$(HOME)/bin";
 				LIBRARY_SEARCH_PATHS = "";
@@ -482,6 +566,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Info-DWXBoxHIDDaemonLauncher__Upgraded_.plist";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
@@ -506,6 +591,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Info-DWXBoxHIDDaemonLauncher__Upgraded_.plist";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
@@ -527,6 +613,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Info-DWXBoxHIDDaemonLauncher__Upgraded_.plist";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
@@ -589,6 +676,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
@@ -610,6 +698,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
@@ -629,6 +718,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
@@ -647,6 +737,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A8BE41F91A0E0F9300CE7B45 /* Build configuration list for PBXAggregateTarget "All" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8BE41F01A0E0F6500CE7B45 /* Development */,
+				A8BE41F11A0E0F6500CE7B45 /* Deployment */,
+				A8BE41F21A0E0F6500CE7B45 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
 		B24EEE140A4D848700A488B8 /* Build configuration list for PBXNativeTarget "DWXBoxHIDDaemon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

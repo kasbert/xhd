@@ -10,16 +10,18 @@ pkg: $(TARGET_DRIVER) $(TARGET_DAEMON) $(TARGET_PREFSPANE)
 	cp -R $(TARGET_DRIVER) Installer_Files/files
 	cp -R $(TARGET_DAEMON) Installer_Files/files
 	cp -R $(TARGET_PREFSPANE) Installer_Files/files
+	cp -R Source/DWXBoxHIDDaemon/build/Default/XboxHIDDaemonLauncher.app Installer_Files/files
+	cp -R Source/DWXBoxHIDDaemon/build/Default/installLoginItem Installer_Files/files
 	/Developer/Applications/Utilities/PackageMaker.app/Contents/MacOS/PackageMaker --doc Installer_Files/XBoxHIDDriver.pmdoc --out xhd.pkg
 
 $(TARGET_DRIVER):
 	cd Source/DWXBoxHIDDriver; xcodebuild -configuration $(CONFIGURATION)
 
 $(TARGET_DAEMON):
-	cd DWXBoxHIDDaemon; xcodebuild -configuration $(CONFIGURATION)
+	cd Source/DWXBoxHIDDaemon; xcodebuild -configuration $(CONFIGURATION)
 
 $(TARGET_PREFSPANE):
-	cd DWXBoxHIDPrefsPane; xcodebuild -configuration $(CONFIGURATION)
+	cd Source/DWXBoxHIDPrefsPane; xcodebuild -configuration $(CONFIGURATION)
 
 target_debug:
 	cd Source/Registrar; xcodebuild
@@ -29,5 +31,5 @@ target_debug:
 all: $(TARGET_DRIVER) $(TARGET_DAEMON) $(TARGET_PREFSPANE) target_debug
 
 clean:
-	rm -fr Source/*/build
-	rm -f xhd.pkg
+	-rm -r Source/*/build
+	-rm -r xhd.pkg

@@ -74,6 +74,7 @@ static void installLoginItem(NSString *path, int global, int hidden)
 static void removeLoginItem(NSString *path, int global)
 {
     NSString *appPath = path;
+    int i;
     
 	// This will retrieve the path for the application
 	CFURLRef url = (CFURLRef)[NSURL fileURLWithPath:appPath];
@@ -93,7 +94,7 @@ static void removeLoginItem(NSString *path, int global)
 		// a NSArray so that it will be easier to iterate.
 		NSArray  *loginItemsArray = (NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
         
-		for( int i = 0; i< [loginItemsArray count]; i++){
+		for(i = 0; i< [loginItemsArray count]; i++){
 			LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)[loginItemsArray objectAtIndex:i];
 			//Resolve the item with URL
 			if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &url, NULL) == noErr) {
@@ -111,7 +112,8 @@ static void removeLoginItem(NSString *path, int global)
 }
 int main (int argc, char** argv)
 {
-    @autoreleasepool {
+    NSAutoreleasePool *pool = [NSAutoreleasePool new];
+    {
         // one parameter is required
         if ((argc<2) || (argc>5))
         {
@@ -162,5 +164,8 @@ int main (int argc, char** argv)
         
         //NSLog(@"global = '%d', hidden = '%d', install = '%d', remove = '%d', path = '%@'", global, hidden, install, remove, path);
         
-    } return 0;
+    }
+    [pool release];
+    
+    return 0;
 }

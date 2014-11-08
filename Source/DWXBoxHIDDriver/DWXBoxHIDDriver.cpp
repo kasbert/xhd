@@ -2394,30 +2394,24 @@ IOReturn
 DWXBoxHIDDriver::ChangeOutstandingIO(OSObject *target, void *param1, void *param2, void *param3, void *param4)
 {
     DWXBoxHIDDriver *me = OSDynamicCast(DWXBoxHIDDriver, target);
-    UInt64  direction = (UInt64)param1;	//  v2.0.0 changed UInt32 to UInt64
     
     if (!me)
     {
         USBLog(1, "DWXBoxHIDDriver::ChangeOutstandingIO - invalid target");
         return kIOReturnSuccess;
     }
-    switch (direction)
-    {
-        case 1:
+    if (param1 == (void*)1) {
             me->_outstandingIO++;
-            break;
-            
-        case -1:
+    } else if (param1 == (void*)-1) {
             if (!--me->_outstandingIO && me->_needToClose)
             {
                 USBLog(3, "%s[%p]::ChangeOutstandingIO isInactive = %d, outstandingIO = %u - closing device",
                        me->getName(), me, me->isInactive(), (unsigned int) me->_outstandingIO);	//  v2.0.0 added (unsigned int)
                 me->_interface->close(me);
             }
-            break;
             
-        default:
-            USBLog(1, "%s[%p]::ChangeOutstandingIO - invalid direction", me->getName(), me);
+    } else {
+            USBLog(1, "%s[%p]::ChangeOutstandingIO - invalid direction %p", me->getName(), me, param1);
     }
     return kIOReturnSuccess;
 }
@@ -2435,7 +2429,7 @@ DWXBoxHIDDriver::DecrementOutstandingIO(void)
             _interface->close(this);
         }
         return;
-    }
+    }   
     _gate->runAction(ChangeOutstandingIO, (void*)-1);
 }
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8DD76FAC0486AB0100D96B5E /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.c */; settings = {ATTRIBUTES = (); }; };
 		A8077F471A0D749B00D4E553 /* bulktest.c in Sources */ = {isa = PBXBuildFile; fileRef = A8077F451A0D749B00D4E553 /* bulktest.c */; };
+		A8BE42091A0E105800CE7B45 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8BE42081A0E105800CE7B45 /* IOKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,7 @@
 		8DD76FB20486AB0100D96B5E /* UserLandTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UserLandTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8077F451A0D749B00D4E553 /* bulktest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bulktest.c; sourceTree = "<group>"; };
 		A8077F461A0D749B00D4E553 /* hex2c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hex2c.h; sourceTree = "<group>"; };
+		A8BE42081A0E105800CE7B45 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8BE42091A0E105800CE7B45 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +50,7 @@
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6A0FF2B0290797F04C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
+				A8BE42081A0E105800CE7B45 /* IOKit.framework */,
 			);
 			name = UserLandTest;
 			sourceTree = "<group>";
