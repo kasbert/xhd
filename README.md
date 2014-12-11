@@ -1,6 +1,8 @@
 xhd
 ===
 
+**This driver is obsolete, use 360Controller instead**
+
 Xbox HID Driver for Mac OS X
 
 This code is from http://xhd.sourceforge.net/
